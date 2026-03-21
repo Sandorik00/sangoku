@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bewqrkcj0hb8e"]
+
+[ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="1_lt1ig"]
+
+[node name="TextureRect" type="TextureRect" unique_id=1447630480]
+custom_minimum_size = Vector2(50, 50)
+texture = ExtResource("1_lt1ig")
+expand_mode = 1
+stretch_mode = 4

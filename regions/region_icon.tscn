@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://si1chjm11vou"]
+
+[ext_resource type="Script" uid="uid://deajh5osm7nnx" path="res://regions/region_icon.gd" id="1_33eaq"]
+[ext_resource type="Texture2D" uid="uid://2scglpu77le3" path="res://icon.svg" id="1_rtl5y"]
+
+[node name="Region" type="TextureButton" unique_id=1036715789]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_rtl5y")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_33eaq")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

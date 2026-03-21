@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cvcsy0bs7hyeq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj7yv"]
+bg_color = Color(0.28235295, 0.6666667, 1, 1)
+
+[node name="RegionActionsBox" type="Panel" unique_id=1162373684]
+custom_minimum_size = Vector2(300, 200)
+offset_right = 300.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fj7yv")

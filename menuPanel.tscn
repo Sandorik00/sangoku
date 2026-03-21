@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://kbsoh2uvk0qx"]
+
+[ext_resource type="Script" uid="uid://d4nhqy5sh2krg" path="res://menu_panel.gd" id="1_5ymp3"]
+[ext_resource type="Texture2D" uid="uid://cemyf8x3n6asr" path="res://SanCheeseSources/SanCheeseUwU.png" id="1_ggtvh"]
+[ext_resource type="Texture2D" uid="uid://dr4yuxtq37a1s" path="res://SanCheeseSources/749020982920085596.png" id="2_5ymp3"]
+
+[node name="Panel" type="Panel" unique_id=1993563656 node_paths=PackedStringArray("system_btn", "items_btn", "forces_btn")]
+custom_minimum_size = Vector2(0, 24)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_5ymp3")
+system_btn = NodePath("MarginContainer/HBoxContainer/System")
+items_btn = NodePath("MarginContainer/HBoxContainer/Items")
+forces_btn = NodePath("MarginContainer/HBoxContainer/Forces")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=643354692]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2088252266]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="System" type="TextureButton" parent="MarginContainer/HBoxContainer" unique_id=1015997138]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+texture_normal = ExtResource("1_ggtvh")
+texture_hover = ExtResource("2_5ymp3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Items" type="TextureButton" parent="MarginContainer/HBoxContainer" unique_id=777589472]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+texture_normal = ExtResource("1_ggtvh")
+texture_hover = ExtResource("2_5ymp3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Forces" type="TextureButton" parent="MarginContainer/HBoxContainer" unique_id=1279198746]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+texture_normal = ExtResource("1_ggtvh")
+texture_hover = ExtResource("2_5ymp3")
+ignore_texture_size = true
+stretch_mode = 0
