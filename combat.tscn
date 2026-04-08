@@ -4,8 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bgcdbhp6hxudw" path="res://unit.tscn" id="2_ga4lu"]
 [ext_resource type="Script" uid="uid://doarsxv7ckgom" path="res://addons/San's Grid/grid.gd" id="2_kx3u1"]
 [ext_resource type="Texture2D" uid="uid://cqqnj02ig4x7i" path="res://spring tilemap.png" id="3_kx3u1"]
+[ext_resource type="PackedScene" uid="uid://cbtq6dmvl2b52" path="res://enemy.tscn" id="3_v7dqf"]
+[ext_resource type="Texture2D" uid="uid://dn2sesfkc73jl" path="res://overlay tilemap.png" id="5_ilamk"]
 [ext_resource type="Script" uid="uid://baki2wi36dw78" path="res://overlayTileLogic.gd" id="5_u30h6"]
 [ext_resource type="Script" uid="uid://e0lka6yf3h0g" path="res://combat/combat_state.gd" id="6_fvoc2"]
+[ext_resource type="Script" uid="uid://caht1m1kri2yi" path="res://draw_grid.gd" id="6_syqip"]
+[ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/command_panel.tscn" id="10_px7ba"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga4lu"]
 texture = ExtResource("3_kx3u1")
@@ -130,7 +134,7 @@ texture = ExtResource("3_kx3u1")
 sources/0 = SubResource("TileSetAtlasSource_ga4lu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u30h6"]
-texture = ExtResource("3_kx3u1")
+texture = ExtResource("5_ilamk")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -258,6 +262,7 @@ grid_dimensions = Vector2i(20, 12)
 tileMap = NodePath("Terrain")
 overlayTileMap = NodePath("Overlays")
 unitPS = ExtResource("2_ga4lu")
+enemyPS = ExtResource("3_v7dqf")
 combatState = NodePath("CombatState")
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=941406359]
@@ -267,6 +272,11 @@ collision_enabled = false
 [node name="Overlays" type="TileMapLayer" parent="." unique_id=1309137642]
 tile_set = SubResource("TileSet_fvoc2")
 script = ExtResource("5_u30h6")
+
+[node name="Node2D" type="Node2D" parent="Overlays" unique_id=1971891999]
+script = ExtResource("6_syqip")
+grid_size = Vector2i(20, 12)
+cell_size = 16
 
 [node name="SanGrid" type="Node2D" parent="." unique_id=535337217]
 script = ExtResource("2_kx3u1")
@@ -279,3 +289,7 @@ metadata/_custom_type_script = "uid://e0lka6yf3h0g"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292258442]
 anchor_mode = 0
 zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1912623512]
+
+[node name="CommandPanel" parent="CanvasLayer" unique_id=43008561 instance=ExtResource("10_px7ba")]

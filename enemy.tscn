@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cbtq6dmvl2b52"]
+
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="1_7k104"]
+[ext_resource type="PackedScene" uid="uid://dnp1c08hbisif" path="res://scenes/ui/hp_bar.tscn" id="2_4gyqm"]
+
+[node name="Enemy" type="Sprite2D" unique_id=1774247171]
+self_modulate = Color(1, 0.06666667, 0.19607843, 1)
+texture = ExtResource("1_7k104")
+region_enabled = true
+region_rect = Rect2(80, 96, 16, 16)
+
+[node name="HPBar" parent="." unique_id=1650369551 instance=ExtResource("2_4gyqm")]

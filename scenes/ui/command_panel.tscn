@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://cvdiw4xfohtx2"]
+
+[ext_resource type="Texture2D" uid="uid://c6g4plk84ykf7" path="res://assets/icons/Is_fe17_luna.png" id="2_oua2m"]
+[ext_resource type="Texture2D" uid="uid://b8ocbe2pdcvv6" path="res://assets/icons/Is_fe17_make_a_killing.png" id="3_gme27"]
+[ext_resource type="Texture2D" uid="uid://dumpjh1qe84w3" path="res://assets/icons/Is_fe17_swordbreaker.png" id="4_qwsri"]
+[ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="5_qwsri"]
+
+[node name="CommandPanel" type="Control" unique_id=43008561]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="." unique_id=1866932354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=481563025]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=1918035998]
+layout_mode = 2
+
+[node name="PortraitContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1835033132]
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer/PortraitContainer" unique_id=691692973]
+layout_mode = 2
+texture = ExtResource("5_qwsri")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Info" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=432405131]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=1236114964]
+layout_mode = 2
+text = "San"
+
+[node name="Lvl" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=106106430]
+layout_mode = 2
+text = "LVL 3"
+
+[node name="Exp" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=577407507]
+layout_mode = 2
+text = "Exp 42"
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/MarginContainer/HBoxContainer" unique_id=1537693284]
+layout_mode = 2
+
+[node name="CommanderStats" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1509547006]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=1787716833]
+layout_mode = 2
+text = "ATK 2"
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=1551182746]
+layout_mode = 2
+text = "DEF 2"
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=872090727]
+layout_mode = 2
+text = "SPD 4"
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/HBoxContainer" unique_id=1812373904]
+layout_mode = 2
+
+[node name="ArmyStats" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1830862555]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=607841011]
+layout_mode = 2
+text = "MOR 2"
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=1122803268]
+layout_mode = 2
+text = "MP  2"
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=2070186453]
+layout_mode = 2
+text = "RAN 4"
+
+[node name="Skills" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=152113919]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Skills" unique_id=16245677]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TextureButton2" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1160241465]
+layout_mode = 2
+texture_normal = ExtResource("2_oua2m")
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=989075960]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton3" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=628847836]
+layout_mode = 2
+texture_normal = ExtResource("3_gme27")
+
+[node name="Control2" type="Control" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1594879171]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton4" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1232711977]
+layout_mode = 2
+texture_normal = ExtResource("4_qwsri")

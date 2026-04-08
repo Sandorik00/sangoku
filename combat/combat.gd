@@ -1,5 +1,7 @@
 extends Node2D
 
+var UCS := UnitControlsState
+
 @export_category("SanGrid")
 @export var grid: SanGrid
 @export var grid_dimensions: Vector2i
@@ -10,23 +12,30 @@ extends Node2D
 
 @export_category("Units")
 @export var unitPS: PackedScene
+@export var enemyPS: PackedScene
 
 @export_category("Logic")
 @export var combatState: CombatState
+@export var movement_range: int = 6
 
 var unit_selected: SanGrid.GridEntity
 var walkZone: Array[SanGrid.GridCell] = []
 var walkPath: Array[SanGrid.GridCell] = []
 
+var reachZone: Array[SanGrid.GridCell] = []
+
+var transitionInProgress: bool = true
+
 func _ready():
 	combatState.turn_passed.connect(_setup_unit_turn)
+	UCS.nextState.connect(_setup_new_state)
 
 	grid.create_grid(grid_dimensions.x, grid_dimensions.y)
 	for y in grid_dimensions.y:
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
 
-	# place unitPS
+	# place unit
 	var posForUnit = to_global(tileMap.map_to_local(Vector2(9, 5)))
 	var u = unitPS.instantiate()
 	u.position = posForUnit
@@ -35,83 +44,66 @@ func _ready():
 
 	grid.add_child(u)
 
-	combatState.add_combatants([uEntity])
+	# place enemy
+	var posForEnemy = to_global(tileMap.map_to_local(Vector2(13, 7)))
+	var e = enemyPS.instantiate()
+	e.position = posForEnemy
+	var eEntity = grid.GridEntity.new(grid.GridEntityType.ENEMY, e)
+	grid.set_entity(13, 7, eEntity)
+
+	grid.add_child(e)
+
+	combatState.add_combatants([uEntity, eEntity])
 	
-
 func _setup_unit_turn(unit: SanGrid.GridEntity):
-	walkZone = grid.calculateWalkZone(unit.cell, 6)
-	overlayTileMap.drawWalkZone(walkZone)
 	unit_selected = unit
+	_calc_and_draw_zone(movement_range)
 
+func _calc_and_draw_zone(mov: int):
+	walkZone = grid.calculateWalkZone(unit_selected.cell, mov)
+	overlayTileMap.drawWalkZone(walkZone)
+	_calc_and_draw_reach(2)
+
+func _calc_and_draw_reach(reach: int):
+	reachZone = grid.get_reachable_cells(unit_selected.cell, reach)
+	overlayTileMap.draw_reach_zone(reachZone)
+	transitionInProgress = false
 
 func _unhandled_input(event: InputEvent):
-	if unit_selected == null: return
+	if unit_selected == null or transitionInProgress: return
 
 	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
 		var correctedPosition = tileMap.get_global_mouse_position()
 		var tile = tileMap.local_to_map(correctedPosition)
 		print("Tiles: %s %s" % [tile.x, tile.y])
 		print(grid.get_cell(tile.x, tile.y).xy)
-		
-		#Unit is not selected
-		# if TurnLogic.unitIsSelected == null:
-		# 	if MyGrid.get_entity(tile.x, tile.y) == MyGrid.GridEntity.PLAYER:
-		# 		TurnLogic.unitIsSelected = MyGrid.get_cell(tile.x, tile.y)
-		# 		drawMap(node, tile)
-		# 		TurnLogic.nextActionPhase()
 
 		var currCell = grid.get_cell(tile.x, tile.y)
-		if currCell.isWalkTile == true:
-			var cell = unit_selected.cell
-			
-			currCell.entity = cell.entity
-			cell.entity = SanGrid.GridEntity.new()
-			
-			#unit_selected.unitNode.position = posForUnit
 
-			walkPath = grid.calculateWalkPath(currCell)
-			_tween_path()
-		else:
-			overlayTileMap.clearWalkZone(grid, walkZone)
-			walkZone = []
+		# Walk and Attack and whatsoever
+		if UCS.current_state == UCS.UnitState.TURN:
+			if currCell.isWalkTile == true:
+				transitionInProgress = true
+				var cell = unit_selected.cell
+				
+				currCell.set_entity(cell.entity)
+				cell.set_entity(SanGrid.GridEntity.new())
+				
+				#unit_selected.unitNode.position = posForUnit
+
+				walkPath = grid.calculateWalkPath(currCell)
+				_tween_path()
+
+		# End
+		if UCS.current_state == UCS.UnitState.END:
+			if currCell.entity.type != grid.GridEntityType.ENEMY: return
+
+			
+
 
 func _tween_path():
 	var unitNode2D = unit_selected.unitNode
 	var tween = get_tree().create_tween()
-
-	# var currentPos = unitNode2D.position
-	# var prevDirection = Vector2i(0, 0)
-	# for i in walkPath.size():
-	# 	var cell = walkPath[i]
-	# 	var easeIn = i == 0
-	# 	var easeOut = true
-	# 	if i < walkPath.size() - 1:
-	# 		var nextCell = walkPath[i + 1]
-	# 		var direction = nextCell.xy - cell.xy
-	# 		easeOut = direction != prevDirection
-	# 		prevDirection = direction
-
-	# 	var nextPos = tileMap.to_global(tileMap.map_to_local(cell.xy))
-	# 	var prop = tween.tween_property(unitNode2D, "position", nextPos, 1.0)
-
-	# 	if easeIn and easeOut:
-	# 		prop.set_ease(Tween.EASE_IN_OUT)
-	# 		prop.set_trans(Tween.TRANS_CUBIC)
-	# 	elif easeIn and not easeOut:
-	# 		prop.set_trans(Tween.TRANS_CUBIC)
-	# 		prop.set_ease(Tween.EASE_IN)
-	# 	elif not easeIn and easeOut:
-	# 		prop.set_trans(Tween.TRANS_CUBIC)
-	# 		prop.set_ease(Tween.EASE_OUT)
-	# 	else:
-	# 		prop.set_trans(Tween.TRANS_LINEAR)
-
-	# for i in walkPath.size():
-	# 	var cell = walkPath[i]
-	# 	var nextCell = walkPath.get(i + 1)
-
-	# 	if nextCell != null:
-	# 		pass
 
 	var i = 0
 	while i < walkPath.size():
@@ -133,10 +125,24 @@ func _tween_path():
 
 		var segmentLength = i - segmentStart
 		var nextPos = tileMap.to_global(tileMap.map_to_local(cell.xy))
-		tween.tween_property(unitNode2D, "position", nextPos, segmentLength * 0.5).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(unitNode2D, "position", nextPos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 
 	tween.tween_callback(_clear_walk_zone)
 
 func _clear_walk_zone():
+	var last_pass_lenght = walkPath.size() - 1
+
 	overlayTileMap.clearWalkZone(grid, walkZone)
+	overlayTileMap.clearReachZone(grid, reachZone)
+	overlayTileMap.clear()
 	walkZone = []
+	walkPath = []
+	reachZone = []
+
+	movement_range -= last_pass_lenght
+	_calc_and_draw_zone(movement_range)
+	# UnitControlsState.forward()
+
+func _setup_new_state(state: UnitControlsState.UnitState):
+	if state == UCS.UnitState.END:
+		pass

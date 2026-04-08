@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dnp1c08hbisif"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btf8p"]
+bg_color = Color(0.8640368, 0.8954771, 0.96922344, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctwoc"]
+bg_color = Color(0.9049979, 0, 0.019826211, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_malfu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5wnup"]
+font = SubResource("FontVariation_malfu")
+font_size = 4
+
+[node name="HPBar" type="Control" unique_id=1650369551]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=296902197]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_btf8p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ctwoc")
+step = 1.0
+value = 67.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="." unique_id=638695645]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "10/100"
+label_settings = SubResource("LabelSettings_5wnup")
+horizontal_alignment = 1
+vertical_alignment = 1

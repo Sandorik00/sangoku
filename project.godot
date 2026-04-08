@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Strategy"
-run/main_scene="uid://ddwwou0008gkw"
+run/main_scene="uid://dxyjbs03ln8sa"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=240
 config/icon="res://icon.svg"
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 UIState="*uid://b8bwg4en12gt2"
+UnitControlsState="*uid://bgjg5s7frqkm0"
+Utils="*uid://dhbmy51fmvs1a"
 
 [display]
 
@@ -33,6 +35,10 @@ window/vsync/vsync_mode=0
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/San\'s Grid/plugin.cfg")
+
+[gui]
+
+theme/custom_font="uid://d0eqnur73j3pp"
 
 [physics]
 
