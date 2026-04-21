@@ -18,6 +18,10 @@ var UCS := UnitControlsState
 @export var combatState: CombatState
 @export var movement_range: int = 6
 
+@export_category("Utils")
+@export var camera: Camera2D
+@export var speed := 100
+
 var unit_selected: SanGrid.GridEntity
 var walkZone: Array[SanGrid.GridCell] = []
 var walkPath: Array[SanGrid.GridCell] = []
@@ -25,6 +29,14 @@ var walkPath: Array[SanGrid.GridCell] = []
 var reachZone: Array[SanGrid.GridCell] = []
 
 var transitionInProgress: bool = true
+
+func _process(delta):
+	var movement := Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up"))
+		
+	movement = speed * movement.normalized()
+	camera.position += movement * delta
+	camera.position = camera.position.clamp(Vector2(-20, -20), Vector2(20, 35))
 
 func _ready():
 	combatState.turn_passed.connect(_setup_unit_turn)

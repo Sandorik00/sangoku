@@ -1,127 +1,740 @@
 [gd_scene format=3 uid="uid://cvdiw4xfohtx2"]
 
-[ext_resource type="Texture2D" uid="uid://c6g4plk84ykf7" path="res://assets/icons/Is_fe17_luna.png" id="2_oua2m"]
-[ext_resource type="Texture2D" uid="uid://b8ocbe2pdcvv6" path="res://assets/icons/Is_fe17_make_a_killing.png" id="3_gme27"]
-[ext_resource type="Texture2D" uid="uid://dumpjh1qe84w3" path="res://assets/icons/Is_fe17_swordbreaker.png" id="4_qwsri"]
+[ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="2_8dgiu"]
+[ext_resource type="Texture2D" uid="uid://uedogdn0rdan" path="res://resources/ui/morale.tres" id="3_oua2m"]
+[ext_resource type="Texture2D" uid="uid://dww41smgwugux" path="res://resources/ui/mana.tres" id="4_gme27"]
+[ext_resource type="Shader" uid="uid://bts1omv0a1yv2" path="res://scenes/ui/command_panel.gdshader" id="5_71j6e"]
 [ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="5_qwsri"]
+[ext_resource type="Texture2D" uid="uid://byxj67iw6dun1" path="res://SanCheeseSources/748650409559588985.png" id="6_71j6e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxfv5"]
+atlas = ExtResource("2_8dgiu")
+region = Rect2(288, 128, 32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j6e"]
+bg_color = Color(0.14901961, 0.13725491, 0.13725491, 0.6)
+border_width_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxfv5"]
+font_size = 22
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jxfv5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmm8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_05i7i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gme27"]
+bg_color = Color(0.14901961, 0.13725491, 0.13725491, 0.6)
+border_width_left = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71j6e"]
+atlas = ExtResource("2_8dgiu")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_71j6e"]
+font_size = 22
+
+[sub_resource type="FontVariation" id="FontVariation_gme27"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8dgiu"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_oua2m"]
+font_size = 22
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oua2m"]
+atlas = ExtResource("2_8dgiu")
+region = Rect2(72, 616, 4, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gme27"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwsri"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71j6e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gme27"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_qwsri"]
+font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwsri"]
+bg_color = Color(0, 0, 0, 0.4)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gme27"]
+atlas = ExtResource("2_8dgiu")
+region = Rect2(256, 416, 32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwsri"]
+shader = ExtResource("5_71j6e")
+shader_parameter/border_width_px = 4.0
+shader_parameter/border_radius_px = 8.0
+shader_parameter/color_start = Color(0.867727, 0.7344707, 0.268252, 0.8)
+shader_parameter/color_end = Color(0.15081295, 0.3528688, 0.5664466, 0.8)
+shader_parameter/gradient_stop = 0.75
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxfv5"]
+texture = ExtResource("6_71j6e")
 
 [node name="CommandPanel" type="Control" unique_id=43008561]
-custom_minimum_size = Vector2(0, 80)
 layout_mode = 3
-anchors_preset = 12
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="." unique_id=1866932354]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1747438298]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -308.0
+offset_right = 208.0
+offset_bottom = -108.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=481563025]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=1918035998]
-layout_mode = 2
-
-[node name="PortraitContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1835033132]
-layout_mode = 2
-
-[node name="Portrait" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer/PortraitContainer" unique_id=691692973]
+[node name="Portrait" type="TextureRect" parent="MarginContainer" unique_id=633602398]
 layout_mode = 2
 texture = ExtResource("5_qwsri")
-expand_mode = 2
+expand_mode = 1
 stretch_mode = 4
 
-[node name="Info" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=432405131]
+[node name="LowerPanel" type="VBoxContainer" parent="." unique_id=18669910]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -130.0
+offset_right = 834.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="LowerPanel" unique_id=1549720846]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="StatusBox" type="VBoxContainer" parent="LowerPanel/MarginContainer" unique_id=2103452686]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=1236114964]
+[node name="HBoxContainer2" type="HBoxContainer" parent="LowerPanel/MarginContainer/StatusBox" unique_id=1394452989]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="LowerPanel/MarginContainer/StatusBox/HBoxContainer2" unique_id=1779158660]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jxfv5")
+
+[node name="TextureRect5" type="TextureRect" parent="LowerPanel/MarginContainer/StatusBox/HBoxContainer2" unique_id=563838652]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jxfv5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LowerPanel/MarginContainer/StatusBox" unique_id=2095527238]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/MarginContainer/StatusBox/HBoxContainer" unique_id=633163717]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jxfv5")
+
+[node name="TextureRect2" type="TextureRect" parent="LowerPanel/MarginContainer/StatusBox/HBoxContainer" unique_id=98845320]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jxfv5")
+
+[node name="TextureRect3" type="TextureRect" parent="LowerPanel/MarginContainer/StatusBox/HBoxContainer" unique_id=1505510103]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jxfv5")
+
+[node name="NameBox" type="HBoxContainer" parent="LowerPanel" unique_id=1136157274]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="LowerPanel/NameBox" unique_id=1562376020]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j6e")
+
+[node name="MarginContainer" type="MarginContainer" parent="LowerPanel/NameBox/Panel" unique_id=1808646373]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="Label" parent="LowerPanel/NameBox/Panel/MarginContainer" unique_id=860924278]
 layout_mode = 2
 text = "San"
+label_settings = SubResource("LabelSettings_jxfv5")
 
-[node name="Lvl" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=106106430]
-layout_mode = 2
-text = "LVL 3"
-
-[node name="Exp" type="Label" parent="Panel/MarginContainer/HBoxContainer/Info" unique_id=577407507]
-layout_mode = 2
-text = "Exp 42"
-
-[node name="VSeparator2" type="VSeparator" parent="Panel/MarginContainer/HBoxContainer" unique_id=1537693284]
-layout_mode = 2
-
-[node name="CommanderStats" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1509547006]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=1787716833]
-layout_mode = 2
-text = "ATK 2"
-
-[node name="Label2" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=1551182746]
-layout_mode = 2
-text = "DEF 2"
-
-[node name="Label3" type="Label" parent="Panel/MarginContainer/HBoxContainer/CommanderStats" unique_id=872090727]
-layout_mode = 2
-text = "SPD 4"
-
-[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/HBoxContainer" unique_id=1812373904]
-layout_mode = 2
-
-[node name="ArmyStats" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1830862555]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=607841011]
-layout_mode = 2
-text = "MOR 2"
-
-[node name="Label2" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=1122803268]
-layout_mode = 2
-text = "MP  2"
-
-[node name="Label3" type="Label" parent="Panel/MarginContainer/HBoxContainer/ArmyStats" unique_id=2070186453]
-layout_mode = 2
-text = "RAN 4"
-
-[node name="Skills" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=152113919]
+[node name="Control" type="Control" parent="LowerPanel/NameBox" unique_id=702055089]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Skills" unique_id=16245677]
+[node name="PanelContainer" type="PanelContainer" parent="LowerPanel/NameBox" unique_id=482410184]
 layout_mode = 2
-size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j6e")
 
-[node name="TextureButton2" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1160241465]
+[node name="MarginContainer" type="MarginContainer" parent="LowerPanel/NameBox/PanelContainer" unique_id=308781066]
 layout_mode = 2
-texture_normal = ExtResource("2_oua2m")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
 
-[node name="Control" type="Control" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=989075960]
+[node name="Button" type="Button" parent="LowerPanel/NameBox/PanelContainer/MarginContainer" unique_id=1404608066]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jxfv5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dmm8e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_05i7i")
+text = "End turn"
+
+[node name="UnitPanel" type="Panel" parent="LowerPanel" unique_id=970545390]
+custom_minimum_size = Vector2(834, 126)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gme27")
+
+[node name="MarginContainer" type="MarginContainer" parent="LowerPanel/UnitPanel" unique_id=330204511]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -126.0
+offset_right = 826.0
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer" unique_id=881089562]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Stats" type="VBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer" unique_id=1510209293]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats" unique_id=1970860966]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="BasicStats" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer" unique_id=1102073129]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Stat" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=1117340697]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat" unique_id=1216731073]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_71j6e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat" unique_id=981823912]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_71j6e")
+
+[node name="Stat2" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=189950900]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2" unique_id=867366246]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_71j6e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2" unique_id=865589408]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_71j6e")
+
+[node name="Stat3" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=1695647874]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3" unique_id=605535233]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_71j6e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3" unique_id=372152221]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_71j6e")
+
+[node name="Stat4" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=1487099984]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat4" unique_id=239936155]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_71j6e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat4" unique_id=1512707106]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_71j6e")
+
+[node name="UniqueStats" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats" unique_id=2048603576]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Morale" type="VBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats" unique_id=1082720514]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale" unique_id=634228387]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/HBoxContainer" unique_id=2095040148]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_gme27")
+text = "Morale"
+label_settings = SubResource("LabelSettings_8dgiu")
+
+[node name="Control" type="Control" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/HBoxContainer" unique_id=216787109]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureButton3" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=628847836]
+[node name="Label2" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/HBoxContainer" unique_id=340392801]
 layout_mode = 2
-texture_normal = ExtResource("3_gme27")
+text = "99"
+label_settings = SubResource("LabelSettings_oua2m")
 
-[node name="Control2" type="Control" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1594879171]
+[node name="Container" type="PanelContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale" unique_id=1905414201]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/Container" unique_id=1267774702]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("3_oua2m")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/Container" unique_id=1093388223]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_icons/grabber = SubResource("AtlasTexture_oua2m")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_oua2m")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_gme27")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_qwsri")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_71j6e")
+min_value = -9.0
+max_value = 99.0
+value = 80.0
+editable = false
+scrollable = false
+
+[node name="Mana" type="VBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats" unique_id=603342963]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana" unique_id=524859798]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/HBoxContainer" unique_id=935656107]
+layout_mode = 2
+text = "Mana"
+label_settings = SubResource("LabelSettings_gme27")
+
+[node name="Control" type="Control" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/HBoxContainer" unique_id=1913520219]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureButton4" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer/Skills/HBoxContainer" unique_id=1232711977]
+[node name="Label2" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/HBoxContainer" unique_id=1593748708]
 layout_mode = 2
-texture_normal = ExtResource("4_qwsri")
+text = "99"
+label_settings = SubResource("LabelSettings_qwsri")
+
+[node name="Container" type="PanelContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana" unique_id=744279688]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/Container" unique_id=1892093067]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+texture = ExtResource("4_gme27")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/Container" unique_id=1960512766]
+layout_mode = 2
+theme_override_icons/grabber = SubResource("AtlasTexture_oua2m")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_oua2m")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_gme27")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_qwsri")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_71j6e")
+min_value = -9.0
+max_value = 99.0
+value = 80.0
+editable = false
+scrollable = false
+
+[node name="Usabels" type="VBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer" unique_id=2131949787]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Items" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels" unique_id=746990347]
+layout_mode = 2
+
+[node name="Equip" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items" unique_id=801058419]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureButton5" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip" unique_id=2142515238]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip/TextureButton5" unique_id=1416482004]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton6" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip" unique_id=1035173636]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip/TextureButton6" unique_id=134197222]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton7" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip" unique_id=1803784963]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip/TextureButton7" unique_id=645535947]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton8" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip" unique_id=1557695475]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Equip/TextureButton8" unique_id=1062486003]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="Control" type="Control" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items" unique_id=189405913]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Consumables" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items" unique_id=1276833116]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureButton5" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=1848790481]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton5" unique_id=595016438]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton6" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=1470197452]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton6" unique_id=1923406233]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton7" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=598176993]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton7" unique_id=1265765907]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton8" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=2000862896]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton8" unique_id=1284528739]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton9" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=1271301025]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton9" unique_id=1400481920]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton10" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables" unique_id=2069226633]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Items/Consumables/TextureButton10" unique_id=1496499177]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="Abilities" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels" unique_id=708923586]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TextureButton5" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=20980482]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton5" unique_id=716229466]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton6" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1373591340]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton6" unique_id=527793407]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton7" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=901445780]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton7" unique_id=63056217]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton8" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1133198307]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton8" unique_id=1126057839]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton9" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=182909301]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton9" unique_id=1521788101]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton10" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=321495269]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton10" unique_id=1719211929]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton11" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1080234321]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton11" unique_id=1715702828]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton12" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1771675264]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton12" unique_id=1292703576]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
+
+[node name="TextureButton13" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=495456987]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+icon = SubResource("AtlasTexture_gme27")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton13" unique_id=919670188]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")

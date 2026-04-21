@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://baki2wi36dw78" path="res://overlayTileLogic.gd" id="5_u30h6"]
 [ext_resource type="Script" uid="uid://e0lka6yf3h0g" path="res://combat/combat_state.gd" id="6_fvoc2"]
 [ext_resource type="Script" uid="uid://caht1m1kri2yi" path="res://draw_grid.gd" id="6_syqip"]
-[ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/command_panel.tscn" id="10_px7ba"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga4lu"]
 texture = ExtResource("3_kx3u1")
@@ -255,7 +254,7 @@ texture = ExtResource("5_ilamk")
 [sub_resource type="TileSet" id="TileSet_fvoc2"]
 sources/0 = SubResource("TileSetAtlasSource_u30h6")
 
-[node name="Combat" type="Node2D" unique_id=2090826167 node_paths=PackedStringArray("grid", "tileMap", "overlayTileMap", "combatState")]
+[node name="Combat" type="Node2D" unique_id=2090826167 node_paths=PackedStringArray("grid", "tileMap", "overlayTileMap", "combatState", "camera")]
 script = ExtResource("1_s0t75")
 grid = NodePath("SanGrid")
 grid_dimensions = Vector2i(20, 12)
@@ -264,6 +263,7 @@ overlayTileMap = NodePath("Overlays")
 unitPS = ExtResource("2_ga4lu")
 enemyPS = ExtResource("3_v7dqf")
 combatState = NodePath("CombatState")
+camera = NodePath("Camera2D")
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=941406359]
 tile_set = SubResource("TileSet_u30h6")
@@ -289,7 +289,3 @@ metadata/_custom_type_script = "uid://e0lka6yf3h0g"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292258442]
 anchor_mode = 0
 zoom = Vector2(2, 2)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1912623512]
-
-[node name="CommandPanel" parent="CanvasLayer" unique_id=43008561 instance=ExtResource("10_px7ba")]

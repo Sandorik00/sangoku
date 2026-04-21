@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cqogb7v34lu4p"]
+
+[ext_resource type="PackedScene" uid="uid://dxyjbs03ln8sa" path="res://combat.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/command_panel.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D" unique_id=491633502]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=392568210]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=1493688289]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=1101164101]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Combat" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=2090826167 instance=ExtResource("1_ig7tw")]
+
+[node name="CommandPanel" parent="CanvasLayer" unique_id=43008561 instance=ExtResource("2_0xm2m")]
