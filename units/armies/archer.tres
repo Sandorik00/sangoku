@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Army" format=3 uid="uid://imlnld1h0d2a"]
+
+[ext_resource type="Script" uid="uid://cm1ih4epmy33m" path="res://units/army.gd" id="1_aijkp"]
+
+[resource]
+script = ExtResource("1_aijkp")
+name = "Archer"
+klass = "archer"
+attack = 2
+defence = 1
+speed = 3
+attack_range = 2
+morale = 3
+number_of_troops = 50
+metadata/_custom_type_script = "uid://cm1ih4epmy33m"

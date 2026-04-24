@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://doarsxv7ckgom" path="res://addons/San's Grid/grid.gd" id="2_kx3u1"]
 [ext_resource type="Texture2D" uid="uid://cqqnj02ig4x7i" path="res://spring tilemap.png" id="3_kx3u1"]
 [ext_resource type="PackedScene" uid="uid://cbtq6dmvl2b52" path="res://enemy.tscn" id="3_v7dqf"]
+[ext_resource type="Resource" uid="uid://ccflaedfaseyi" path="res://units/armies/footman.tres" id="4_tt5c4"]
+[ext_resource type="Resource" uid="uid://cvtoav134qx88" path="res://units/commanders/san.tres" id="5_5pdxm"]
 [ext_resource type="Texture2D" uid="uid://dn2sesfkc73jl" path="res://overlay tilemap.png" id="5_ilamk"]
 [ext_resource type="Script" uid="uid://baki2wi36dw78" path="res://overlayTileLogic.gd" id="5_u30h6"]
 [ext_resource type="Script" uid="uid://e0lka6yf3h0g" path="res://combat/combat_state.gd" id="6_fvoc2"]
@@ -262,6 +264,8 @@ tileMap = NodePath("Terrain")
 overlayTileMap = NodePath("Overlays")
 unitPS = ExtResource("2_ga4lu")
 enemyPS = ExtResource("3_v7dqf")
+armyResource = ExtResource("4_tt5c4")
+commanderResource = ExtResource("5_5pdxm")
 combatState = NodePath("CombatState")
 camera = NodePath("Camera2D")
 

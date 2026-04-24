@@ -1,9 +1,10 @@
 extends Resource
-class_name Troops
+class_name Army
 
 @export_group("info")
 @export var name: String
-@export var portrait: Image
+@export var portrait: Texture2D
+@export var sprite: Texture2D
 @export var klass: String
 
 @export_group("stats")

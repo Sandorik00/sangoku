@@ -2,15 +2,16 @@ extends Resource
 class_name Commander
 
 @export_group("info")
-@export var name: String
-@export var portrait: Image
+@export var name: String = ""
+@export var portrait: Texture2D
+@export var sprite: Texture2D
 
 @export_group("stats")
-@export var attack: int
-@export var defence: int
-@export var speed: int
-@export var leadership: int
-@export var mana: int
+@export var attack: int = 0
+@export var defence: int = 0
+@export var speed: int = 0
+@export var leadership: int = 0
+@export var mana: int = 0
 
 # @export_group("skills")
 # @export var passive: String

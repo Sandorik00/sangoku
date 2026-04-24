@@ -13,6 +13,8 @@ var UCS := UnitControlsState
 @export_category("Units")
 @export var unitPS: PackedScene
 @export var enemyPS: PackedScene
+@export var armyResource: Army
+@export var commanderResource: Commander
 
 @export_category("Logic")
 @export var combatState: CombatState
@@ -46,6 +48,11 @@ func _ready():
 	for y in grid_dimensions.y:
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
+
+	var newUnit = Unit.new()
+	newUnit.army = armyResource
+	newUnit.commander = commanderResource
+	add_child(newUnit)
 
 	# place unit
 	var posForUnit = to_global(tileMap.map_to_local(Vector2(9, 5)))

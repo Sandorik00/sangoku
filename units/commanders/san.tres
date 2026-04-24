@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Commander" format=3 uid="uid://cvtoav134qx88"]
+
+[ext_resource type="Script" uid="uid://y5jcu6vphs5f" path="res://units/commander.gd" id="1_c012f"]
+[ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="1_eafcp"]
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_0ymgl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnnn5"]
+atlas = ExtResource("3_0ymgl")
+region = Rect2(16, 48, 16, 16)
+
+[resource]
+script = ExtResource("1_c012f")
+name = "San"
+portrait = ExtResource("1_eafcp")
+sprite = SubResource("AtlasTexture_dnnn5")
+attack = 3
+defence = 3
+speed = 3
+leadership = 3
+mana = 10
+metadata/_custom_type_script = "uid://y5jcu6vphs5f"

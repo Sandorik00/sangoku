@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Army" format=3 uid="uid://ccflaedfaseyi"]
+
+[ext_resource type="Script" uid="uid://cm1ih4epmy33m" path="res://units/army.gd" id="1_qsbl4"]
+
+[resource]
+script = ExtResource("1_qsbl4")
+name = "Footman"
+klass = "footman"
+attack = 1
+defence = 2
+speed = 2
+attack_range = 1
+morale = 3
+number_of_troops = 100
+metadata/_custom_type_script = "uid://cm1ih4epmy33m"
