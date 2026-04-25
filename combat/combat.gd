@@ -2,6 +2,8 @@ extends Node2D
 
 var UCS := UnitControlsState
 
+var unit_id: int = 0
+
 @export_category("SanGrid")
 @export var grid: SanGrid
 @export var grid_dimensions: Vector2i
@@ -12,9 +14,11 @@ var UCS := UnitControlsState
 
 @export_category("Units")
 @export var unitPS: PackedScene
-@export var enemyPS: PackedScene
 @export var armyResource: Army
 @export var commanderResource: Commander
+
+@export var enemyArmyResource: Army
+@export var enemyCommanderResource: Commander
 
 @export_category("Logic")
 @export var combatState: CombatState
@@ -24,6 +28,9 @@ var UCS := UnitControlsState
 @export var camera: Camera2D
 @export var speed := 100
 
+var unitsInCombat: Dictionary[int, Unit] = {}
+var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7)]
+
 var unit_selected: SanGrid.GridEntity
 var walkZone: Array[SanGrid.GridCell] = []
 var walkPath: Array[SanGrid.GridCell] = []
@@ -31,6 +38,12 @@ var walkPath: Array[SanGrid.GridCell] = []
 var reachZone: Array[SanGrid.GridCell] = []
 
 var transitionInProgress: bool = true
+
+## Call before adding to the scene
+func setup_combat_entities(units: Array[Unit]):
+	for u in units:
+		unitsInCombat.set(unit_id, u)
+		unit_id += 1
 
 func _process(delta):
 	var movement := Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -41,6 +54,26 @@ func _process(delta):
 	camera.position = camera.position.clamp(Vector2(-20, -20), Vector2(20, 35))
 
 func _ready():
+	# test code, delete later
+	var ce: Array[Unit] = [Unit.new(), Unit.new()]
+
+	for i in range(ce.size()):
+		if (i + 1) % 2 == 0:
+			var ue = ce[i]
+			ue.army = enemyArmyResource
+			ue.commander = enemyCommanderResource
+			ue.team = Types.TEAMS.RED
+			ue.calculate()
+		else:
+			var ue = ce[i]
+			ue.army = armyResource
+			ue.commander = commanderResource
+			ue.team = Types.TEAMS.BLUE
+			ue.calculate()
+
+	self.setup_combat_entities(ce)
+
+	########################################
 	combatState.turn_passed.connect(_setup_unit_turn)
 	UCS.nextState.connect(_setup_new_state)
 
@@ -49,30 +82,26 @@ func _ready():
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
 
-	var newUnit = Unit.new()
-	newUnit.army = armyResource
-	newUnit.commander = commanderResource
-	add_child(newUnit)
+	var combatants: Array[SanGrid.GridEntity] = []
 
-	# place unit
-	var posForUnit = to_global(tileMap.map_to_local(Vector2(9, 5)))
-	var u = unitPS.instantiate()
-	u.position = posForUnit
-	var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u)
-	grid.set_entity(9, 5, uEntity)
+	# place units
+	for i in unitsInCombat.keys():
+		var spawnPos = spawnPositions[i]
+		var posForUnit = to_global(tileMap.map_to_local(spawnPos))
 
-	grid.add_child(u)
+		var u = unitPS.instantiate() as UnitEntity
+		u.unit_data = unitsInCombat[i]
+		u.prepare()
+		u.position = posForUnit
 
-	# place enemy
-	var posForEnemy = to_global(tileMap.map_to_local(Vector2(13, 7)))
-	var e = enemyPS.instantiate()
-	e.position = posForEnemy
-	var eEntity = grid.GridEntity.new(grid.GridEntityType.ENEMY, e)
-	grid.set_entity(13, 7, eEntity)
+		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u)
 
-	grid.add_child(e)
+		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)
+		grid.add_child(u)
 
-	combatState.add_combatants([uEntity, eEntity])
+		combatants.push_back(uEntity)
+
+	combatState.add_combatants(combatants)
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
 	unit_selected = unit
@@ -115,7 +144,7 @@ func _unhandled_input(event: InputEvent):
 
 		# End
 		if UCS.current_state == UCS.UnitState.END:
-			if currCell.entity.type != grid.GridEntityType.ENEMY: return
+			pass
 
 			
 

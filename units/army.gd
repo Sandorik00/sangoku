@@ -4,8 +4,8 @@ class_name Army
 @export_group("info")
 @export var name: String
 @export var portrait: Texture2D
-@export var sprite: Texture2D
-@export var klass: String
+@export var sprite: AtlasTexture
+@export var clazz: String
 
 @export_group("stats")
 @export var attack: int

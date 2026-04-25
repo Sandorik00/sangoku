@@ -7,7 +7,7 @@ var width: int = 0
 var height: int = 0
 var move_array: Array[GridCell] = []
 
-enum GridEntityType { EMPTY, UNIT, ENEMY }
+enum GridEntityType { EMPTY, UNIT }
 
 class GridEntity:
 	var id: int

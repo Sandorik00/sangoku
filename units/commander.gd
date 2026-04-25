@@ -4,7 +4,7 @@ class_name Commander
 @export_group("info")
 @export var name: String = ""
 @export var portrait: Texture2D
-@export var sprite: Texture2D
+@export var sprite: AtlasTexture
 
 @export_group("stats")
 @export var attack: int = 0

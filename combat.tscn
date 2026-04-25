@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://dxyjbs03ln8sa"]
 
 [ext_resource type="Script" uid="uid://8wpedhq0gi58" path="res://combat/combat.gd" id="1_s0t75"]
-[ext_resource type="PackedScene" uid="uid://bgcdbhp6hxudw" path="res://unit.tscn" id="2_ga4lu"]
+[ext_resource type="PackedScene" uid="uid://bgcdbhp6hxudw" path="res://scenes/combat/unit.tscn" id="2_ga4lu"]
 [ext_resource type="Script" uid="uid://doarsxv7ckgom" path="res://addons/San's Grid/grid.gd" id="2_kx3u1"]
 [ext_resource type="Texture2D" uid="uid://cqqnj02ig4x7i" path="res://spring tilemap.png" id="3_kx3u1"]
-[ext_resource type="PackedScene" uid="uid://cbtq6dmvl2b52" path="res://enemy.tscn" id="3_v7dqf"]
 [ext_resource type="Resource" uid="uid://ccflaedfaseyi" path="res://units/armies/footman.tres" id="4_tt5c4"]
 [ext_resource type="Resource" uid="uid://cvtoav134qx88" path="res://units/commanders/san.tres" id="5_5pdxm"]
 [ext_resource type="Texture2D" uid="uid://dn2sesfkc73jl" path="res://overlay tilemap.png" id="5_ilamk"]
+[ext_resource type="Resource" uid="uid://imlnld1h0d2a" path="res://units/armies/archer.tres" id="5_mp23d"]
 [ext_resource type="Script" uid="uid://baki2wi36dw78" path="res://overlayTileLogic.gd" id="5_u30h6"]
 [ext_resource type="Script" uid="uid://e0lka6yf3h0g" path="res://combat/combat_state.gd" id="6_fvoc2"]
+[ext_resource type="Resource" uid="uid://c7djxq3ycce4" path="res://units/commanders/evil_san.tres" id="6_prnnl"]
 [ext_resource type="Script" uid="uid://caht1m1kri2yi" path="res://draw_grid.gd" id="6_syqip"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga4lu"]
@@ -263,9 +264,10 @@ grid_dimensions = Vector2i(20, 12)
 tileMap = NodePath("Terrain")
 overlayTileMap = NodePath("Overlays")
 unitPS = ExtResource("2_ga4lu")
-enemyPS = ExtResource("3_v7dqf")
 armyResource = ExtResource("4_tt5c4")
 commanderResource = ExtResource("5_5pdxm")
+enemyArmyResource = ExtResource("5_mp23d")
+enemyCommanderResource = ExtResource("6_prnnl")
 combatState = NodePath("CombatState")
 camera = NodePath("Camera2D")
 

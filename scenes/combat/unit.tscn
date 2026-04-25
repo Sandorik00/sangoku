@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bgcdbhp6hxudw"]
+
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="1_ok2bc"]
+[ext_resource type="Script" uid="uid://8h3tfy0hygm6" path="res://scenes/combat/unit_entity.gd" id="2_gsyea"]
+
+[node name="Unit" type="Sprite2D" unique_id=1774247171]
+texture = ExtResource("1_ok2bc")
+region_rect = Rect2(16, 48, 16, 16)
+script = ExtResource("2_gsyea")

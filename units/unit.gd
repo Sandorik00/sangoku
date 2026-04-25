@@ -1,4 +1,4 @@
-extends Node2D
+extends Resource
 class_name Unit
 
 var commander: Commander
@@ -6,7 +6,7 @@ var army: Army
 
 var unit_name: String
 var portrait: Texture2D
-var sprite: Texture2D
+var sprite: AtlasTexture
 
 var attack: int
 var defence: int
@@ -17,7 +17,11 @@ var attack_range: int
 var troops: int
 var initiative: int
 
-func _ready():
+var validUnit: bool = false
+var team: Types.TEAMS = Types.TEAMS.BLUE
+
+func calculate():
+	validUnit = false
 	if not army: return
 
 	var commander_stats = commander
@@ -36,3 +40,5 @@ func _ready():
 	attack_range = army.attack_range
 	troops = army.number_of_troops
 	initiative = army.speed + commander_stats.speed
+
+	validUnit = true
