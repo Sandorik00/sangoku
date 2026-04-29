@@ -31,7 +31,8 @@ var unit_id: int = 0
 var unitsInCombat: Dictionary[int, Unit] = {}
 var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7)]
 
-var unit_selected: SanGrid.GridEntity
+var unit_entity: SanGrid.GridEntity
+var unit_active: Unit
 var walkZone: Array[SanGrid.GridCell] = []
 var walkPath: Array[SanGrid.GridCell] = []
 
@@ -95,6 +96,7 @@ func _ready():
 		u.position = posForUnit
 
 		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u)
+		uEntity.id = i
 
 		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)
 		grid.add_child(u)
@@ -104,21 +106,23 @@ func _ready():
 	combatState.add_combatants(combatants)
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
-	unit_selected = unit
-	_calc_and_draw_zone(movement_range)
+	unit_entity = unit
+	unit_active = unitsInCombat[unit.id]
+	UIState.panel_unit_data = unit_active
+	_calc_and_draw_zone(unit_active.movement)
 
 func _calc_and_draw_zone(mov: int):
-	walkZone = grid.calculateWalkZone(unit_selected.cell, mov)
+	walkZone = grid.calculateWalkZone(unit_entity.cell, mov)
 	overlayTileMap.drawWalkZone(walkZone)
-	_calc_and_draw_reach(2)
+	_calc_and_draw_reach(unit_active.attack_range)
 
 func _calc_and_draw_reach(reach: int):
-	reachZone = grid.get_reachable_cells(unit_selected.cell, reach)
+	reachZone = grid.get_reachable_cells(unit_entity.cell, reach)
 	overlayTileMap.draw_reach_zone(reachZone)
 	transitionInProgress = false
 
 func _unhandled_input(event: InputEvent):
-	if unit_selected == null or transitionInProgress: return
+	if unit_entity == null or transitionInProgress: return
 
 	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
 		var correctedPosition = tileMap.get_global_mouse_position()
@@ -132,12 +136,12 @@ func _unhandled_input(event: InputEvent):
 		if UCS.current_state == UCS.UnitState.TURN:
 			if currCell.isWalkTile == true:
 				transitionInProgress = true
-				var cell = unit_selected.cell
+				var cell = unit_entity.cell
 				
 				currCell.set_entity(cell.entity)
 				cell.set_entity(SanGrid.GridEntity.new())
 				
-				#unit_selected.unitNode.position = posForUnit
+				#unit_entity.unitNode.position = posForUnit
 
 				walkPath = grid.calculateWalkPath(currCell)
 				_tween_path()
@@ -150,7 +154,7 @@ func _unhandled_input(event: InputEvent):
 
 
 func _tween_path():
-	var unitNode2D = unit_selected.unitNode
+	var unitNode2D = unit_entity.unitNode
 	var tween = get_tree().create_tween()
 
 	var i = 0

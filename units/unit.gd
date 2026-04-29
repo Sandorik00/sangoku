@@ -16,6 +16,7 @@ var mana: int
 var attack_range: int
 var troops: int
 var initiative: int
+var movement: int
 
 var validUnit: bool = false
 var team: Types.TEAMS = Types.TEAMS.BLUE
@@ -40,5 +41,6 @@ func calculate():
 	attack_range = army.attack_range
 	troops = army.number_of_troops
 	initiative = army.speed + commander_stats.speed
+	movement = speed
 
 	validUnit = true

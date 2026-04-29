@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cvdiw4xfohtx2"]
 
+[ext_resource type="Script" uid="uid://deuq0c61ulq0r" path="res://scenes/ui/command_panel.gd" id="1_jxfv5"]
 [ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="2_8dgiu"]
 [ext_resource type="Texture2D" uid="uid://uedogdn0rdan" path="res://resources/ui/morale.tres" id="3_oua2m"]
+[ext_resource type="Texture2D" uid="uid://cp3xi4poodgkx" path="res://assets/ui/back3.png" id="4_dmm8e"]
 [ext_resource type="Texture2D" uid="uid://dww41smgwugux" path="res://resources/ui/mana.tres" id="4_gme27"]
 [ext_resource type="Shader" uid="uid://bts1omv0a1yv2" path="res://scenes/ui/command_panel.gdshader" id="5_71j6e"]
 [ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="5_qwsri"]
@@ -82,12 +84,23 @@ shader_parameter/gradient_stop = 0.75
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxfv5"]
 texture = ExtResource("6_71j6e")
 
-[node name="CommandPanel" type="Control" unique_id=43008561]
+[node name="CommandPanel" type="Control" unique_id=43008561 node_paths=PackedStringArray("portrait", "name_label", "attack", "defence", "speed", "attack_range", "morale", "morale_slider", "mana", "mana_slider")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
+script = ExtResource("1_jxfv5")
+portrait = NodePath("MarginContainer/Portrait")
+name_label = NodePath("LowerPanel/NameBox/Panel/MarginContainer/Label")
+attack = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat/Label")
+defence = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2/Label")
+speed = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3/Label")
+attack_range = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat4/Label")
+morale = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/HBoxContainer/Label2")
+morale_slider = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/Container/HSlider")
+mana = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/HBoxContainer/Label2")
+mana_slider = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/Container/HSlider")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1747438298]
 custom_minimum_size = Vector2(40, 40)
@@ -192,6 +205,22 @@ custom_minimum_size = Vector2(834, 126)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gme27")
 
+[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel" unique_id=1553845385]
+self_modulate = Color(0.14901961, 0.13725491, 0.13725491, 0.6)
+layout_mode = 0
+offset_right = 834.0
+offset_bottom = 126.0
+
+[node name="TextureRect" type="TextureRect" parent="LowerPanel/UnitPanel" unique_id=1214860767]
+self_modulate = Color(1, 1, 1, 0.2)
+clip_contents = true
+layout_mode = 0
+offset_right = 834.0
+offset_bottom = 126.0
+texture = ExtResource("4_dmm8e")
+expand_mode = 1
+stretch_mode = 3
+
 [node name="MarginContainer" type="MarginContainer" parent="LowerPanel/UnitPanel" unique_id=330204511]
 layout_mode = 1
 anchors_preset = 2
@@ -233,9 +262,11 @@ texture = SubResource("AtlasTexture_71j6e")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat" unique_id=981823912]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_71j6e")
+horizontal_alignment = 2
 
 [node name="Stat2" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=189950900]
 layout_mode = 2
@@ -246,10 +277,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_71j6e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2" unique_id=865589408]
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2" unique_id=285862903]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_71j6e")
+horizontal_alignment = 2
 
 [node name="Stat3" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=1695647874]
 layout_mode = 2
@@ -260,10 +293,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_71j6e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3" unique_id=372152221]
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3" unique_id=1980347103]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_71j6e")
+horizontal_alignment = 2
 
 [node name="Stat4" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats" unique_id=1487099984]
 layout_mode = 2
@@ -274,10 +309,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_71j6e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat4" unique_id=1512707106]
+[node name="Label" type="Label" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat4" unique_id=1880896858]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_71j6e")
+horizontal_alignment = 2
 
 [node name="UniqueStats" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats" unique_id=2048603576]
 layout_mode = 2
