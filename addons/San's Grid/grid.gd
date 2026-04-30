@@ -75,18 +75,14 @@ func get_neighbours(xy: Vector2i) -> Array[GridCell]:
 	var neighbours: Array[GridCell] = []
 	var x = xy.x
 	var y = xy.y
-	
-	for i in range(-1, 2):
-		for j in range(-1, 2):
-			if i == 0 && j == 0:
-				continue
-			if i != 0 && j != 0:
-				continue
-				
-			if is_cell_valid(x + i, y + j):
-				var trueX = x + i
-				var trueY = y + j
-				neighbours.append(grid[trueX + trueY * width])
+
+	const DIRS = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+
+	for dir in DIRS:
+		var nx = x + dir.x
+		var ny = y + dir.y
+		if is_cell_valid(nx, ny):
+			neighbours.append(grid[nx + ny * width])
 	
 	return neighbours
 	
@@ -110,28 +106,46 @@ func clear_reach_tiles(cells: Array[GridCell]):
 
 func calculateWalkZone(node: GridCell, mov: int) -> Array[GridCell]:
 	var startNode = node
-	
+
 	var openSet: Array[GridCell] = []
+	var openSetDict: Dictionary = {}
 	var closedSet: Array[GridCell] = []
-	
+	var closedSetDict: Dictionary = {}
+
+	var costMap: Dictionary = {}
+
 	openSet.append(startNode)
+	openSetDict[startNode] = true
+	costMap[startNode] = 0
+
 	while openSet.size() > 0:
-		var currentNode := openSet[0]
-		
-		for neighbour in get_neighbours(currentNode.xy):
-			if neighbour.entity.type != GridEntityType.EMPTY: continue
-			if closedSet.has(neighbour):
-				continue
-			
-			var newCostToNeighbour = get_distance(currentNode)
-			
-			if newCostToNeighbour <= mov:
-				neighbour.parent = currentNode
-				openSet.append(neighbour)
-			
-		openSet.erase(currentNode)
+		var currentNode: GridCell = openSet.pop_front()
+		openSetDict.erase(currentNode)
+
+		if closedSetDict.has(currentNode):
+			continue
+
 		closedSet.append(currentNode)
-		
+		closedSetDict[currentNode] = true
+
+		var currentCost: int = costMap[currentNode]
+		if currentCost >= mov:
+			continue
+
+		for neighbour in get_neighbours(currentNode.xy):
+			if neighbour.entity.type != GridEntityType.EMPTY:
+				continue
+			if closedSetDict.has(neighbour):
+				continue
+			if openSetDict.has(neighbour):
+				continue
+
+			neighbour.parent = currentNode
+			costMap[neighbour] = currentCost + 1
+
+			openSet.append(neighbour)
+			openSetDict[neighbour] = true
+
 	return closedSet
 
 func calculateWalkPath(destination: GridCell) -> Array[GridCell]:

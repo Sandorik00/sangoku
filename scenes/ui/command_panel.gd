@@ -17,7 +17,7 @@ extends Control
 @export var mana_slider: HSlider
 
 func _init():
-	UIState.unit_data_changed.connect(_fill_unit_data)
+	CombatData.unit_data_changed.connect(_fill_unit_data)
 	hide()
 
 func _fill_unit_data(data: Unit):

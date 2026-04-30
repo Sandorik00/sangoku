@@ -22,13 +22,12 @@ var unit_id: int = 0
 
 @export_category("Logic")
 @export var combatState: CombatState
-@export var movement_range: int = 6
+@export var movement_range: int = 0
 
 @export_category("Utils")
 @export var camera: Camera2D
 @export var speed := 100
 
-var unitsInCombat: Dictionary[int, Unit] = {}
 var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7)]
 
 var unit_entity: SanGrid.GridEntity
@@ -43,7 +42,7 @@ var transitionInProgress: bool = true
 ## Call before adding to the scene
 func setup_combat_entities(units: Array[Unit]):
 	for u in units:
-		unitsInCombat.set(unit_id, u)
+		CombatData.unitsInCombat.set(unit_id, u)
 		unit_id += 1
 
 func _process(delta):
@@ -83,15 +82,16 @@ func _ready():
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
 
+	## Array[{ id: int, initiative: int }]
 	var combatants: Array[SanGrid.GridEntity] = []
 
 	# place units
-	for i in unitsInCombat.keys():
+	for i in CombatData.unitsInCombat.keys():
 		var spawnPos = spawnPositions[i]
 		var posForUnit = to_global(tileMap.map_to_local(spawnPos))
 
 		var u = unitPS.instantiate() as UnitEntity
-		u.unit_data = unitsInCombat[i]
+		u.unit_data = CombatData.unitsInCombat[i]
 		u.prepare()
 		u.position = posForUnit
 
@@ -107,8 +107,9 @@ func _ready():
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
 	unit_entity = unit
-	unit_active = unitsInCombat[unit.id]
-	UIState.panel_unit_data = unit_active
+	unit_active = CombatData.unitsInCombat[unit.id]
+	CombatData.panel_unit_data = unit_active
+	movement_range = unit_active.movement
 	_calc_and_draw_zone(unit_active.movement)
 
 func _calc_and_draw_zone(mov: int):
@@ -127,8 +128,8 @@ func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
 		var correctedPosition = tileMap.get_global_mouse_position()
 		var tile = tileMap.local_to_map(correctedPosition)
-		print("Tiles: %s %s" % [tile.x, tile.y])
-		print(grid.get_cell(tile.x, tile.y).xy)
+		# print("Tiles: %s %s" % [tile.x, tile.y])
+		# print(grid.get_cell(tile.x, tile.y).xy)
 
 		var currCell = grid.get_cell(tile.x, tile.y)
 
