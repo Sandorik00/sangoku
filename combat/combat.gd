@@ -3,6 +3,8 @@ extends Node2D
 var UCS := UnitControlsState
 
 var unit_id: int = 0
+@onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
+@onready var sub_viewport_container: SubViewportContainer = $/root/Main/CanvasLayer/SubViewportContainer
 
 @export_category("SanGrid")
 @export var grid: SanGrid
@@ -52,6 +54,7 @@ func _process(delta):
 	movement = speed * movement.normalized()
 	camera.position += movement * delta
 	camera.position = camera.position.clamp(Vector2(-20, -20), Vector2(20, 35))
+	combat_ui.position = -camera.position * 6
 
 func _ready():
 	# test code, delete later
@@ -95,7 +98,7 @@ func _ready():
 		u.prepare()
 		u.position = posForUnit
 
-		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u)
+		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.unit_data.team)
 		uEntity.id = i
 
 		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)
@@ -103,6 +106,7 @@ func _ready():
 
 		combatants.push_back(uEntity)
 
+	CombatData.add_units_ui(combatants)
 	combatState.add_combatants(combatants)
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
@@ -111,6 +115,8 @@ func _setup_unit_turn(unit: SanGrid.GridEntity):
 	CombatData.panel_unit_data = unit_active
 	movement_range = unit_active.movement
 	_calc_and_draw_zone(unit_active.movement)
+	print("move label")
+	CombatData.move_unit_label(unit)
 
 func _calc_and_draw_zone(mov: int):
 	walkZone = grid.calculateWalkZone(unit_entity.cell, mov)
@@ -146,13 +152,15 @@ func _unhandled_input(event: InputEvent):
 
 				walkPath = grid.calculateWalkPath(currCell)
 				_tween_path()
+			elif currCell.isInReach and currCell.entity.team == Types.TEAMS.RED:
+				transitionInProgress = true
+
+
+				
 
 		# End
 		if UCS.current_state == UCS.UnitState.END:
 			pass
-
-			
-
 
 func _tween_path():
 	var unitNode2D = unit_entity.unitNode
@@ -178,7 +186,12 @@ func _tween_path():
 
 		var segmentLength = i - segmentStart
 		var nextPos = tileMap.to_global(tileMap.map_to_local(cell.xy))
+
+		# Calculatons for troops label
+		var next_label_pos = ((nextPos * 6) + (Vector2(-16, 8) * 3))
+
 		tween.tween_property(unitNode2D, "position", nextPos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
+		tween.parallel().tween_property(CombatData.moving_label, "position", next_label_pos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 
 	tween.tween_callback(_clear_walk_zone)
 

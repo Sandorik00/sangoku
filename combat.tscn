@@ -269,7 +269,7 @@ commanderResource = ExtResource("5_5pdxm")
 enemyArmyResource = ExtResource("5_mp23d")
 enemyCommanderResource = ExtResource("6_prnnl")
 combatState = NodePath("CombatState")
-camera = NodePath("Camera2D")
+camera = NodePath("")
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=941406359]
 tile_set = SubResource("TileSet_u30h6")
@@ -291,7 +291,3 @@ metadata/_custom_type_script = "uid://doarsxv7ckgom"
 [node name="CombatState" type="Node" parent="." unique_id=1281360289]
 script = ExtResource("6_fvoc2")
 metadata/_custom_type_script = "uid://e0lka6yf3h0g"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=292258442]
-anchor_mode = 0
-zoom = Vector2(2, 2)

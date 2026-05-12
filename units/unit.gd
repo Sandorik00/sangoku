@@ -19,7 +19,7 @@ var initiative: int
 var movement: int
 
 var validUnit: bool = false
-var team: Types.TEAMS = Types.TEAMS.BLUE
+var team: Types.TEAMS = Types.TEAMS.RED
 
 func calculate():
 	validUnit = false

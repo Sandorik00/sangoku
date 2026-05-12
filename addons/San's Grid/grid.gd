@@ -14,12 +14,12 @@ class GridEntity:
 	var type: GridEntityType
 	var unitNode: Node2D
 	var cell: GridCell
-	var friendly: bool
+	var team: Types.TEAMS
 
-	func _init(_type: GridEntityType = GridEntityType.EMPTY, _unitNode: Node2D = null, _friendly: bool = false):
+	func _init(_type: GridEntityType = GridEntityType.EMPTY, _unitNode: Node2D = null, _team: Types.TEAMS = Types.TEAMS.RED):
 		self.type = _type
 		self.unitNode = _unitNode
-		self.friendly = _friendly
+		self.team = _team
 
 	func set_cell(cell: GridCell):
 		var ent = self
