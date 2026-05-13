@@ -155,9 +155,13 @@ func _unhandled_input(event: InputEvent):
 			elif currCell.isInReach and currCell.entity.team == Types.TEAMS.RED:
 				transitionInProgress = true
 
+				var dead_unit := _calculate_attack(unit_entity, currCell.entity)
+				CombatData.update_labels_for_units([unit_entity, currCell.entity])
 
+				if dead_unit: _on_unit_death(dead_unit)
+
+				_clear_walk_zone()
 				
-
 		# End
 		if UCS.current_state == UCS.UnitState.END:
 			pass
@@ -196,7 +200,7 @@ func _tween_path():
 	tween.tween_callback(_clear_walk_zone)
 
 func _clear_walk_zone():
-	var last_pass_lenght = walkPath.size() - 1
+	var last_pass_lenght = max(walkPath.size() - 1, 0)
 
 	overlayTileMap.clearWalkZone(grid, walkZone)
 	overlayTileMap.clearReachZone(grid, reachZone)
@@ -212,3 +216,33 @@ func _clear_walk_zone():
 func _setup_new_state(state: UnitControlsState.UnitState):
 	if state == UCS.UnitState.END:
 		pass
+
+func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridEntity) -> SanGrid.GridEntity:
+	var dead_unit: SanGrid.GridEntity = null
+
+	var attacker = attacker_e.unitNode.unit_data
+	var defender = defender_e.unitNode.unit_data
+
+	var a_true_attack: int = attacker.attack - defender.defence
+	var a_true_damage: int = max((attacker.troops * a_true_attack) * 0.3, 1)
+
+	var d_true_attack: int = defender.attack - attacker.defence
+	var d_true_damage: int = max((defender.troops * d_true_attack) * 0.1, 1)
+
+	defender.troops = max(defender.troops - a_true_damage, 0)
+	if defender.troops == 0:
+		d_true_damage = min(d_true_damage, attacker.troops - 1)
+		dead_unit = defender_e
+
+	attacker.troops = max(attacker.troops - d_true_damage, 0)
+	if attacker.troops == 0:
+		dead_unit = attacker_e
+
+	return dead_unit
+
+func _on_unit_death(unit: SanGrid.GridEntity):
+	combatState.on_unit_death(unit)
+	var node_for_deletion = unit.unitNode
+	node_for_deletion.queue_free()
+	CombatData.unitsInCombat.erase(unit.id)
+	unit.cell.erase_entity()

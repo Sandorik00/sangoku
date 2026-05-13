@@ -23,3 +23,6 @@ func sort_initiative(a: SanGrid.GridEntity, b: SanGrid.GridEntity):
 	var unit_data_b: Unit = CombatData.unitsInCombat[b.id]
 
 	return unit_data_a.initiative > unit_data_b.initiative
+
+func on_unit_death(unit: SanGrid.GridEntity):
+	_turn_order.remove_at(_turn_order.find(unit))

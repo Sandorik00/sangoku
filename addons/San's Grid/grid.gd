@@ -12,7 +12,7 @@ enum GridEntityType { EMPTY, UNIT }
 class GridEntity:
 	var id: int
 	var type: GridEntityType
-	var unitNode: Node2D
+	var unitNode: UnitEntity
 	var cell: GridCell
 	var team: Types.TEAMS
 
@@ -42,6 +42,9 @@ class GridCell:
 		var cell = self
 		ent.cell = cell
 		cell.entity = ent
+
+	func erase_entity():
+		entity = GridEntity.new()
 
 func create_grid(x: int, y: int):
 	grid.resize(x * y)

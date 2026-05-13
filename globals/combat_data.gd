@@ -38,3 +38,12 @@ func move_unit_label(unit: SanGrid.GridEntity):
 func reset_moving_label():
 	moving_unit = null
 	moving_label = null
+
+func update_labels_for_units(units: Array[SanGrid.GridEntity]):
+	for ue in units:
+		var label = units_by_labels[ue.id]
+		if ue.unitNode.unit_data.troops == 0:
+			units_by_labels.erase(ue.id)
+			label.queue_free()
+		else:
+			label.text = str(ue.unitNode.unit_data.troops)
