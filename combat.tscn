@@ -257,7 +257,7 @@ texture = ExtResource("5_ilamk")
 [sub_resource type="TileSet" id="TileSet_fvoc2"]
 sources/0 = SubResource("TileSetAtlasSource_u30h6")
 
-[node name="Combat" type="Node2D" unique_id=2090826167 node_paths=PackedStringArray("grid", "tileMap", "overlayTileMap", "combatState", "camera")]
+[node name="Combat" type="Node2D" unique_id=2090826167 node_paths=PackedStringArray("grid", "tileMap", "overlayTileMap", "combatState")]
 script = ExtResource("1_s0t75")
 grid = NodePath("SanGrid")
 grid_dimensions = Vector2i(20, 12)
@@ -269,7 +269,6 @@ commanderResource = ExtResource("5_5pdxm")
 enemyArmyResource = ExtResource("5_mp23d")
 enemyCommanderResource = ExtResource("6_prnnl")
 combatState = NodePath("CombatState")
-camera = NodePath("")
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=941406359]
 tile_set = SubResource("TileSet_u30h6")

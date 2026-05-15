@@ -20,6 +20,7 @@ var movement: int
 
 var validUnit: bool = false
 var team: Types.TEAMS = Types.TEAMS.RED
+var enemies: Types.TEAM_MAPPING = Types.TEAM_MAPPING.RED
 
 func calculate():
 	validUnit = false

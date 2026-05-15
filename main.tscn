@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxyjbs03ln8sa" path="res://combat.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/command_panel.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c0fw3eq07jyru" path="res://scenes/ui/turn_order.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D" unique_id=491633502]
 
@@ -34,3 +35,5 @@ zoom = Vector2(2, 2)
 [node name="CombatUI" type="Control" parent="CanvasLayer" unique_id=813854917]
 layout_mode = 3
 anchors_preset = 0
+
+[node name="TurnOrder" parent="CanvasLayer" unique_id=1369279574 instance=ExtResource("3_h2yge")]

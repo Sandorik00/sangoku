@@ -6,9 +6,12 @@ func drawWalkZone(moveList: Array[SanGrid.GridCell]):
 		node.isWalkTile = true
 		set_cell(node.xy, 0, Vector2(6, 12))
 
-func draw_reach_zone(cellList: Array[SanGrid.GridCell]):
+func draw_reach_zone(cellList: Array[SanGrid.GridCell], unit_entity: SanGrid.GridEntity):
 	for cell in cellList:
-		if cell.entity.type == SanGrid.GridEntityType.UNIT and cell.entity.team == Types.TEAMS.RED: 
+		print("enemies: " + str(unit_entity.enemies))
+		print("team: " + str(cell.entity.team))
+		print("check: " + str((unit_entity.enemies & cell.entity.team) != 0))
+		if cell.entity.type == SanGrid.GridEntityType.UNIT and (unit_entity.enemies & cell.entity.team) != 0: 
 			set_cell(cell.xy, 0, Vector2(3, 1))
 
 		# set_cell(cell.xy, 0, Vector2(4, 1))

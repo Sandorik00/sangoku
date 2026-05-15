@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c0fw3eq07jyru"]
+
+[ext_resource type="Script" uid="uid://b54kkus3atqsc" path="res://scenes/ui/turn_order.gd" id="1_dj78v"]
+[ext_resource type="PackedScene" uid="uid://cahr0cvelary8" path="res://scenes/ui/turn_order_unit.tscn" id="2_81cie"]
+
+[node name="TurnOrder" type="Control" unique_id=1369279574 node_paths=PackedStringArray("units_container")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dj78v")
+turn_order_unit = ExtResource("2_81cie")
+units_container = NodePath("Panel/MarginContainer/HBoxContainer")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1978916394]
+layout_mode = 1
+offset_right = 89.0
+offset_bottom = 88.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1488424903]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=58052856]
+layout_mode = 2
+theme_override_constants/separation = 8

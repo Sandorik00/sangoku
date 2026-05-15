@@ -84,7 +84,7 @@ shader_parameter/gradient_stop = 0.75
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxfv5"]
 texture = ExtResource("6_71j6e")
 
-[node name="CommandPanel" type="Control" unique_id=43008561 node_paths=PackedStringArray("portrait", "name_label", "attack", "defence", "speed", "attack_range", "morale", "morale_slider", "mana", "mana_slider")]
+[node name="CommandPanel" type="Control" unique_id=43008561 node_paths=PackedStringArray("portrait", "name_label", "end_turn_button", "attack", "defence", "speed", "attack_range", "morale", "morale_slider", "mana", "mana_slider")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -93,6 +93,7 @@ grow_vertical = 0
 script = ExtResource("1_jxfv5")
 portrait = NodePath("MarginContainer/Portrait")
 name_label = NodePath("LowerPanel/NameBox/Panel/MarginContainer/Label")
+end_turn_button = NodePath("LowerPanel/NameBox/PanelContainer/MarginContainer/Button")
 attack = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat/Label")
 defence = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat2/Label")
 speed = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/MarginContainer/BasicStats/Stat3/Label")
@@ -223,12 +224,11 @@ stretch_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="LowerPanel/UnitPanel" unique_id=330204511]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -126.0
-offset_right = 826.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12

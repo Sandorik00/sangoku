@@ -1,10 +1,11 @@
 extends Node2D
 
-var UCS := UnitControlsState
+# var UCS := UnitControlsState
 
 var unit_id: int = 0
 @onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
 @onready var sub_viewport_container: SubViewportContainer = $/root/Main/CanvasLayer/SubViewportContainer
+@onready var command_panel: CommandPanel = $/root/Main/CanvasLayer/CommandPanel
 
 @export_category("SanGrid")
 @export var grid: SanGrid
@@ -66,19 +67,22 @@ func _ready():
 			ue.army = enemyArmyResource
 			ue.commander = enemyCommanderResource
 			ue.team = Types.TEAMS.RED
+			ue.enemies = Types.TEAM_MAPPING.RED
 			ue.calculate()
 		else:
 			var ue = ce[i]
 			ue.army = armyResource
 			ue.commander = commanderResource
 			ue.team = Types.TEAMS.BLUE
+			ue.enemies = Types.TEAM_MAPPING.BLUE
 			ue.calculate()
 
 	self.setup_combat_entities(ce)
 
 	########################################
 	combatState.turn_passed.connect(_setup_unit_turn)
-	UCS.nextState.connect(_setup_new_state)
+	# UCS.nextState.connect(_setup_new_state)
+	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
 
 	grid.create_grid(grid_dimensions.x, grid_dimensions.y)
 	for y in grid_dimensions.y:
@@ -98,7 +102,7 @@ func _ready():
 		u.prepare()
 		u.position = posForUnit
 
-		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.unit_data.team)
+		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.unit_data.team, u.unit_data.enemies)
 		uEntity.id = i
 
 		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)
@@ -115,7 +119,6 @@ func _setup_unit_turn(unit: SanGrid.GridEntity):
 	CombatData.panel_unit_data = unit_active
 	movement_range = unit_active.movement
 	_calc_and_draw_zone(unit_active.movement)
-	print("move label")
 	CombatData.move_unit_label(unit)
 
 func _calc_and_draw_zone(mov: int):
@@ -125,7 +128,7 @@ func _calc_and_draw_zone(mov: int):
 
 func _calc_and_draw_reach(reach: int):
 	reachZone = grid.get_reachable_cells(unit_entity.cell, reach)
-	overlayTileMap.draw_reach_zone(reachZone)
+	overlayTileMap.draw_reach_zone(reachZone, unit_entity)
 	transitionInProgress = false
 
 func _unhandled_input(event: InputEvent):
@@ -140,31 +143,27 @@ func _unhandled_input(event: InputEvent):
 		var currCell = grid.get_cell(tile.x, tile.y)
 
 		# Walk and Attack and whatsoever
-		if UCS.current_state == UCS.UnitState.TURN:
-			if currCell.isWalkTile == true:
-				transitionInProgress = true
-				var cell = unit_entity.cell
+		if currCell.isWalkTile == true:
+			transitionInProgress = true
+			var cell = unit_entity.cell
+			
+			currCell.set_entity(cell.entity)
+			cell.set_entity(SanGrid.GridEntity.new())
+			
+			#unit_entity.unitNode.position = posForUnit
+
+			walkPath = grid.calculateWalkPath(currCell)
+			_tween_path()
+		elif currCell.isInReach and (unit_entity.unitNode.unit_data.enemies & currCell.entity.team) != 0:
+			transitionInProgress = true
+
+			var dead_unit := _calculate_attack(unit_entity, currCell.entity)
+			CombatData.update_labels_for_units([unit_entity, currCell.entity])
+
+			if dead_unit: _on_unit_death(dead_unit)
+
+			_cycle_walk_zone()
 				
-				currCell.set_entity(cell.entity)
-				cell.set_entity(SanGrid.GridEntity.new())
-				
-				#unit_entity.unitNode.position = posForUnit
-
-				walkPath = grid.calculateWalkPath(currCell)
-				_tween_path()
-			elif currCell.isInReach and currCell.entity.team == Types.TEAMS.RED:
-				transitionInProgress = true
-
-				var dead_unit := _calculate_attack(unit_entity, currCell.entity)
-				CombatData.update_labels_for_units([unit_entity, currCell.entity])
-
-				if dead_unit: _on_unit_death(dead_unit)
-
-				_clear_walk_zone()
-				
-		# End
-		if UCS.current_state == UCS.UnitState.END:
-			pass
 
 func _tween_path():
 	var unitNode2D = unit_entity.unitNode
@@ -197,25 +196,23 @@ func _tween_path():
 		tween.tween_property(unitNode2D, "position", nextPos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 		tween.parallel().tween_property(CombatData.moving_label, "position", next_label_pos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 
-	tween.tween_callback(_clear_walk_zone)
+	tween.tween_callback(_cycle_walk_zone)
 
-func _clear_walk_zone():
+func _cycle_walk_zone():
 	var last_pass_lenght = max(walkPath.size() - 1, 0)
 
+	_clear_walk_zone()
+
+	movement_range -= last_pass_lenght
+	_calc_and_draw_zone(movement_range)
+
+func _clear_walk_zone():
 	overlayTileMap.clearWalkZone(grid, walkZone)
 	overlayTileMap.clearReachZone(grid, reachZone)
 	overlayTileMap.clear()
 	walkZone = []
 	walkPath = []
 	reachZone = []
-
-	movement_range -= last_pass_lenght
-	_calc_and_draw_zone(movement_range)
-	# UnitControlsState.forward()
-
-func _setup_new_state(state: UnitControlsState.UnitState):
-	if state == UCS.UnitState.END:
-		pass
 
 func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridEntity) -> SanGrid.GridEntity:
 	var dead_unit: SanGrid.GridEntity = null
@@ -246,3 +243,9 @@ func _on_unit_death(unit: SanGrid.GridEntity):
 	node_for_deletion.queue_free()
 	CombatData.unitsInCombat.erase(unit.id)
 	unit.cell.erase_entity()
+
+func _on_end_turn_pressed():
+	# cleanup
+	_clear_walk_zone()
+
+	combatState.pass_turn()

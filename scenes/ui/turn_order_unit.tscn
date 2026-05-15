@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cahr0cvelary8"]
+
+[ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="1_f1ki4"]
+[ext_resource type="Script" uid="uid://clohavdh8onji" path="res://scenes/ui/turn_order_unit.gd" id="2_yv3qp"]
+
+[node name="TextureRect" type="TextureRect" unique_id=1162945109]
+self_modulate = Color(0.3529412, 0.3529412, 0.3529412, 0.78431374)
+custom_minimum_size = Vector2(69, 0)
+texture = ExtResource("1_f1ki4")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("2_yv3qp")

@@ -1,8 +1,10 @@
 extends Control
+class_name CommandPanel
 
 @export_category("Info")
 @export var portrait: TextureRect
 @export var name_label: Label
+@export var end_turn_button: Button
 
 @export_category("Basic stats")
 @export var attack: Label
