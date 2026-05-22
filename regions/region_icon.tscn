@@ -13,5 +13,3 @@ texture_normal = ExtResource("1_rtl5y")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("1_33eaq")
-
-[connection signal="pressed" from="." to="." method="_on_pressed"]

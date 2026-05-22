@@ -3,8 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bewqrkcj0hb8e" path="res://regions/castleIcon.tscn" id="1_nrtmm"]
 [ext_resource type="Script" uid="uid://dvck0qagoqngq" path="res://regions/castles_box.gd" id="1_tyv5h"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_11jvi"]
+font_size = 48
+
 [node name="Panel" type="Panel" unique_id=1888732432 node_paths=PackedStringArray("castleHBox")]
-custom_minimum_size = Vector2(200, 90)
+custom_minimum_size = Vector2(600, 270)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -21,13 +24,16 @@ castleIconPS = ExtResource("1_nrtmm")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=462810425]
 custom_minimum_size = Vector2(200, 80)
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 90.0
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2131620326]
 layout_mode = 2
@@ -39,6 +45,7 @@ theme_override_constants/margin_left = 4
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=596274618]
 layout_mode = 2
 text = "Castles"
+label_settings = SubResource("LabelSettings_11jvi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=891914773]
 layout_mode = 2

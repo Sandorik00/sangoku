@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://61votu5io48k"]
+
+[ext_resource type="Script" uid="uid://drrix0g2efs68" path="res://regions/region_action_ui.gd" id="1_a3meu"]
+
+[sub_resource type="FontVariation" id="FontVariation_h7jvj"]
+spacing_top = -4
+spacing_bottom = -4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3meu"]
+bg_color = Color(0.17945084, 0.21699342, 0.47836655, 1)
+
+[node name="RegionAction" type="PanelContainer" unique_id=2069620315 node_paths=PackedStringArray("btn")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 37.0
+grow_horizontal = 2
+script = ExtResource("1_a3meu")
+btn = NodePath("MarginContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1641987954]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer" unique_id=1611960305]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_h7jvj")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_a3meu")
+text = "Recruit army"

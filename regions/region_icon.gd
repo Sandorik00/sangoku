@@ -3,6 +3,7 @@ extends TextureButton
 @export var res: Region
 
 func _ready():
+	self.pressed.connect(_on_pressed)
 	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
 
 func _on_pressed() -> void:
@@ -10,5 +11,5 @@ func _on_pressed() -> void:
 	UIState.chosen_region = res
 
 func _on_chosen_region_changed(region: Region):
-	if (not region or region.name != res.name):
+	if (not region or region.id != res.id):
 		modulate = Color.WHITE
