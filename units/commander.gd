@@ -2,6 +2,7 @@ extends Resource
 class_name Commander
 
 @export_group("info")
+@export var id: int = -1
 @export var name: String = ""
 @export var portrait: Texture2D
 @export var sprite: AtlasTexture

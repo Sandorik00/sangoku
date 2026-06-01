@@ -3,14 +3,16 @@ extends Control
 @export var actionsBoxPS: PackedScene
 @export var castlesBoxPS: PackedScene
 @export var region_action_ui_ps: PackedScene
+@export var hire_menu_ui_ps: PackedScene
 
 var actionsBox: RegionActionsBox
 var castlesBox: Panel
+var hire_menu_ui: HireMenu
 
 func _ready():
 	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
 
-	# region actions
+	## region actions
 	UIState.region_action_changed.connect(_on_region_action_changed)
 
 func _on_chosen_region_changed(region: Region):
@@ -46,4 +48,17 @@ func _on_chosen_region_changed(region: Region):
 	add_child(castlesBox)
 
 func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
-	print(type)
+	match type:
+		Types.REGION_ACTION_TYPE.NONE:
+			if hire_menu_ui:
+				hire_menu_ui.queue_free()
+				hire_menu_ui = null
+
+		Types.REGION_ACTION_TYPE.HIRE_ARMY:
+			_show_hire_ui()
+
+func _show_hire_ui():
+	hire_menu_ui = hire_menu_ui_ps.instantiate()
+
+	hire_menu_ui.add_armies(UIState.armies_for_hire)
+	add_child(hire_menu_ui)

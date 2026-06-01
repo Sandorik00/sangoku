@@ -38,3 +38,32 @@ class TurnOrderArray extends RefCounted:
 	func remove_unit(unit: SanGrid.GridEntity):
 		_data.remove_at(_data.find(unit))
 	
+class UnitsStateDictionary extends RefCounted:
+	var _data: Dictionary[int, Resource]
+	var _last_index: int = 0
+	var _free_buffer: Array[int] = []
+
+	func _init(__data: Dictionary[int, Resource] = {}) -> void:
+		_data = __data
+		_last_index = __data.keys().size()
+
+	func set_batch(ress: Array[Resource]):
+		for res in ress:
+			self.set_last(res)
+
+	func set_last(res: Resource):
+		var curr_index: int = _last_index
+		if not _free_buffer.is_empty():
+			curr_index = _free_buffer.pop_back()
+		else: _last_index += 1
+
+		_data.set(curr_index, res)
+		
+		if res is Army or res is Commander:
+			res.id = curr_index
+		
+	func erase_at(index: int):
+		if index == -1: return
+
+		_data.erase(index)
+		_free_buffer.push_back(index)

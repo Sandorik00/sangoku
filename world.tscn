@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://wk683gtlktk5" path="res://regions/castlesBox.tscn" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://61votu5io48k" path="res://regions/region_action.tscn" id="7_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://kbsoh2uvk0qx" path="res://menuPanel.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://cb3h7neln0lga" path="res://scenes/ui/hire_menu.tscn" id="8_ioo17"]
 
 [sub_resource type="Resource" id="Resource_036b0"]
 script = ExtResource("3_aqk2v")
@@ -82,6 +83,7 @@ script = ExtResource("3_tlwt5")
 actionsBoxPS = ExtResource("4_aqk2v")
 castlesBoxPS = ExtResource("4_dwbse")
 region_action_ui_ps = ExtResource("7_gbfbk")
+hire_menu_ui_ps = ExtResource("8_ioo17")
 
 [node name="Panel" parent="UI" unique_id=1993563656 instance=ExtResource("7_pkg7o")]
 layout_mode = 1

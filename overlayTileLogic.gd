@@ -8,9 +8,6 @@ func drawWalkZone(moveList: Array[SanGrid.GridCell]):
 
 func draw_reach_zone(cellList: Array[SanGrid.GridCell], unit_entity: SanGrid.GridEntity):
 	for cell in cellList:
-		print("enemies: " + str(unit_entity.enemies))
-		print("team: " + str(cell.entity.team))
-		print("check: " + str((unit_entity.enemies & cell.entity.team) != 0))
 		if cell.entity.type == SanGrid.GridEntityType.UNIT and (unit_entity.enemies & cell.entity.team) != 0: 
 			set_cell(cell.xy, 0, Vector2(3, 1))
 

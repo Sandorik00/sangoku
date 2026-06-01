@@ -2,10 +2,12 @@ extends Resource
 class_name Army
 
 @export_group("info")
+@export var id: int = -1
 @export var name: String
 @export var portrait: Texture2D
 @export var sprite: AtlasTexture
 @export var clazz: String
+@export var grade: String
 
 @export_group("stats")
 @export var attack: int

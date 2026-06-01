@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b0i0c0b7t0khl"]
+
+[ext_resource type="Script" uid="uid://c8p5du8u5m0gt" path="res://scenes/ui/army_panel.gd" id="1_x0xim"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_neqos"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_erugy"]
+font_size = 20
+
+[node name="ArmyPanel" type="Button" unique_id=1331081905 node_paths=PackedStringArray("army_name", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
+custom_minimum_size = Vector2(0, 81)
+mouse_default_cursor_shape = 2
+script = ExtResource("1_x0xim")
+army_name = NodePath("VBoxContainer/Army name")
+attack_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/AttackN")
+defence_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer2/DefenceN")
+speed_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer3/SpeedN")
+attack_range_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer4/RangeN")
+mana_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer5/ManaN")
+morale_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer6/MoraleN")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1104115729]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Army name" type="Label" parent="VBoxContainer" unique_id=1241471751]
+layout_mode = 2
+text = "Army name"
+label_settings = SubResource("LabelSettings_neqos")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=78770954]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=910777197]
+layout_mode = 2
+
+[node name="Attack" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=618459098]
+layout_mode = 2
+text = "Attack:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="AttackN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=72933660]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=977702853]
+layout_mode = 2
+
+[node name="Defence" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1023406390]
+layout_mode = 2
+text = "Defence:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="DefenceN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1349085632]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1260810615]
+layout_mode = 2
+
+[node name="Speed" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3" unique_id=1186416519]
+layout_mode = 2
+text = "Speed:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="SpeedN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer3" unique_id=565926592]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1989827864]
+layout_mode = 2
+
+[node name="Range" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer4" unique_id=1239814886]
+layout_mode = 2
+text = "Range:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="RangeN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer4" unique_id=1955998799]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=177893354]
+layout_mode = 2
+
+[node name="Mana" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer5" unique_id=359308919]
+layout_mode = 2
+text = "Mana:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="ManaN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer5" unique_id=52261415]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=908431149]
+layout_mode = 2
+
+[node name="Morale" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=641808357]
+layout_mode = 2
+text = "Morale:"
+label_settings = SubResource("LabelSettings_erugy")
+
+[node name="MoraleN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=1928289429]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_erugy")

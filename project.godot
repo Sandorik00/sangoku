@@ -24,6 +24,8 @@ Utils="*uid://dhbmy51fmvs1a"
 Types="*uid://cs2mmlfqq342k"
 CombatData="*uid://bcnn7txoxcjr2"
 FactionsState="*uid://vd7msjolcg4f"
+WorldActions="*uid://b86t0rhq6psg3"
+WorldState="*uid://c36pu2v0nh51f"
 
 [display]
 
