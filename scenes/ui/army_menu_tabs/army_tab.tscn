@@ -1,0 +1,298 @@
+[gd_scene format=3 uid="uid://vnn1tqvsb6sw"]
+
+[ext_resource type="Script" uid="uid://1gkyeci42f4g" path="res://scenes/ui/army_menu_tabs/army_tab.gd" id="1_67vrc"]
+[ext_resource type="Texture2D" uid="uid://2scglpu77le3" path="res://icon.svg" id="2_1ck5b"]
+[ext_resource type="PackedScene" uid="uid://b0i0c0b7t0khl" path="res://scenes/ui/components/army_panel.tscn" id="2_a7fke"]
+
+[sub_resource type="FontVariation" id="FontVariation_ofcrd"]
+spacing_top = -10
+spacing_bottom = -10
+
+[sub_resource type="LabelSettings" id="LabelSettings_67vrc"]
+font = SubResource("FontVariation_ofcrd")
+font_size = 32
+
+[sub_resource type="FontVariation" id="FontVariation_bcpuf"]
+spacing_top = -10
+spacing_bottom = -10
+
+[sub_resource type="LabelSettings" id="LabelSettings_a7fke"]
+font = SubResource("FontVariation_bcpuf")
+font_size = 32
+
+[sub_resource type="FontVariation" id="FontVariation_l2fqc"]
+spacing_top = -10
+spacing_bottom = -10
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fv33"]
+font = SubResource("FontVariation_l2fqc")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofcrd"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_l2fqc"]
+font_size = 32
+
+[node name="ArmyTab" type="VBoxContainer" unique_id=662747475 node_paths=PackedStringArray("stats_block", "change_army_btn", "unit_list", "unit_list_container", "attack_l", "defence_l", "speed_l", "mana_l", "range_l", "morale_l", "clazz_l", "grade_l", "troops_l")]
+offset_right = 924.0
+offset_bottom = 727.0
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_67vrc")
+stats_block = NodePath("StatsBlock")
+change_army_btn = NodePath("InfoAndChange/Button")
+unit_list = NodePath("UnitList")
+unit_list_container = NodePath("UnitList/ScrollContainer/VBoxContainer")
+army_panel_ps = ExtResource("2_a7fke")
+attack_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control/AttackN")
+defence_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control2/DefenceN")
+speed_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control3/SpeedN")
+mana_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control/ManaN")
+range_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control2/RangeN")
+morale_l = NodePath("StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control3/MoraleN")
+clazz_l = NodePath("InfoAndChange/Info/VBoxContainer/HBoxContainer2/Clazz")
+grade_l = NodePath("InfoAndChange/Info/VBoxContainer/HBoxContainer/GradeN")
+troops_l = NodePath("InfoAndChange/Info/VBoxContainer/HBoxContainer3/TroopsN")
+
+[node name="InfoAndChange" type="HBoxContainer" parent="." unique_id=605243222]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Portrait" type="Panel" parent="InfoAndChange" unique_id=1582103601]
+custom_minimum_size = Vector2(0, 171)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoAndChange/Portrait" unique_id=1772453174]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="InfoAndChange/Portrait/MarginContainer" unique_id=528340176]
+layout_mode = 2
+texture = ExtResource("2_1ck5b")
+expand_mode = 1
+
+[node name="Info" type="Panel" parent="InfoAndChange" unique_id=739322916]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoAndChange/Info" unique_id=1698368321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InfoAndChange/Info/VBoxContainer" unique_id=35057700]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer2" unique_id=1128747407]
+layout_mode = 2
+text = "Army: "
+label_settings = SubResource("LabelSettings_67vrc")
+
+[node name="Clazz" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer2" unique_id=1659113405]
+layout_mode = 2
+text = "class"
+label_settings = SubResource("LabelSettings_67vrc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoAndChange/Info/VBoxContainer" unique_id=2094793679]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer" unique_id=1506644927]
+layout_mode = 2
+text = "Grade: "
+label_settings = SubResource("LabelSettings_a7fke")
+
+[node name="GradeN" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer" unique_id=1477294840]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_a7fke")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="InfoAndChange/Info/VBoxContainer" unique_id=1940522857]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer3" unique_id=751508356]
+layout_mode = 2
+text = "Troops: "
+label_settings = SubResource("LabelSettings_3fv33")
+
+[node name="TroopsN" type="Label" parent="InfoAndChange/Info/VBoxContainer/HBoxContainer3" unique_id=1388878201]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_3fv33")
+
+[node name="Control" type="Control" parent="InfoAndChange" unique_id=1707889178]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Button" type="Button" parent="InfoAndChange" unique_id=441947663]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Change Army"
+autowrap_mode = 2
+
+[node name="StatsBlock" type="VBoxContainer" parent="." unique_id=2135668571]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="StatsBlock" unique_id=360481796]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Panel" parent="StatsBlock" unique_id=818348579]
+custom_minimum_size = Vector2(924, 250)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsBlock/Description" unique_id=1305769591]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 924.0
+offset_bottom = 414.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="Label" type="Label" parent="StatsBlock/Description/MarginContainer" unique_id=1402836750]
+custom_minimum_size = Vector2(876, 250)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat vestibulum nibh, sit amet dignissim purus dictum ac. Sed nibh sem,  scelerisque et tempus ut, accumsan vitae nulla. Curabitur lacinia  euismod tellus."
+label_settings = SubResource("LabelSettings_ofcrd")
+autowrap_mode = 2
+
+[node name="Stats" type="Panel" parent="StatsBlock" unique_id=1598274361]
+custom_minimum_size = Vector2(924, 110)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsBlock/Stats" unique_id=1051140659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsBlock/Stats/MarginContainer" unique_id=1569424355]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer" unique_id=1019577391]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer" unique_id=461552549]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=970304761]
+layout_mode = 2
+text = "Attack: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="AttackN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=773605216]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="Control2" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer" unique_id=822794632]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control2" unique_id=1671568797]
+layout_mode = 2
+text = "Defence: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="DefenceN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control2" unique_id=1594535700]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="Control3" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer" unique_id=976911027]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=1967352410]
+layout_mode = 2
+text = "Speed: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="SpeedN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=1059852404]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer" unique_id=2058127662]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1689691599]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control" unique_id=191805649]
+layout_mode = 2
+text = "Mana: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="ManaN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control" unique_id=1093580143]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="Control2" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1768805247]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control2" unique_id=1536660300]
+layout_mode = 2
+text = "Range: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="RangeN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control2" unique_id=2115645401]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="Control3" type="HBoxContainer" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=507977964]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control3" unique_id=876004107]
+layout_mode = 2
+text = "Morale: "
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="MoraleN" type="Label" parent="StatsBlock/Stats/MarginContainer/VBoxContainer/HBoxContainer2/Control3" unique_id=1617072145]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_l2fqc")
+
+[node name="UnitList" type="MarginContainer" parent="." unique_id=354335629]
+visible = false
+custom_minimum_size = Vector2(924, 600)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UnitList" unique_id=429750909]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitList/ScrollContainer" unique_id=2142079012]
+layout_mode = 2
+size_flags_horizontal = 3

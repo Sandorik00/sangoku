@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://bldqos0y8xufl"]
+
+[ext_resource type="Script" uid="uid://3mu7rhv1omrn" path="res://scenes/ui/army_menu.gd" id="1_tm76n"]
+[ext_resource type="PackedScene" uid="uid://xx3fp8dwams8" path="res://scenes/ui/components/commander_panel.tscn" id="2_bcpuf"]
+[ext_resource type="PackedScene" uid="uid://b1igy4agrjk14" path="res://scenes/ui/army_menu_tabs/info_tab.tscn" id="3_tm76n"]
+[ext_resource type="PackedScene" uid="uid://vnn1tqvsb6sw" path="res://scenes/ui/army_menu_tabs/army_tab.tscn" id="4_4iik1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcpuf"]
+bg_color = Color(0, 0, 0, 0.21568628)
+
+[node name="ArmyMenu" type="Control" unique_id=194574503 node_paths=PackedStringArray("commander_list_ui", "current_tab_scene", "close_btn", "info_btn", "abilities_btn", "army_btn", "equip_btn", "tab_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tm76n")
+commander_panel_ps = ExtResource("2_bcpuf")
+commander_list_ui = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/List/ScrollContainer/VBoxContainer")
+current_tab_scene = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/InfoTab")
+close_btn = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/CommanderBanner/HBoxContainer/Close")
+info_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button")
+abilities_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button2")
+army_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button3")
+equip_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button4")
+tab_container = NodePath("Panel/HBoxContainer/Tabs/TabsContainer")
+info_tab_ps = ExtResource("3_tm76n")
+army_tab_ps = ExtResource("4_4iik1")
+
+[node name="Panel" type="Panel" parent="." unique_id=155814156]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=401744982]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Tabs" type="MarginContainer" parent="Panel/HBoxContainer" unique_id=929924357]
+custom_minimum_size = Vector2(1018, 1080)
+layout_mode = 2
+theme_override_constants/margin_left = 47
+theme_override_constants/margin_right = 47
+theme_override_constants/margin_bottom = 20
+
+[node name="TabsContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Tabs" unique_id=1202148845]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Tabs/TabsContainer" unique_id=536150060]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=308307940]
+custom_minimum_size = Vector2(216, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Info"
+
+[node name="Button2" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=1006257984]
+custom_minimum_size = Vector2(216, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Skill tree"
+
+[node name="Button3" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=965703451]
+custom_minimum_size = Vector2(216, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Army"
+
+[node name="Button4" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=1014296997]
+custom_minimum_size = Vector2(216, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Items"
+
+[node name="InfoTab" parent="Panel/HBoxContainer/Tabs/TabsContainer" unique_id=662747475 instance=ExtResource("3_tm76n")]
+layout_mode = 2
+
+[node name="CommanderList" type="PanelContainer" parent="Panel/HBoxContainer" unique_id=361243682]
+custom_minimum_size = Vector2(902, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/CommanderList" unique_id=19240026]
+layout_mode = 2
+
+[node name="CommanderBanner" type="Panel" parent="Panel/HBoxContainer/CommanderList/VBoxContainer" unique_id=1785843702]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/CommanderList/VBoxContainer/CommanderBanner" unique_id=1440088805]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+alignment = 2
+
+[node name="Close" type="Button" parent="Panel/HBoxContainer/CommanderList/VBoxContainer/CommanderBanner/HBoxContainer" unique_id=1140059220]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="List" type="MarginContainer" parent="Panel/HBoxContainer/CommanderList/VBoxContainer" unique_id=1338888559]
+custom_minimum_size = Vector2(902, 700)
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/CommanderList/VBoxContainer/List" unique_id=562451487]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bcpuf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/CommanderList/VBoxContainer/List/ScrollContainer" unique_id=2121356141]
+layout_mode = 2
+size_flags_horizontal = 3

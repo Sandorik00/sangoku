@@ -4,7 +4,7 @@ class_name Unit
 var commander: Commander
 var army: Army
 
-var unit_name: String
+var name: String
 var portrait: Texture2D
 var sprite: AtlasTexture
 
@@ -13,6 +13,7 @@ var defence: int
 var speed: int
 var morale: int
 var mana: int
+var leadership: int
 var attack_range: int
 var troops: int
 var initiative: int
@@ -22,26 +23,35 @@ var validUnit: bool = false
 var team: Types.TEAMS = Types.TEAMS.RED
 var enemies: Types.TEAM_MAPPING = Types.TEAM_MAPPING.RED
 
+func _init(_commander: Commander, _army: Army = null) -> void:
+	assert(_commander, "Unit must have a commander!")
+	
+	commander = _commander
+	army = _army
+
+	self.calculate()
+
 func calculate():
 	validUnit = false
-	if not army: return
+	if not commander: return
 
-	var commander_stats = commander
-	if not commander:
-		commander_stats = Commander.new()
+	var army_stats = army
+	if not army_stats:
+		army_stats = Army.new()
+	
+	name = commander.name if not commander.name.is_empty() else army_stats.name
+	portrait = commander.portrait if commander.portrait else army_stats.portrait
+	sprite = commander.sprite if commander.sprite else army_stats.sprite
 
-	unit_name = commander_stats.name if not commander_stats.name.is_empty() else army.name
-	portrait = commander_stats.portrait if commander_stats.portrait else army.portrait
-	sprite = commander_stats.sprite if commander_stats.sprite else army.sprite
-
-	attack = army.attack + commander_stats.attack
-	defence = army.defence + commander_stats.defence
-	speed = army.speed + commander_stats.speed
-	morale = army.morale
-	mana = army.mana + commander_stats.mana
-	attack_range = army.attack_range
-	troops = army.number_of_troops
-	initiative = army.speed + commander_stats.speed
+	attack = army_stats.attack + commander.attack
+	defence = army_stats.defence + commander.defence
+	speed = army_stats.speed + commander.speed
+	morale = army_stats.morale
+	mana = army_stats.mana + commander.mana
+	leadership = commander.leadership
+	attack_range = max(army_stats.attack_range, 1)
+	troops = army_stats.number_of_troops
+	initiative = army_stats.speed + commander.speed
 	movement = speed
 
 	validUnit = true

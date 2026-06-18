@@ -59,25 +59,25 @@ func _process(delta):
 
 func _ready():
 	# test code, delete later
-	var ce: Array[Unit] = [Unit.new(), Unit.new()]
+	# var ce: Array[Unit] = [Unit.new(), Unit.new()]
 
-	for i in range(ce.size()):
-		if (i + 1) % 2 == 0:
-			var ue = ce[i]
-			ue.army = enemyArmyResource
-			ue.commander = enemyCommanderResource
-			ue.team = Types.TEAMS.RED
-			ue.enemies = Types.TEAM_MAPPING.RED
-			ue.calculate()
-		else:
-			var ue = ce[i]
-			ue.army = armyResource
-			ue.commander = commanderResource
-			ue.team = Types.TEAMS.BLUE
-			ue.enemies = Types.TEAM_MAPPING.BLUE
-			ue.calculate()
+	# for i in range(ce.size()):
+	# 	if (i + 1) % 2 == 0:
+	# 		var ue = ce[i]
+	# 		ue.army = enemyArmyResource
+	# 		ue.commander = enemyCommanderResource
+	# 		ue.team = Types.TEAMS.RED
+	# 		ue.enemies = Types.TEAM_MAPPING.RED
+	# 		ue.calculate()
+	# 	else:
+	# 		var ue = ce[i]
+	# 		ue.army = armyResource
+	# 		ue.commander = commanderResource
+	# 		ue.team = Types.TEAMS.BLUE
+	# 		ue.enemies = Types.TEAM_MAPPING.BLUE
+	# 		ue.calculate()
 
-	self.setup_combat_entities(ce)
+	# self.setup_combat_entities(ce)
 
 	########################################
 	combatState.turn_passed.connect(_setup_unit_turn)

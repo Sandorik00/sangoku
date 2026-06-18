@@ -5,15 +5,23 @@ extends Control
 @export var region_action_ui_ps: PackedScene
 @export var hire_menu_ui_ps: PackedScene
 
+@export_category("Menu panel")
+@export var menu_panel: MenuPanel
+@export var army_menu_ui_ps: PackedScene
+
 var actionsBox: RegionActionsBox
 var castlesBox: Panel
 var hire_menu_ui: HireMenu
+var army_menu_ui: ArmyMenu
 
 func _ready():
 	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
 
 	## region actions
 	UIState.region_action_changed.connect(_on_region_action_changed)
+
+	# menu panel buttons
+	UIState.menu_army_switched.connect(_on_menu_army_switched)
 
 func _on_chosen_region_changed(region: Region):
 	if (not region):
@@ -62,3 +70,14 @@ func _show_hire_ui():
 
 	hire_menu_ui.add_armies(UIState.armies_for_hire)
 	add_child(hire_menu_ui)
+
+func _on_menu_army_switched(opened: bool):
+	if opened:
+		army_menu_ui = army_menu_ui_ps.instantiate()
+
+		army_menu_ui.add_units(WorldState.PLAYER_UNITS)
+		add_child(army_menu_ui)
+	else:
+		army_menu_ui.queue_free()
+		army_menu_ui = null
+

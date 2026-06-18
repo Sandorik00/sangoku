@@ -3,6 +3,9 @@ extends Node
 signal chosen_region_changed(region: Region)
 signal region_action_changed(type: Types.REGION_ACTION_TYPE)
 
+# menu signals
+signal menu_army_switched(opened: bool)
+
 var all_regions_data: Dictionary[int, Array]
 
 var armies_for_hire: Array[Army] = []
@@ -61,3 +64,9 @@ func _collect_resources() -> Array[String]:
 	dir.list_dir_end()
 	
 	return file_paths
+
+# menu panel actions
+var army_menu_opened: bool = false :
+	set(new_value):
+		army_menu_opened = new_value
+		menu_army_switched.emit(new_value)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0i0c0b7t0khl"]
 
-[ext_resource type="Script" uid="uid://c8p5du8u5m0gt" path="res://scenes/ui/army_panel.gd" id="1_x0xim"]
+[ext_resource type="Script" uid="uid://c8p5du8u5m0gt" path="res://scenes/ui/components/army_panel.gd" id="1_x0xim"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_neqos"]
 font_size = 28

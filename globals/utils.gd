@@ -47,6 +47,9 @@ class UnitsStateDictionary extends RefCounted:
 		_data = __data
 		_last_index = __data.keys().size()
 
+	func get_by_key(id: int) -> Resource:
+		return _data.get(id)
+
 	func set_batch(ress: Array[Resource]):
 		for res in ress:
 			self.set_last(res)
@@ -58,7 +61,7 @@ class UnitsStateDictionary extends RefCounted:
 		else: _last_index += 1
 
 		_data.set(curr_index, res)
-		
+
 		if res is Army or res is Commander:
 			res.id = curr_index
 		
@@ -67,3 +70,6 @@ class UnitsStateDictionary extends RefCounted:
 
 		_data.erase(index)
 		_free_buffer.push_back(index)
+
+	func keys() -> Array[int]:
+		return _data.keys()

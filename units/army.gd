@@ -10,13 +10,13 @@ class_name Army
 @export var grade: String
 
 @export_group("stats")
-@export var attack: int
-@export var defence: int
-@export var speed: int
-@export var mana: int
-@export var attack_range: int
-@export var morale: int
-@export var number_of_troops: int
+@export var attack: int = 0
+@export var defence: int = 0
+@export var speed: int = 0
+@export var mana: int = 0
+@export var attack_range: int = 0
+@export var morale: int = 0
+@export var number_of_troops: int = 0
 
 # @export_group("skills")
 # @export var passive: String

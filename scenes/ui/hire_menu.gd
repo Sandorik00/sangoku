@@ -30,6 +30,8 @@ func _ready():
 	hire_btn.pressed.connect(_on_hire_btn_pressed)
 
 func add_armies(armies_a: Array[Army]):
+	if armies_a.is_empty(): return
+
 	for i in armies_a.size():
 		armies.set(i, armies_a.get(i))
 
@@ -74,6 +76,7 @@ func _on_hire_btn_pressed():
 
 	armies.erase(selected_army_index)
 
+	# TODO: wait for Godot 4.9 for `get` issue fixed
 	if armies.keys().is_empty():
 		selected_army_index = -1
 		selected_army = null

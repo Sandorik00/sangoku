@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://b1igy4agrjk14"]
+
+[ext_resource type="Script" uid="uid://bvnsnm4h88mp7" path="res://scenes/ui/army_menu_tabs/info_tab.gd" id="1_8lue8"]
+[ext_resource type="Texture2D" uid="uid://2scglpu77le3" path="res://icon.svg" id="1_q4adp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_khm6i"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_bqc0r"]
+font_size = 32
+
+[sub_resource type="FontVariation" id="FontVariation_bcpuf"]
+spacing_top = -10
+spacing_bottom = -10
+
+[sub_resource type="LabelSettings" id="LabelSettings_tm76n"]
+font = SubResource("FontVariation_bcpuf")
+font_size = 32
+
+[node name="InfoTab" type="VBoxContainer" unique_id=662747475 node_paths=PackedStringArray("attack_l", "defence_l", "speed_l", "mana_l", "leadership_l", "clazz_l", "grade_l", "troops_l")]
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_8lue8")
+attack_l = NodePath("Stats/MarginContainer/HBoxContainer/Control/AttackN")
+defence_l = NodePath("Stats/MarginContainer/HBoxContainer/Control2/DefenceN")
+speed_l = NodePath("Stats/MarginContainer/HBoxContainer/Control3/SpeedN")
+mana_l = NodePath("Stats/MarginContainer/HBoxContainer/Control4/ManaN")
+leadership_l = NodePath("Stats/MarginContainer/HBoxContainer/Control5/LeadershipN")
+clazz_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer/Clazz")
+grade_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/GradeN")
+troops_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer2/TroopsN")
+
+[node name="Control" type="Control" parent="." unique_id=360481796]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Panel" parent="." unique_id=1245431478]
+custom_minimum_size = Vector2(924, 410)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Description" unique_id=1659093566]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 924.0
+offset_bottom = 414.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="Label" type="Label" parent="Description/MarginContainer" unique_id=790287257]
+custom_minimum_size = Vector2(876, 410)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat vestibulum nibh, sit amet dignissim purus dictum ac. Sed nibh sem,  scelerisque et tempus ut, accumsan vitae nulla. Curabitur lacinia  euismod tellus. Donec vel mi non lectus pretium efficitur."
+label_settings = SubResource("LabelSettings_khm6i")
+autowrap_mode = 2
+
+[node name="Stats" type="Panel" parent="." unique_id=963103047]
+custom_minimum_size = Vector2(924, 86)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Stats" unique_id=2001030464]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer" unique_id=281141298]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer" unique_id=194069957]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control" unique_id=1005408443]
+layout_mode = 2
+text = "Attack: "
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="AttackN" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control" unique_id=213670785]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="Control2" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer" unique_id=984155867]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control2" unique_id=1918800160]
+layout_mode = 2
+text = "Defence: "
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="DefenceN" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control2" unique_id=4436611]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="Control3" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer" unique_id=873927926]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control3" unique_id=1802016393]
+layout_mode = 2
+text = "Speed: "
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="SpeedN" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control3" unique_id=1019570465]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="Control4" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer" unique_id=356059245]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control4" unique_id=358634353]
+layout_mode = 2
+text = "Mana: "
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="ManaN" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control4" unique_id=1968675469]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="Control5" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer" unique_id=2073557306]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control5" unique_id=1707779212]
+layout_mode = 2
+text = "Leadership: "
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="LeadershipN" type="Label" parent="Stats/MarginContainer/HBoxContainer/Control5" unique_id=1693263021]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_bqc0r")
+
+[node name="Army_Equip" type="HBoxContainer" parent="." unique_id=163116948]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Army" type="Panel" parent="Army_Equip" unique_id=1928066354]
+custom_minimum_size = Vector2(0, 171)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Army_Equip/Army" unique_id=447991788]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Army_Equip/Army/MarginContainer" unique_id=601459648]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Army_Equip/Army/MarginContainer/VBoxContainer" unique_id=1843386059]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer" unique_id=902218013]
+layout_mode = 2
+text = "Army: "
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="Clazz" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1711523953]
+layout_mode = 2
+text = "class"
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Army_Equip/Army/MarginContainer/VBoxContainer" unique_id=1788526324]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1165819810]
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+texture = ExtResource("1_q4adp")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1174359090]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=632706825]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=768218585]
+layout_mode = 2
+text = "Grade: "
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="GradeN" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=298530258]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1937602868]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=2084775112]
+layout_mode = 2
+text = "Troops: "
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="TroopsN" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=1200175964]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_tm76n")
+
+[node name="Equip" type="Panel" parent="Army_Equip" unique_id=329196152]
+custom_minimum_size = Vector2(0, 171)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
