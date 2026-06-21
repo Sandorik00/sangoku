@@ -21,13 +21,15 @@ var movement: int
 
 var validUnit: bool = false
 var team: Types.TEAMS = Types.TEAMS.RED
-var enemies: Types.TEAM_MAPPING = Types.TEAM_MAPPING.RED
+var enemies: Types.TEAM_MAPPING = Types.TEAMS_MAPPING_TO_MAPPINGS.get(team, Types.TEAM_MAPPING.RED)
 
-func _init(_commander: Commander, _army: Army = null) -> void:
+func _init(_team: Types.TEAMS, _commander: Commander, _army: Army = null) -> void:
 	assert(_commander, "Unit must have a commander!")
 	
 	commander = _commander
 	army = _army
+	team = _team
+	enemies = Types.TEAMS_MAPPING_TO_MAPPINGS.get(team, Types.TEAM_MAPPING.RED)
 
 	self.calculate()
 

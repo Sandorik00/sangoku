@@ -1,9 +1,16 @@
 extends Control
 
+@export var world: Node2D
+@export var world_camera: Camera2D
+@export var sub_viewport: SubViewport
+
+@export_category("Packed scenes")
 @export var actionsBoxPS: PackedScene
 @export var castlesBoxPS: PackedScene
 @export var region_action_ui_ps: PackedScene
 @export var hire_menu_ui_ps: PackedScene
+
+@export var combat_ps: PackedScene
 
 @export_category("Menu panel")
 @export var menu_panel: MenuPanel
@@ -47,6 +54,7 @@ func _on_chosen_region_changed(region: Region):
 	for action in Types.DEFAULT_REGION_ACTIONS:
 		var region_action_ui: RegionActionUI = region_action_ui_ps.instantiate()
 		region_action_ui.action_type = action
+		region_action_ui.btn.text = Types.ACTIONS_TEXT.get(action)
 
 		actionsBox.actions_container.add_child(region_action_ui)
 
@@ -65,6 +73,11 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 		Types.REGION_ACTION_TYPE.HIRE_ARMY:
 			_show_hire_ui()
 
+		Types.REGION_ACTION_TYPE.ATTACK:
+			UIState.chosen_region = null
+
+			_setup_combat_ui()
+
 func _show_hire_ui():
 	hire_menu_ui = hire_menu_ui_ps.instantiate()
 
@@ -81,3 +94,13 @@ func _on_menu_army_switched(opened: bool):
 		army_menu_ui.queue_free()
 		army_menu_ui = null
 
+func _setup_combat_ui():
+	world.hide()
+	self.hide()
+
+	var combat: Combat = combat_ps.instantiate()
+	combat.setup_combat_entities(WorldState.PLAYER_UNITS.values() + WorldState.DEFAULT_ENEMY_UNITS.values())
+
+	sub_viewport.add_child(combat)
+
+	world_camera.enabled = false

@@ -1,10 +1,10 @@
 extends Node2D
+class_name Combat
 
 # var UCS := UnitControlsState
 
 var unit_id: int = 0
 @onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
-@onready var sub_viewport_container: SubViewportContainer = $/root/Main/CanvasLayer/SubViewportContainer
 @onready var command_panel: CommandPanel = $/root/Main/CanvasLayer/CommandPanel
 
 @export_category("SanGrid")
@@ -31,7 +31,7 @@ var unit_id: int = 0
 @export var camera: Camera2D
 @export var speed := 100
 
-var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7)]
+var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7), Vector2(10, 5), Vector2(11, 5), Vector2(13, 8)]
 
 var unit_entity: SanGrid.GridEntity
 var unit_active: Unit
@@ -58,28 +58,6 @@ func _process(delta):
 	combat_ui.position = -camera.position * 6
 
 func _ready():
-	# test code, delete later
-	# var ce: Array[Unit] = [Unit.new(), Unit.new()]
-
-	# for i in range(ce.size()):
-	# 	if (i + 1) % 2 == 0:
-	# 		var ue = ce[i]
-	# 		ue.army = enemyArmyResource
-	# 		ue.commander = enemyCommanderResource
-	# 		ue.team = Types.TEAMS.RED
-	# 		ue.enemies = Types.TEAM_MAPPING.RED
-	# 		ue.calculate()
-	# 	else:
-	# 		var ue = ce[i]
-	# 		ue.army = armyResource
-	# 		ue.commander = commanderResource
-	# 		ue.team = Types.TEAMS.BLUE
-	# 		ue.enemies = Types.TEAM_MAPPING.BLUE
-	# 		ue.calculate()
-
-	# self.setup_combat_entities(ce)
-
-	########################################
 	combatState.turn_passed.connect(_setup_unit_turn)
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)

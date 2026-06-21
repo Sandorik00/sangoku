@@ -18,6 +18,7 @@ func add_combatants(combatants: Array[SanGrid.GridEntity]):
 	_current_unit = _turn_order.get_next()
 
 	_turn_order_ui.add_units(_turn_order.get_array_copy(), _current_unit)
+	_turn_order_ui.show()
 
 	turn_passed.emit(_current_unit)
 

@@ -24,7 +24,7 @@ func _init():
 
 func _fill_unit_data(data: Unit):
 	portrait.texture = data.portrait
-	name_label.text = data.unit_name
+	name_label.text = data.name
 
 	attack.text = str(data.attack)
 	defence.text = str(data.defence)

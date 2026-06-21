@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://61votu5io48k" path="res://regions/region_action.tscn" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cb3h7neln0lga" path="res://scenes/ui/hire_menu.tscn" id="8_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://bldqos0y8xufl" path="res://scenes/ui/army_menu.tscn" id="9_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dxyjbs03ln8sa" path="res://combat/combat.tscn" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://kbsoh2uvk0qx" path="res://menuPanel.tscn" id="9_w48qg"]
 
 [node name="Main" type="Node2D" unique_id=491633502]
@@ -46,7 +47,7 @@ anchor_mode = 0
 
 [node name="World" parent="CanvasLayer" unique_id=1856769851 instance=ExtResource("2_1bvp3")]
 
-[node name="UI" type="Control" parent="CanvasLayer" unique_id=1466229710 node_paths=PackedStringArray("menu_panel")]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1466229710 node_paths=PackedStringArray("world", "world_camera", "sub_viewport", "menu_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,10 +56,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_kek77")
+world = NodePath("../World")
+world_camera = NodePath("../WorldCamera")
+sub_viewport = NodePath("../SubViewportContainer/SubViewport")
 actionsBoxPS = ExtResource("5_4c57u")
 castlesBoxPS = ExtResource("6_efxa6")
 region_action_ui_ps = ExtResource("7_dg77c")
 hire_menu_ui_ps = ExtResource("8_ycdy4")
+combat_ps = ExtResource("9_efxa6")
 menu_panel = NodePath("Panel")
 army_menu_ui_ps = ExtResource("9_4c57u")
 
