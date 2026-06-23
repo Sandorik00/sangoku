@@ -10,7 +10,7 @@ func prevEnumMember(enumz: Dictionary, current: int):
 
 class TurnOrderArray extends RefCounted:
 	var _data: Array[SanGrid.GridEntity]
-	var _index: int = 0
+	var _index: int = -1
 
 	func _init(__data: Array[SanGrid.GridEntity] = []) -> void:
 		_data = __data
@@ -30,13 +30,20 @@ class TurnOrderArray extends RefCounted:
 	func get_next() -> SanGrid.GridEntity:
 		if _data.is_empty(): return null
 
-		var result = _data[_index]
 		_index = wrapi(_index + 1, 0, _data.size())
+		var result = _data[_index]
 
 		return result
 
 	func remove_unit(unit: SanGrid.GridEntity):
-		_data.remove_at(_data.find(unit))
+		var unit_index = _data.find(unit)
+		_data.remove_at(unit_index)
+		
+		if unit_index < _index:
+			_index = wrapi(_index - 1, 0, _data.size())
+		elif unit_index == _index:
+			_index = wrapi(_index, 0, _data.size())
+
 	
 class UnitsStateDictionary extends RefCounted:
 	var _data: Dictionary[int, Resource]

@@ -35,5 +35,6 @@ func _fill_unit_data(data: Unit):
 	morale_slider.value = data.morale
 	mana.text = str(data.mana)
 	mana_slider.value = data.mana
-
-	show()
+	
+	if hidden:
+		show()

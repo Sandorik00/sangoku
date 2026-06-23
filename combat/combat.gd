@@ -6,6 +6,9 @@ class_name Combat
 var unit_id: int = 0
 @onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
 @onready var command_panel: CommandPanel = $/root/Main/CanvasLayer/CommandPanel
+@onready var world: Node2D = $/root/Main/CanvasLayer/World
+@onready var world_camera: Camera2D = $/root/Main/CanvasLayer/WorldCamera
+@onready var global_ui: Control = $/root/Main/CanvasLayer/UI
 
 @export_category("SanGrid")
 @export var grid: SanGrid
@@ -41,6 +44,7 @@ var walkPath: Array[SanGrid.GridCell] = []
 var reachZone: Array[SanGrid.GridCell] = []
 
 var transitionInProgress: bool = true
+var is_my_turn: bool = false
 
 ## Call before adding to the scene
 func setup_combat_entities(units: Array[Unit]):
@@ -59,6 +63,7 @@ func _process(delta):
 
 func _ready():
 	combatState.turn_passed.connect(_setup_unit_turn)
+	combatState.end_combat.connect(_on_end_combat)
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
 
@@ -92,6 +97,10 @@ func _ready():
 	combatState.add_combatants(combatants)
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
+	if unit.team != Types.TEAMS.BLUE:
+		combatState.pass_turn()
+		return
+
 	unit_entity = unit
 	unit_active = CombatData.unitsInCombat[unit.id]
 	CombatData.panel_unit_data = unit_active
@@ -227,3 +236,12 @@ func _on_end_turn_pressed():
 	_clear_walk_zone()
 
 	combatState.pass_turn()
+
+func _on_end_combat(is_win: bool):
+	CombatData.clear_units_ui()
+	command_panel.hide()
+	world.show()
+	global_ui.show()
+	world_camera.enabled = true
+
+	self.queue_free()

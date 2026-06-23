@@ -30,6 +30,8 @@ func add_units_ui(unit_entities_in_combat: Array[SanGrid.GridEntity]):
 		acl.text = str(unitsInCombat[ue.id].troops)
 		units_by_labels.set(ue.id, acl)
 		combat_ui.add_child(acl)
+	
+	combat_ui.show()
 
 func move_unit_label(unit: SanGrid.GridEntity):
 	moving_unit = unit
@@ -47,3 +49,12 @@ func update_labels_for_units(units: Array[SanGrid.GridEntity]):
 			label.queue_free()
 		else:
 			label.text = str(ue.unitNode.unit_data.troops)
+
+func clear_units_ui():
+	for ubl in units_by_labels.values():
+		ubl.queue_free()
+
+	units_by_labels.clear()
+	unitsInCombat.clear()
+
+	combat_ui.hide()

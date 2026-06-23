@@ -65,6 +65,7 @@ func _on_army_changed(army: Army):
 		c.queue_free()
 
 	selected_unit.army = army
+	selected_unit.calculate()
 	refresh_ui(selected_unit)
 
 	stats_block.show()
