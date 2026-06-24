@@ -51,7 +51,17 @@ func _on_chosen_region_changed(region: Region):
 
 	actionsBox.region_name_l.text = region.name
 
-	for action in Types.DEFAULT_REGION_ACTIONS:
+	var actions_for_region: Array[Types.REGION_ACTION_TYPE] = []
+	if region.faction != FactionsState.FACTIONS.SAN:
+		actions_for_region.append_array(
+			Utils.get_actions_for_relation(FactionsState.get_relation(FactionsState.FACTIONS.SAN, region.faction))
+		)
+
+	actions_for_region.append_array(Utils.get_actions_for_property(region, FactionsState.FACTIONS.SAN))
+
+	for action in actions_for_region:
+		if action == Types.REGION_ACTION_TYPE.NONE: return
+
 		var region_action_ui: RegionActionUI = region_action_ui_ps.instantiate()
 		region_action_ui.action_type = action
 		region_action_ui.btn.text = Types.ACTIONS_TEXT.get(action)

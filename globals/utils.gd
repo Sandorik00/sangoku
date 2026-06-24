@@ -80,3 +80,22 @@ class UnitsStateDictionary extends RefCounted:
 
 	func keys() -> Array[int]:
 		return _data.keys()
+
+func get_actions_for_relation(relation: int):
+	if relation > Types.FACTION_RELATIONS_MAP.ALLY:
+		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ALLY)
+	elif relation > Types.FACTION_RELATIONS_MAP.FRIENDLY:
+		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.FRIENDLY)
+	elif relation > Types.FACTION_RELATIONS_MAP.WARY:
+		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.WARY)
+	else:
+		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ENEMY)
+
+func get_actions_for_property(region: Region, faction: FactionsState.FACTIONS):
+	var property_type: Types.REGION_PROPERTY_TYPE = Types.REGION_PROPERTY_TYPE.REINFORCEMENTS
+	if region.faction == faction:
+		property_type = Types.REGION_PROPERTY_TYPE.CASTLE
+	elif region.captured.get(faction) == 0:
+		property_type = Types.REGION_PROPERTY_TYPE.NONE
+
+	return Types.ACTIONS_FOR_PROPERTY.get(property_type, [])

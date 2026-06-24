@@ -18,8 +18,8 @@ func get_relation(f1: FACTIONS, f2: FACTIONS) -> int:
 	return _relations.get(_get_key(f1, f2), 0)
 
 func _ready() -> void:
-	set_relation(FACTIONS.SAN, FACTIONS.RIK, -50)
-	set_relation(FACTIONS.SAN, FACTIONS.ROMBUS, 50)
+	set_relation(FACTIONS.SAN, FACTIONS.RIK, -24)
+	set_relation(FACTIONS.SAN, FACTIONS.ROMBUS, -25)
 	set_relation(FACTIONS.SAN, FACTIONS.PARADOX, 80)
 
 	set_relation(FACTIONS.RIK, FACTIONS.ROMBUS, 100)
