@@ -1,4 +1,5 @@
 extends TextureButton
+class_name RegionIcon
 
 @export var res: Region
 

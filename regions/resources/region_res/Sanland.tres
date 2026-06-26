@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://be1hic0tw0w81"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_mfulu"]
+
+[resource]
+script = ExtResource("1_mfulu")
+name = "Sanland"
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

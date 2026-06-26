@@ -8,7 +8,7 @@
 spacing_top = -20
 spacing_bottom = -30
 
-[node name="Panel" type="Panel" unique_id=1993563656 node_paths=PackedStringArray("system_btn", "items_btn", "army_btn")]
+[node name="Panel" type="Panel" unique_id=1993563656 node_paths=PackedStringArray("system_btn", "items_btn", "army_btn", "end_turn_btn")]
 custom_minimum_size = Vector2(0, 72)
 anchors_preset = 12
 anchor_top = 1.0
@@ -20,6 +20,7 @@ script = ExtResource("1_5ymp3")
 system_btn = NodePath("MarginContainer/HBoxContainer/System")
 items_btn = NodePath("MarginContainer/HBoxContainer/Items")
 army_btn = NodePath("MarginContainer/HBoxContainer/Army")
+end_turn_btn = NodePath("MarginContainer/HBoxContainer/End Turn")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=643354692]
 layout_mode = 1
@@ -62,3 +63,13 @@ text = "Army"
 flat = true
 clip_text = true
 expand_icon = true
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=2043583555]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="End Turn" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1353447845]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_efqg6")
+theme_override_font_sizes/font_size = 50
+text = "End Turn"

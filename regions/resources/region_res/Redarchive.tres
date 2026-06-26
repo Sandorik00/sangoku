@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://qit5odxkt08m"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_twlcb"]
+
+[resource]
+script = ExtResource("1_twlcb")
+id = 2
+name = "RedArchive"
+castle_count = 2
+faction = 1
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

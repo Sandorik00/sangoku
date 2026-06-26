@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://dkvcfpm52co1"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_xo73w"]
+
+[resource]
+script = ExtResource("1_xo73w")
+id = 3
+name = "Rombusland"
+castle_count = 3
+faction = 2
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

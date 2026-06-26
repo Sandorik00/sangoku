@@ -86,7 +86,7 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 		Types.REGION_ACTION_TYPE.ATTACK:
 			UIState.chosen_region = null
 
-			_setup_combat_ui()
+			_setup_combat()
 
 func _show_hire_ui():
 	hire_menu_ui = hire_menu_ui_ps.instantiate()
@@ -104,7 +104,7 @@ func _on_menu_army_switched(opened: bool):
 		army_menu_ui.queue_free()
 		army_menu_ui = null
 
-func _setup_combat_ui():
+func _setup_combat():
 	world.hide()
 	self.hide()
 
