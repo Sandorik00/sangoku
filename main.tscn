@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bldqos0y8xufl" path="res://scenes/ui/army_menu.tscn" id="9_4c57u"]
 [ext_resource type="PackedScene" uid="uid://dxyjbs03ln8sa" path="res://combat/combat.tscn" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://kbsoh2uvk0qx" path="res://menuPanel.tscn" id="9_w48qg"]
+[ext_resource type="PackedScene" uid="uid://c6y3k7n1gjqcn" path="res://scenes/ui/factions_turn_ui.tscn" id="12_dg77c"]
 
 [node name="Main" type="Node2D" unique_id=491633502]
 
@@ -47,7 +48,7 @@ anchor_mode = 0
 
 [node name="World" parent="CanvasLayer" unique_id=1856769851 instance=ExtResource("2_1bvp3")]
 
-[node name="UI" type="Control" parent="CanvasLayer" unique_id=1466229710 node_paths=PackedStringArray("world", "world_camera", "sub_viewport", "menu_panel")]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1466229710 node_paths=PackedStringArray("world", "world_camera", "sub_viewport", "menu_panel", "factions_turn_ui")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,6 +67,14 @@ hire_menu_ui_ps = ExtResource("8_ycdy4")
 combat_ps = ExtResource("9_efxa6")
 menu_panel = NodePath("Panel")
 army_menu_ui_ps = ExtResource("9_4c57u")
+factions_turn_ui = NodePath("FactionsTurnUI")
 
 [node name="Panel" parent="CanvasLayer/UI" unique_id=1993563656 instance=ExtResource("9_w48qg")]
 layout_mode = 1
+
+[node name="FactionsTurnUI" parent="CanvasLayer/UI" unique_id=1508196638 instance=ExtResource("12_dg77c")]
+visible = false
+layout_mode = 1
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 150.0

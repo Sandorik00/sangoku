@@ -238,10 +238,4 @@ func _on_end_turn_pressed():
 	combatState.pass_turn()
 
 func _on_end_combat(is_win: bool):
-	CombatData.clear_units_ui()
-	command_panel.hide()
-	world.show()
-	global_ui.show()
-	world_camera.enabled = true
-
-	self.queue_free()
+	WorldTurnLogic.out_combat()

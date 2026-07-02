@@ -1,4 +1,5 @@
 extends Control
+class_name GlobalUI
 
 @export var world: Node2D
 @export var world_camera: Camera2D
@@ -16,10 +17,16 @@ extends Control
 @export var menu_panel: MenuPanel
 @export var army_menu_ui_ps: PackedScene
 
+@export_category("Turn panels")
+@export var factions_turn_ui: FactionsTurnUI
+
 var actionsBox: RegionActionsBox
 var castlesBox: Panel
 var hire_menu_ui: HireMenu
 var army_menu_ui: ArmyMenu
+
+# turn logic
+var highlighted_regions: Array[RegionIcon] = []
 
 func _ready():
 	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
@@ -86,7 +93,7 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 		Types.REGION_ACTION_TYPE.ATTACK:
 			UIState.chosen_region = null
 
-			_setup_combat()
+			WorldTurnLogic.into_combat()
 
 func _show_hire_ui():
 	hire_menu_ui = hire_menu_ui_ps.instantiate()
@@ -104,13 +111,24 @@ func _on_menu_army_switched(opened: bool):
 		army_menu_ui.queue_free()
 		army_menu_ui = null
 
-func _setup_combat():
-	world.hide()
-	self.hide()
+func toggle_on_turn_end(players_turn: bool, faction: FactionsState.FACTIONS):
+	if players_turn and factions_turn_ui.visible:
+		for r in highlighted_regions:
+			r.self_modulate = Color(1, 1, 1, 1)
+		highlighted_regions.clear()
 
-	var combat: Combat = combat_ps.instantiate()
-	combat.setup_combat_entities(WorldState.PLAYER_UNITS.values() + WorldState.DEFAULT_ENEMY_UNITS.values())
+		factions_turn_ui.hide()
+	else:
+		for r in highlighted_regions:
+			r.self_modulate = Color(1, 1, 1, 1)
+		highlighted_regions.clear()
 
-	sub_viewport.add_child(combat)
+		var faction_regions = WorldState.DEFAULT_REGIONS.get(faction, []) as Array[RegionIcon]
+		for r in faction_regions:
+			r.self_modulate = Color(0, 0, 1, 1)
+		highlighted_regions.append_array(faction_regions)
 
-	world_camera.enabled = false
+		factions_turn_ui.set_faction(FactionsState.FACTIONS_TEXT.get(faction, "This is a bug"))
+
+		if not factions_turn_ui.visible:
+			factions_turn_ui.show()

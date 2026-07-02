@@ -27,6 +27,7 @@ FactionsState="*uid://vd7msjolcg4f"
 WorldActions="*uid://b86t0rhq6psg3"
 WorldState="*uid://c36pu2v0nh51f"
 WorldTurnLogic="*uid://dasgfpwywrpid"
+Grng="*uid://hvfbllxgvj3m"
 
 [display]
 

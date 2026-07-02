@@ -2,6 +2,13 @@ extends Node
 
 enum FACTIONS { SAN, RIK, ROMBUS, PARADOX }
 
+var FACTIONS_TEXT: Dictionary[FACTIONS, String] = {
+	FACTIONS.SAN: "San",
+	FACTIONS.RIK: "Rik",
+	FACTIONS.ROMBUS: "Rombus",
+	FACTIONS.PARADOX: "Paradox",
+}
+
 var _relations: Dictionary = {}
 
 func _get_key(f1: FACTIONS, f2: FACTIONS) -> String:
