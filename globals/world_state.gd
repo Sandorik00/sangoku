@@ -11,7 +11,12 @@ var rikland: Region = preload("uid://c5vauo0h72mbl")
 var redarchive: Region = preload("uid://qit5odxkt08m")
 var rombusland: Region = preload("uid://dkvcfpm52co1")
 
+var san_fd: FactionData = preload("uid://b11lrqc3hslkx")
+var rombus_fd: FactionData = preload("uid://bg543dst24jwa")
+var rik_fd: FactionData = preload("uid://ccw2wet6o1bwv")
+
 func _ready() -> void:
+	# temporal regions
 	var region_icon: RegionIcon = region_icon_ps.instantiate()
 	region_icon.res = sanland
 	DEFAULT_REGIONS.set(FactionsState.FACTIONS.SAN, [region_icon])
@@ -25,6 +30,16 @@ func _ready() -> void:
 	var region_icon_2 = region_icon_ps.instantiate()
 	region_icon_2.res = redarchive
 	DEFAULT_REGIONS.set(FactionsState.FACTIONS.RIK, [region_icon, region_icon_2])
+
+	# temporal factions data
+	for f in DEFAULT_REGIONS.keys():
+		match f:
+			FactionsState.FACTIONS.SAN:
+				FACTIONS_TO_DATA.set(FactionsState.FACTIONS.SAN, san_fd)
+			FactionsState.FACTIONS.ROMBUS:
+				FACTIONS_TO_DATA.set(FactionsState.FACTIONS.ROMBUS, rombus_fd)
+			FactionsState.FACTIONS.RIK:
+				FACTIONS_TO_DATA.set(FactionsState.FACTIONS.RIK, rik_fd)
 
 # player
 var PLAYER_COMMANDERS: Utils.UnitsStateDictionary = Utils.UnitsStateDictionary.new({
@@ -51,3 +66,6 @@ var DEFAULT_ENEMY_UNITS: Dictionary[int, Unit] = {
 # regions
 ## Dictionary[FactionsState.FACTIONS, Array[RegionIcon]]
 var DEFAULT_REGIONS: Dictionary[FactionsState.FACTIONS, Array] = {}
+
+# TODO: fill
+var FACTIONS_TO_DATA: Dictionary[FactionsState.FACTIONS, FactionData] = {}

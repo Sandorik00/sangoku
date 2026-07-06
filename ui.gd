@@ -30,10 +30,8 @@ var highlighted_regions: Array[RegionIcon] = []
 
 func _ready():
 	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
-
 	## region actions
 	UIState.region_action_changed.connect(_on_region_action_changed)
-
 	# menu panel buttons
 	UIState.menu_army_switched.connect(_on_menu_army_switched)
 

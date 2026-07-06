@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FactionData" format=3 uid="uid://ccw2wet6o1bwv"]
+
+[ext_resource type="Script" uid="uid://b2fbwr8thnq6x" path="res://campaigns/faction_data.gd" id="1_anobw"]
+
+[resource]
+script = ExtResource("1_anobw")
+faction = 1
+evilness = 0.8
+metadata/_custom_type_script = "uid://b2fbwr8thnq6x"

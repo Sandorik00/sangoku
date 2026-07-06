@@ -47,6 +47,8 @@ enabled=PackedStringArray("res://addons/San\'s Grid/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://campaigns/": "teal",
+"res://cerebrum/": "yellow",
 "res://combat/": "red",
 "res://fonts/": "gray",
 "res://globals/": "pink",

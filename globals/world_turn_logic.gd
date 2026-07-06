@@ -14,20 +14,27 @@ var combat_ps: PackedScene = preload("uid://dxyjbs03ln8sa")
 var combat: Combat = null
 
 var _index = 0
-var _campaing_factions: Array[FactionsState.FACTIONS] = [
+var _campaign_factions: Array[FactionsState.FACTIONS] = [
 	FactionsState.FACTIONS.SAN,
 	FactionsState.FACTIONS.ROMBUS,
 	FactionsState.FACTIONS.RIK,
 ]
-var _current_faction: FactionsState.FACTIONS = _campaing_factions.get(_index)
+var _current_faction: FactionsState.FACTIONS = _campaign_factions.get(_index)
+
+var cerebrum: WorldBTSelector
 
 func _ready():
 	turn_end.connect(_on_turn_end)
 
-func _on_turn_end():
-	_index = wrapi(_index + 1, 0, _campaing_factions.size())
+	cerebrum = WorldBTSelector.new([
+		WorldAttackAction.new(),
+		WorldChillAction.new(),
+	])
 
-	_transfer_control(_campaing_factions.get(_index))
+func _on_turn_end():
+	_index = wrapi(_index + 1, 0, _campaign_factions.size())
+
+	_transfer_control(_campaign_factions.get(_index))
 
 func _transfer_control(faction: FactionsState.FACTIONS):
 	if _current_faction == FactionsState.FACTIONS.SAN:
@@ -41,10 +48,12 @@ func _transfer_control(faction: FactionsState.FACTIONS):
 	if _current_faction == FactionsState.FACTIONS.SAN:
 		global_ui.modulate = Color(1, 1, 1, 1)
 		global_ui.process_mode = Node.PROCESS_MODE_INHERIT
-	else: _do_ai_things()
+	else: _do_cerebrum_things()
 
-func _do_ai_things():
+func _do_cerebrum_things():
 	await get_tree().create_timer(2.0).timeout
+
+	cerebrum.make_decision(WorldState.FACTIONS_TO_DATA.get(_current_faction), {})
 
 	turn_end.emit()
 
