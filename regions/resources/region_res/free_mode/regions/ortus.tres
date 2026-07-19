@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://dng1jp6wfpnem"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_mtju2"]
+
+[resource]
+script = ExtResource("1_mtju2")
+id = 15
+name = "Ortus ravis"
+faction = 8
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

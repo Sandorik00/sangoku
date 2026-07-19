@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://c3j3l0rolh001"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_fdcvu"]
+
+[resource]
+script = ExtResource("1_fdcvu")
+id = 14
+name = "Lucus grove"
+faction = 7
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

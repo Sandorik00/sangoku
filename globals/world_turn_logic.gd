@@ -14,16 +14,18 @@ var combat_ps: PackedScene = preload("uid://dxyjbs03ln8sa")
 var combat: Combat = null
 
 var _index = 0
-var _campaign_factions: Array[FactionsState.FACTIONS] = [
-	FactionsState.FACTIONS.SAN,
-	FactionsState.FACTIONS.ROMBUS,
-	FactionsState.FACTIONS.RIK,
-]
-var _current_faction: FactionsState.FACTIONS = _campaign_factions.get(_index)
+var _campaign_factions: Array[FactionsState.FACTIONS] = []
+
+var _current_faction: FactionsState.FACTIONS = WorldState.player_faction
 
 var cerebrum: WorldBTSelector
 
 func _ready():
+	var unsorted_factions = FactionsState.FACTIONS.values().duplicate()
+	unsorted_factions.sort_custom(func(f1, f2): return f1 == WorldState.player_faction)
+
+	_campaign_factions.assign(unsorted_factions)
+
 	turn_end.connect(_on_turn_end)
 
 	cerebrum = WorldBTSelector.new([
@@ -37,15 +39,15 @@ func _on_turn_end():
 	_transfer_control(_campaign_factions.get(_index))
 
 func _transfer_control(faction: FactionsState.FACTIONS):
-	if _current_faction == FactionsState.FACTIONS.SAN:
+	if _current_faction == WorldState.player_faction:
 		global_ui.modulate = Color(1, 1, 1, 0.5)
 		global_ui.process_mode = Node.PROCESS_MODE_DISABLED
 
 	_current_faction = faction
 
-	global_ui.toggle_on_turn_end(_current_faction == FactionsState.FACTIONS.SAN, _current_faction)
+	global_ui.toggle_on_turn_end(_current_faction == WorldState.player_faction, _current_faction)
 
-	if _current_faction == FactionsState.FACTIONS.SAN:
+	if _current_faction == WorldState.player_faction:
 		global_ui.modulate = Color(1, 1, 1, 1)
 		global_ui.process_mode = Node.PROCESS_MODE_INHERIT
 	else: _do_cerebrum_things()

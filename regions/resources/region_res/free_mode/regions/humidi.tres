@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://dxtfg1eai1v70"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_c5cf7"]
+[ext_resource type="Resource" uid="uid://c5smiauiaw358" path="res://regions/resources/region_res/free_mode/provinces/swamp_brotherhood.tres" id="1_q7txe"]
+
+[resource]
+script = ExtResource("1_c5cf7")
+id = 1
+name = "Humidi swamp"
+province = ExtResource("1_q7txe")
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

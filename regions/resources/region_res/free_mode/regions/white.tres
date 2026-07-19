@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://b3j3qo5r0lioo"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_4wbpt"]
+
+[resource]
+script = ExtResource("1_4wbpt")
+id = 34
+name = "White coast"
+faction = 18
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

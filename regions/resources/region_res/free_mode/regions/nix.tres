@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://dsl6k4emb0kjm"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_xwp46"]
+
+[resource]
+script = ExtResource("1_xwp46")
+id = 33
+name = "Nix bay"
+faction = 17
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

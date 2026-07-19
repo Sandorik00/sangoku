@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://bycaadsb307nd"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_kmkc4"]
+
+[resource]
+script = ExtResource("1_kmkc4")
+id = 13
+name = "Qorax litus"
+faction = 7
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

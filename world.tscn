@@ -1,6 +1,294 @@
 [gd_scene format=3 uid="uid://ddwwou0008gkw"]
 
 [ext_resource type="Script" uid="uid://xtsdqwkothv5" path="res://world.gd" id="1_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://bd0b0os5ppy2u" path="res://Chainland 2026-07-07-23-08.png" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://si1chjm11vou" path="res://regions/region_icon.tscn" id="3_tlwt5"]
+[ext_resource type="Resource" uid="uid://22710gn13tot" path="res://regions/resources/region_res/free_mode/regions/darkwater.tres" id="4_yx0jh"]
+[ext_resource type="Resource" uid="uid://dpkwx8jicjmqi" path="res://regions/resources/region_res/free_mode/regions/lochnel.tres" id="5_1ew0l"]
+[ext_resource type="Resource" uid="uid://dng1jp6wfpnem" path="res://regions/resources/region_res/free_mode/regions/ortus.tres" id="6_ryup7"]
+[ext_resource type="Resource" uid="uid://c6f50d2vb0o6a" path="res://regions/resources/region_res/free_mode/regions/nemus.tres" id="7_ytpkv"]
+[ext_resource type="Resource" uid="uid://l3upbh5njyu2" path="res://regions/resources/region_res/free_mode/regions/corvida.tres" id="8_jas3d"]
+[ext_resource type="Resource" uid="uid://di8qeum4aryn" path="res://regions/resources/region_res/free_mode/regions/davo.tres" id="9_7htu6"]
+[ext_resource type="Resource" uid="uid://bboliadsmyqmk" path="res://regions/resources/region_res/free_mode/regions/dolmoor.tres" id="10_7qk3m"]
+[ext_resource type="Resource" uid="uid://ji6n1m2wd8s0" path="res://regions/resources/region_res/free_mode/regions/veliki.tres" id="11_xpnt2"]
+[ext_resource type="Resource" uid="uid://d3fad2aqxkpc4" path="res://regions/resources/region_res/free_mode/regions/gold.tres" id="12_ruyqm"]
+[ext_resource type="Resource" uid="uid://ci4a5rd1ng82x" path="res://regions/resources/region_res/free_mode/regions/vesper.tres" id="13_fnoqa"]
+[ext_resource type="Resource" uid="uid://c3j3l0rolh001" path="res://regions/resources/region_res/free_mode/regions/lucus.tres" id="14_nx736"]
+[ext_resource type="Resource" uid="uid://bycaadsb307nd" path="res://regions/resources/region_res/free_mode/regions/qorax.tres" id="15_55kwu"]
+[ext_resource type="Resource" uid="uid://cjas42y3n7c3u" path="res://regions/resources/region_res/free_mode/regions/coeden.tres" id="16_f3o6s"]
+[ext_resource type="Resource" uid="uid://2xblmyvn2ywc" path="res://regions/resources/region_res/free_mode/regions/tirwood.tres" id="17_w4lh7"]
+[ext_resource type="Resource" uid="uid://b2dg172bw78cm" path="res://regions/resources/region_res/free_mode/regions/deckenzug.tres" id="18_k3lar"]
+[ext_resource type="Resource" uid="uid://cy071wudyjmcg" path="res://regions/resources/region_res/free_mode/regions/gardborg.tres" id="19_olr1q"]
+[ext_resource type="Resource" uid="uid://esh51ysi5vix" path="res://regions/resources/region_res/free_mode/regions/wiese.tres" id="20_q42o5"]
+[ext_resource type="Resource" uid="uid://cvhb3612uxlt8" path="res://regions/resources/region_res/free_mode/regions/aitire.tres" id="21_b7btk"]
+[ext_resource type="Resource" uid="uid://dxtfg1eai1v70" path="res://regions/resources/region_res/free_mode/regions/humidi.tres" id="22_kkgr2"]
+[ext_resource type="Resource" uid="uid://ca5mty47w1v5a" path="res://regions/resources/region_res/free_mode/regions/alveolus.tres" id="23_iett8"]
+[ext_resource type="Resource" uid="uid://dquyy5euyvpv0" path="res://regions/resources/region_res/free_mode/regions/vrachinor.tres" id="24_r5m4j"]
+[ext_resource type="Resource" uid="uid://rcch7fbohv7c" path="res://regions/resources/region_res/free_mode/regions/dyrrawyr.tres" id="25_e77ka"]
+[ext_resource type="Resource" uid="uid://duxoyqgpbd36s" path="res://regions/resources/region_res/free_mode/regions/tulivuori.tres" id="26_c0wax"]
+[ext_resource type="Resource" uid="uid://87u6yq5l0w0x" path="res://regions/resources/region_res/free_mode/regions/root.tres" id="27_sedwk"]
+[ext_resource type="Resource" uid="uid://wvnbxep7k230" path="res://regions/resources/region_res/free_mode/regions/helmster.tres" id="28_37ykd"]
+[ext_resource type="Resource" uid="uid://mjg8bwnleot0" path="res://regions/resources/region_res/free_mode/regions/hirano.tres" id="29_1hvhf"]
+[ext_resource type="Resource" uid="uid://cen6rvg8d76i" path="res://regions/resources/region_res/free_mode/regions/shinrin.tres" id="30_75cpn"]
+[ext_resource type="Resource" uid="uid://bpn5kiw1vcb50" path="res://regions/resources/region_res/free_mode/regions/umibe.tres" id="31_ct3wn"]
+[ext_resource type="Resource" uid="uid://c5tl2qo8al6os" path="res://regions/resources/region_res/free_mode/regions/freti.tres" id="32_ynm8w"]
+[ext_resource type="Resource" uid="uid://btgmu6jvolyk7" path="res://regions/resources/region_res/free_mode/regions/maris.tres" id="33_rakx2"]
+[ext_resource type="Resource" uid="uid://c3fqnbo21gin4" path="res://regions/resources/region_res/free_mode/regions/pax.tres" id="34_3fh52"]
+[ext_resource type="Resource" uid="uid://bl1uxmp5s84tx" path="res://regions/resources/region_res/free_mode/regions/bellum.tres" id="35_8f1f8"]
+[ext_resource type="Resource" uid="uid://dtowkipns77y5" path="res://regions/resources/region_res/free_mode/regions/eirawyrt.tres" id="36_lxwtw"]
+[ext_resource type="Resource" uid="uid://dsl6k4emb0kjm" path="res://regions/resources/region_res/free_mode/regions/nix.tres" id="37_ir1d4"]
+[ext_resource type="Resource" uid="uid://b3j3qo5r0lioo" path="res://regions/resources/region_res/free_mode/regions/white.tres" id="38_tj74d"]
 
 [node name="World" type="Node2D" unique_id=1856769851]
 script = ExtResource("1_aqk2v")
+
+[node name="Chainland202607072308" type="Sprite2D" parent="." unique_id=1891642009]
+position = Vector2(959.9999, 540.00006)
+scale = Vector2(0.25668448, 0.27835056)
+texture = ExtResource("2_fj7yv")
+metadata/_edit_lock_ = true
+
+[node name="Darkwater" parent="." unique_id=1036715789 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 736.0
+offset_top = 232.0
+offset_right = 784.0
+offset_bottom = 280.0
+res = ExtResource("4_yx0jh")
+
+[node name="Lochnel valley" parent="." unique_id=55993202 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 920.0
+offset_top = 552.0
+offset_right = 968.0
+offset_bottom = 600.0
+res = ExtResource("5_1ew0l")
+
+[node name="Ortus ravis" parent="." unique_id=492204163 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 912.0
+offset_top = 440.0
+offset_right = 960.0
+offset_bottom = 488.0
+res = ExtResource("6_ryup7")
+
+[node name="Nemus forest" parent="." unique_id=908189492 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1088.0
+offset_top = 600.0
+offset_right = 1136.0
+offset_bottom = 648.0
+res = ExtResource("7_ytpkv")
+
+[node name="Corvida la sol" parent="." unique_id=174863845 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1240.0
+offset_top = 712.0
+offset_right = 1288.0
+offset_bottom = 760.0
+res = ExtResource("8_jas3d")
+
+[node name="Davo peninsula" parent="." unique_id=576377493 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1032.0
+offset_top = 752.0
+offset_right = 1080.0
+offset_bottom = 800.0
+res = ExtResource("9_7htu6")
+
+[node name="Dolmoor" parent="." unique_id=647404925 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 712.0
+offset_top = 632.0
+offset_right = 760.0
+offset_bottom = 680.0
+res = ExtResource("10_7qk3m")
+
+[node name="Veliki corvis" parent="." unique_id=1844566593 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 864.0
+offset_top = 680.0
+offset_right = 912.0
+offset_bottom = 728.0
+res = ExtResource("11_xpnt2")
+
+[node name="Gold desert" parent="." unique_id=1287530622 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 760.0
+offset_top = 776.0
+offset_right = 808.0
+offset_bottom = 824.0
+res = ExtResource("12_ruyqm")
+
+[node name="Vesper ravis" parent="." unique_id=1487989129 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 800.0
+offset_top = 328.0
+offset_right = 848.0
+offset_bottom = 376.0
+res = ExtResource("13_fnoqa")
+
+[node name="Lucus grove" parent="." unique_id=1923362296 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 952.0
+offset_top = 360.0
+offset_right = 1000.0
+offset_bottom = 408.0
+res = ExtResource("14_nx736")
+
+[node name="Qorax litus" parent="." unique_id=2095304712 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 880.0
+offset_top = 288.0
+offset_right = 928.0
+offset_bottom = 336.0
+res = ExtResource("15_55kwu")
+
+[node name="Coeden" parent="." unique_id=326072029 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 800.0
+offset_top = 456.0
+offset_right = 848.0
+offset_bottom = 504.0
+res = ExtResource("16_f3o6s")
+
+[node name="Tirwood" parent="." unique_id=1256029557 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 680.0
+offset_top = 488.0
+offset_right = 728.0
+offset_bottom = 536.0
+res = ExtResource("17_w4lh7")
+
+[node name="Deckenzug" parent="." unique_id=1826756554 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 656.0
+offset_top = 320.0
+offset_right = 704.0
+offset_bottom = 368.0
+res = ExtResource("18_k3lar")
+
+[node name="Gardborg" parent="." unique_id=261867928 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 440.0
+offset_top = 416.0
+offset_right = 488.0
+offset_bottom = 464.0
+res = ExtResource("19_olr1q")
+
+[node name="Wiese" parent="." unique_id=241227188 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 456.0
+offset_top = 256.0
+offset_right = 504.0
+offset_bottom = 304.0
+res = ExtResource("20_q42o5")
+
+[node name="Aitire ridge" parent="." unique_id=35949250 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 552.0
+offset_top = 368.0
+offset_right = 600.0
+offset_bottom = 416.0
+res = ExtResource("21_b7btk")
+
+[node name="Humidi swamp" parent="." unique_id=2062204289 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 296.0
+offset_top = 272.0
+offset_right = 344.0
+offset_bottom = 320.0
+res = ExtResource("22_kkgr2")
+
+[node name="Alveolus basin" parent="." unique_id=1449852982 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 320.0
+offset_top = 448.0
+offset_right = 368.0
+offset_bottom = 496.0
+res = ExtResource("23_iett8")
+
+[node name="Vrachinor" parent="." unique_id=1435110305 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 400.0
+offset_top = 584.0
+offset_right = 448.0
+offset_bottom = 632.0
+res = ExtResource("24_r5m4j")
+
+[node name="Dyrrawyr" parent="." unique_id=1918662837 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 552.0
+offset_top = 608.0
+offset_right = 600.0
+offset_bottom = 656.0
+res = ExtResource("25_e77ka")
+
+[node name="Tulivuori" parent="." unique_id=646217268 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 544.0
+offset_top = 744.0
+offset_right = 592.0
+offset_bottom = 792.0
+res = ExtResource("26_c0wax")
+
+[node name="Root" parent="." unique_id=250037337 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1184.0
+offset_top = 528.0
+offset_right = 1232.0
+offset_bottom = 576.0
+res = ExtResource("27_sedwk")
+
+[node name="Helmster" parent="." unique_id=1249250521 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1072.0
+offset_top = 352.0
+offset_right = 1120.0
+offset_bottom = 400.0
+res = ExtResource("28_37ykd")
+
+[node name="Hirano" parent="." unique_id=869342299 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1264.0
+offset_top = 504.0
+offset_right = 1312.0
+offset_bottom = 552.0
+res = ExtResource("29_1hvhf")
+
+[node name="Shinrin forest" parent="." unique_id=1263241131 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1152.0
+offset_top = 424.0
+offset_right = 1200.0
+offset_bottom = 472.0
+res = ExtResource("30_75cpn")
+
+[node name="Umibe" parent="." unique_id=58374906 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1224.0
+offset_top = 368.0
+offset_right = 1272.0
+offset_bottom = 416.0
+res = ExtResource("31_ct3wn")
+
+[node name="Freti obala" parent="." unique_id=2127148560 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1392.0
+offset_top = 488.0
+offset_right = 1440.0
+offset_bottom = 536.0
+res = ExtResource("32_ynm8w")
+
+[node name="Maris" parent="." unique_id=1014186147 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1584.0
+offset_top = 528.0
+offset_right = 1632.0
+offset_bottom = 576.0
+res = ExtResource("33_rakx2")
+
+[node name="Pax mata" parent="." unique_id=54282081 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1400.0
+offset_top = 568.0
+offset_right = 1448.0
+offset_bottom = 616.0
+res = ExtResource("34_3fh52")
+
+[node name="Bellum" parent="." unique_id=2070753622 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1392.0
+offset_top = 656.0
+offset_right = 1440.0
+offset_bottom = 704.0
+res = ExtResource("35_8f1f8")
+
+[node name="Eirawyrt" parent="." unique_id=116825790 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1536.0
+offset_top = 616.0
+offset_right = 1584.0
+offset_bottom = 664.0
+res = ExtResource("36_lxwtw")
+
+[node name="Nix bay" parent="." unique_id=1792671916 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1528.0
+offset_top = 728.0
+offset_right = 1576.0
+offset_bottom = 776.0
+res = ExtResource("37_ir1d4")
+
+[node name="White coast" parent="." unique_id=1050272642 groups=["RegionIcons"] instance=ExtResource("3_tlwt5")]
+offset_left = 1648.0
+offset_top = 784.0
+offset_right = 1696.0
+offset_bottom = 832.0
+res = ExtResource("38_tj74d")

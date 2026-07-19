@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://ji6n1m2wd8s0"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_efa5r"]
+
+[resource]
+script = ExtResource("1_efa5r")
+id = 25
+name = "Veliki corvis"
+faction = 14
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

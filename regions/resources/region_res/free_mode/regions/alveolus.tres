@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://ca5mty47w1v5a"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_3yemv"]
+[ext_resource type="Resource" uid="uid://c5smiauiaw358" path="res://regions/resources/region_res/free_mode/provinces/swamp_brotherhood.tres" id="1_loc0w"]
+
+[resource]
+script = ExtResource("1_3yemv")
+id = 2
+name = "Alveolus basin"
+province = ExtResource("1_loc0w")
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

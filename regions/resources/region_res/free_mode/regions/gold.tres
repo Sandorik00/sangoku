@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://d3fad2aqxkpc4"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_8p1ny"]
+
+[resource]
+script = ExtResource("1_8p1ny")
+id = 24
+name = "Gold desert"
+faction = 14
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://cen6rvg8d76i"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_cgvk7"]
+
+[resource]
+script = ExtResource("1_cgvk7")
+id = 19
+name = "Shinrin forest"
+faction = 11
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

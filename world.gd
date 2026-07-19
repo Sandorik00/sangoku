@@ -10,16 +10,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				UIState.current_region_action = Types.REGION_ACTION_TYPE.NONE
 
-func _ready() -> void:
-	var all_regions: Array[RegionIcon] = []
+# func _ready() -> void:
+# 	var all_regions: Array[RegionIcon] = []
 
-	for a in WorldState.DEFAULT_REGIONS.values():
-		all_regions.append_array(a)
+# 	for a in WorldState.DEFAULT_REGIONS.values():
+# 		all_regions.append_array(a)
 
-	for i in all_regions.size():
-		var new_pos: Vector2 = (base_region_pos * i) + base_region_pos
-		var region: RegionIcon = all_regions.get(i)
+# 	for i in all_regions.size():
+# 		var new_pos: Vector2 = (base_region_pos * i) + base_region_pos
+# 		var region: RegionIcon = all_regions.get(i)
 
-		region.position = new_pos
-		add_child(region)
+# 		region.position = new_pos
+# 		add_child(region)
 

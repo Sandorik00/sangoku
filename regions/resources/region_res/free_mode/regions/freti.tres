@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://c5tl2qo8al6os"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_0y0g7"]
+
+[resource]
+script = ExtResource("1_0y0g7")
+id = 28
+name = "Freti obala"
+faction = 15
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

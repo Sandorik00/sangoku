@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://btgmu6jvolyk7"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_q2kmv"]
+
+[resource]
+script = ExtResource("1_q2kmv")
+id = 29
+name = "Maris"
+faction = 15
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

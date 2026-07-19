@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://c6f50d2vb0o6a"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_63v1b"]
+
+[resource]
+script = ExtResource("1_63v1b")
+id = 17
+name = "Nemus forest"
+faction = 9
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

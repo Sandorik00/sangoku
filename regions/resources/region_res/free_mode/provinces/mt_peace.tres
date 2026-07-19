@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Province" format=3 uid="uid://c55mavv3decsa"]
+
+[ext_resource type="Script" uid="uid://dgfg32o2f1o5" path="res://regions/province.gd" id="1_1qt2v"]
+
+[resource]
+script = ExtResource("1_1qt2v")
+id = 2
+faction = 1
+regions = Array[int]([3, 4, 5])
+metadata/_custom_type_script = "uid://dgfg32o2f1o5"

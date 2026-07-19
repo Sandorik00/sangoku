@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://c3fqnbo21gin4"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_0y8un"]
+
+[resource]
+script = ExtResource("1_0y8un")
+id = 30
+name = "Pax mata"
+faction = 16
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

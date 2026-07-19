@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://ci4a5rd1ng82x"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_pgyp3"]
+
+[resource]
+script = ExtResource("1_pgyp3")
+id = 10
+name = "Vesper"
+faction = 5
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

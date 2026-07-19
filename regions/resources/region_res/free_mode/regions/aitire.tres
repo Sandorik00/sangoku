@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://cvhb3612uxlt8"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_r2dbm"]
+
+[resource]
+script = ExtResource("1_r2dbm")
+id = 6
+name = "Aitire ridge"
+faction = 2
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

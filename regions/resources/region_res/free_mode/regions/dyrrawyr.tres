@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://rcch7fbohv7c"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_jlriw"]
+
+[resource]
+script = ExtResource("1_jlriw")
+id = 8
+name = "Dyrrawyr"
+faction = 3
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

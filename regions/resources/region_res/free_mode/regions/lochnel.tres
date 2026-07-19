@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Region" format=3 uid="uid://dpkwx8jicjmqi"]
+
+[ext_resource type="Script" uid="uid://cjlq0w58b0627" path="res://regions/region.gd" id="1_f3ina"]
+
+[resource]
+script = ExtResource("1_f3ina")
+id = 16
+name = "Lochnel valley"
+faction = 9
+metadata/_custom_type_script = "uid://cjlq0w58b0627"

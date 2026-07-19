@@ -7,7 +7,6 @@ class_name GlobalUI
 
 @export_category("Packed scenes")
 @export var actionsBoxPS: PackedScene
-@export var castlesBoxPS: PackedScene
 @export var region_action_ui_ps: PackedScene
 @export var hire_menu_ui_ps: PackedScene
 
@@ -21,7 +20,6 @@ class_name GlobalUI
 @export var factions_turn_ui: FactionsTurnUI
 
 var actionsBox: RegionActionsBox
-var castlesBox: Panel
 var hire_menu_ui: HireMenu
 var army_menu_ui: ArmyMenu
 
@@ -40,29 +38,23 @@ func _on_chosen_region_changed(region: Region):
 		if actionsBox:
 			actionsBox.queue_free()
 			actionsBox = null
-		if castlesBox:
-			castlesBox.queue_free()
-			castlesBox = null
 		return
 
 	if (actionsBox):
 		actionsBox.queue_free()
 		actionsBox = null
-		castlesBox.queue_free()
-		castlesBox = null
 
 	actionsBox = actionsBoxPS.instantiate() as RegionActionsBox
-	castlesBox = castlesBoxPS.instantiate() as Panel
 
 	actionsBox.region_name_l.text = region.name
 
 	var actions_for_region: Array[Types.REGION_ACTION_TYPE] = []
-	if region.faction != FactionsState.FACTIONS.SAN:
+	if region.faction != WorldState.player_faction:
 		actions_for_region.append_array(
-			Utils.get_actions_for_relation(FactionsState.get_relation(FactionsState.FACTIONS.SAN, region.faction))
+			Utils.get_actions_for_relation(FactionsState.get_relation(WorldState.player_faction, region.faction))
 		)
 
-	actions_for_region.append_array(Utils.get_actions_for_property(region, FactionsState.FACTIONS.SAN))
+	actions_for_region.append_array(Utils.get_actions_for_property(region, WorldState.player_faction))
 
 	for action in actions_for_region:
 		if action == Types.REGION_ACTION_TYPE.NONE: return
@@ -74,9 +66,6 @@ func _on_chosen_region_changed(region: Region):
 		actionsBox.actions_container.add_child(region_action_ui)
 
 	add_child(actionsBox)
-
-	castlesBox.add_castles(region.castle_count)
-	add_child(castlesBox)
 
 func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 	match type:
@@ -121,7 +110,7 @@ func toggle_on_turn_end(players_turn: bool, faction: FactionsState.FACTIONS):
 			r.self_modulate = Color(1, 1, 1, 1)
 		highlighted_regions.clear()
 
-		var faction_regions = WorldState.DEFAULT_REGIONS.get(faction, []) as Array[RegionIcon]
+		var faction_regions = WorldState.ALL_REGION_ICONS.filter(func(ri: RegionIcon): return ri.res.faction == faction) as Array[RegionIcon]
 		for r in faction_regions:
 			r.self_modulate = Color(0, 0, 1, 1)
 		highlighted_regions.append_array(faction_regions)
