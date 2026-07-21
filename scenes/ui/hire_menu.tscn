@@ -10,7 +10,13 @@ bg_color = Color(0.6, 0.6, 0.6, 0.49803922)
 [sub_resource type="LabelSettings" id="LabelSettings_5qbh0"]
 font_size = 32
 
-[node name="HireMenu" type="Control" unique_id=1101857578 node_paths=PackedStringArray("unit_list_ui", "hire_btn", "portrait_tr", "class_l", "grade_l", "troops_l", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
+[sub_resource type="LabelSettings" id="LabelSettings_yro8m"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_58y7u"]
+font_size = 40
+
+[node name="HireMenu" type="Control" unique_id=1101857578 node_paths=PackedStringArray("unit_list_ui", "hire_btn", "portrait_tr", "class_l", "grade_l", "troops_l", "cost_l", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +32,7 @@ portrait_tr = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContai
 class_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Class")
 grade_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Grade")
 troops_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Troops")
+cost_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer4/VBoxContainer/CostN")
 attack_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer/HBoxContainer/AttackN")
 defence_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer/HBoxContainer2/DefenceN")
 speed_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer/HBoxContainer3/SpeedN")
@@ -100,6 +107,23 @@ label_settings = SubResource("LabelSettings_5qbh0")
 layout_mode = 2
 text = "Troops: 100"
 label_settings = SubResource("LabelSettings_5qbh0")
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo" unique_id=932108977]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer4" unique_id=1360132724]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer4/VBoxContainer" unique_id=1551151254]
+layout_mode = 2
+text = "Cost:"
+label_settings = SubResource("LabelSettings_yro8m")
+
+[node name="CostN" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer4/VBoxContainer" unique_id=664175841]
+layout_mode = 2
+text = "1000"
+label_settings = SubResource("LabelSettings_58y7u")
 
 [node name="Control" type="Control" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo" unique_id=1328494567]
 layout_mode = 2

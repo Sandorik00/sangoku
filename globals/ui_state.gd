@@ -47,3 +47,6 @@ var army_menu_opened: bool = false :
 	set(new_value):
 		army_menu_opened = new_value
 		menu_army_switched.emit(new_value)
+
+func update_regions_data(region_armies: Array[Army]):
+	all_regions_data.set(chosen_region.id, region_armies)

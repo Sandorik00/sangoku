@@ -6,13 +6,14 @@ class_name HireMenu
 
 @export var hire_btn: Button
 
-@export_category("Short info")
+@export_group("Short info")
 @export var portrait_tr: TextureRect
 @export var class_l: Label
 @export var grade_l: Label
 @export var troops_l: Label
+@export var cost_l: Label
 
-@export_category("Stats")
+@export_group("Stats")
 @export var attack_l: Label
 @export var defence_l: Label
 @export var speed_l: Label
@@ -23,6 +24,7 @@ class_name HireMenu
 var armies: Dictionary[int, Army] = {}
 var selected_army: Army
 var selected_army_index: int = -1
+var selected_army_cost: int = -1
 
 var army_panels: Dictionary[int, ArmyPanel] = {}
 
@@ -37,6 +39,8 @@ func add_armies(armies_a: Array[Army]):
 
 	selected_army = armies.get(0)
 	selected_army_index = 0
+	selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+	_validate_hire_btn()
 	if selected_army:
 		_refresh_ui()
 
@@ -52,6 +56,8 @@ func add_armies(armies_a: Array[Army]):
 func _on_army_pressed(army: Army, index: int):
 	selected_army = army
 	selected_army_index = index
+	selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+	_validate_hire_btn()
 	_refresh_ui()
 
 func _refresh_ui():
@@ -59,6 +65,7 @@ func _refresh_ui():
 	class_l.text = selected_army.clazz
 	grade_l.text = selected_army.grade
 	troops_l.text = str(selected_army.number_of_troops)
+	cost_l.text = str(selected_army_cost)
 
 	attack_l.text = str(selected_army.attack)
 	defence_l.text = str(selected_army.defence)
@@ -68,23 +75,32 @@ func _refresh_ui():
 	morale_l.text = str(selected_army.morale)
 
 func _on_hire_btn_pressed():
-	WorldActions.hiring_army.emit(selected_army)
-
 	var curr_panel: ArmyPanel = army_panels.get(selected_army_index)
 	army_panels.erase(selected_army_index)
 	curr_panel.queue_free()
 
 	armies.erase(selected_army_index)
 
+	WorldActions.hiring_army.emit(selected_army, selected_army_cost, armies.values())
+
 	# TODO: wait for Godot 4.9 for `get` issue fixed
 	if armies.keys().is_empty():
 		selected_army_index = -1
 		selected_army = null
+		selected_army_cost = -1
 	else:
 		selected_army_index = armies.keys().get(0)
 		selected_army = armies.get(selected_army_index)
+		selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+
+	_validate_hire_btn()
 
 	if selected_army:
 		_refresh_ui()
 	else:
 		UIState.current_region_action = Types.REGION_ACTION_TYPE.NONE
+
+func _validate_hire_btn():
+	if WorldState.PLAYER_DATA.money < selected_army_cost:
+		hire_btn.disabled = true
+	else: hire_btn.disabled = false

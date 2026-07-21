@@ -65,4 +65,5 @@ var ALL_REGIONS: Dictionary[int, Region] = {}
 
 var ALL_REGION_ICONS: Array[RegionIcon] = []
 
+var PLAYER_DATA: FactionData = san_fd
 var FACTIONS_TO_DATA: Dictionary[FactionsState.FACTIONS, FactionData] = {}

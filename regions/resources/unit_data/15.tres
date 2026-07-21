@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="UnitsByRegions" format=3 uid="uid://bxm5meujtf0pf"]
 
-[ext_resource type="Script" uid="uid://brcg7n732qpgr" path="res://regions/resources/units_by_regions.gd" id="1_vapes"]
-[ext_resource type="Script" uid="uid://cm1ih4epmy33m" path="res://units/army.gd" id="2_ra6nq"]
+[ext_resource type="Script" uid="uid://brcg7n732qpgr" path="res://regions/resources/units_by_regions.gd" id="1_3neya"]
+[ext_resource type="Script" uid="uid://cm1ih4epmy33m" path="res://units/army.gd" id="2_m5s8u"]
 
 [sub_resource type="Resource" id="Resource_vapes"]
-script = ExtResource("2_ra6nq")
+script = ExtResource("2_m5s8u")
 name = "Fire mage"
 attack = 4
 speed = 1
@@ -15,7 +15,7 @@ number_of_troops = 30
 metadata/_custom_type_script = "uid://cm1ih4epmy33m"
 
 [sub_resource type="Resource" id="Resource_ra6nq"]
-script = ExtResource("2_ra6nq")
+script = ExtResource("2_m5s8u")
 name = "Cavalier"
 attack = 3
 defence = 2
@@ -27,6 +27,7 @@ number_of_troops = 50
 metadata/_custom_type_script = "uid://cm1ih4epmy33m"
 
 [resource]
-script = ExtResource("1_vapes")
-units_in_store = Array[ExtResource("2_ra6nq")]([SubResource("Resource_vapes"), SubResource("Resource_ra6nq")])
+script = ExtResource("1_3neya")
+region_id = 15
+units_in_store = Array[ExtResource("2_m5s8u")]([SubResource("Resource_vapes"), SubResource("Resource_ra6nq")])
 metadata/_custom_type_script = "uid://brcg7n732qpgr"

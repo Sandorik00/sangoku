@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://c0fw3eq07jyru" path="res://scenes/ui/turn_order.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://nnuxodm20mlc" path="res://ui.gd" id="4_kek77"]
 [ext_resource type="PackedScene" uid="uid://cvcsy0bs7hyeq" path="res://regions/region_actions_box.tscn" id="5_4c57u"]
-[ext_resource type="PackedScene" uid="uid://wk683gtlktk5" path="res://regions/castlesBox.tscn" id="6_efxa6"]
 [ext_resource type="PackedScene" uid="uid://61votu5io48k" path="res://regions/region_action.tscn" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cb3h7neln0lga" path="res://scenes/ui/hire_menu.tscn" id="8_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://bldqos0y8xufl" path="res://scenes/ui/army_menu.tscn" id="9_4c57u"]
@@ -61,7 +60,6 @@ world = NodePath("../World")
 world_camera = NodePath("../WorldCamera")
 sub_viewport = NodePath("../SubViewportContainer/SubViewport")
 actionsBoxPS = ExtResource("5_4c57u")
-castlesBoxPS = ExtResource("6_efxa6")
 region_action_ui_ps = ExtResource("7_dg77c")
 hire_menu_ui_ps = ExtResource("8_ycdy4")
 combat_ps = ExtResource("9_efxa6")

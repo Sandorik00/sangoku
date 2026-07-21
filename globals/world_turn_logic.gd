@@ -22,7 +22,7 @@ var cerebrum: WorldBTSelector
 
 func _ready():
 	var unsorted_factions = FactionsState.FACTIONS.values().duplicate()
-	unsorted_factions.sort_custom(func(f1, f2): return f1 == WorldState.player_faction)
+	unsorted_factions.sort_custom(func(f1, _f2): return f1 == WorldState.player_faction)
 
 	_campaign_factions.assign(unsorted_factions)
 

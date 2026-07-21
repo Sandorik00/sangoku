@@ -18,6 +18,10 @@ class_name Army
 @export var morale: int = 0
 @export var number_of_troops: int = 0
 
+@export_group("addons")
+@export var base_cost: int = 10
+@export var max_number_of_troops: int = 1
+
 # @export_group("skills")
 # @export var passive: String
 # @export var abilities: Array[String]

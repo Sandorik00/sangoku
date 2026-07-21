@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1_qsbl4")
 name = "Footman"
-klass = "footman"
 attack = 1
 defence = 2
 speed = 2
 attack_range = 1
 morale = 3
 number_of_troops = 100
+max_number_of_troops = 100
 metadata/_custom_type_script = "uid://cm1ih4epmy33m"

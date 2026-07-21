@@ -11,4 +11,5 @@ mana = 20
 attack_range = 3
 morale = 5
 number_of_troops = 30
+max_number_of_troops = 30
 metadata/_custom_type_script = "uid://cm1ih4epmy33m"
