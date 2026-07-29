@@ -21,7 +21,6 @@ class_name HireMenu
 @export var mana_l: Label
 @export var morale_l: Label
 
-var armies: Dictionary[int, Army] = {}
 var selected_army: Army
 var selected_army_index: int = -1
 var selected_army_cost: int = -1
@@ -34,18 +33,18 @@ func _ready():
 func add_armies(armies_a: Array[Army]):
 	if armies_a.is_empty(): return
 
-	for i in armies_a.size():
-		armies.set(i, armies_a.get(i))
+	HireLogic.add_armies(armies_a)
 
-	selected_army = armies.get(0)
+	selected_army = HireLogic.armies.get(0)
 	selected_army_index = 0
 	selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
 	_validate_hire_btn()
+
 	if selected_army:
 		_refresh_ui()
 
-	for i in armies.keys().size():
-		var army = armies.get(i)
+	for i in HireLogic.armies.keys().size():
+		var army = HireLogic.armies.get(i)
 		var army_panel: ArmyPanel = unit_panel_ps.instantiate()
 
 		army_panel.set_stats(army)
@@ -79,18 +78,18 @@ func _on_hire_btn_pressed():
 	army_panels.erase(selected_army_index)
 	curr_panel.queue_free()
 
-	armies.erase(selected_army_index)
+	HireLogic.armies.erase(selected_army_index)
 
-	WorldActions.hiring_army.emit(selected_army, selected_army_cost, armies.values())
+	WorldActions.hiring_army.emit(selected_army, selected_army_cost, HireLogic.armies.values())
 
 	# TODO: wait for Godot 4.9 for `get` issue fixed
-	if armies.keys().is_empty():
+	if HireLogic.armies.keys().is_empty():
 		selected_army_index = -1
 		selected_army = null
 		selected_army_cost = -1
 	else:
-		selected_army_index = armies.keys().get(0)
-		selected_army = armies.get(selected_army_index)
+		selected_army_index = HireLogic.armies.keys().get(0)
+		selected_army = HireLogic.armies.get(selected_army_index)
 		selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
 
 	_validate_hire_btn()

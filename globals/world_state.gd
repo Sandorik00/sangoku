@@ -1,5 +1,7 @@
 extends Node
 
+signal player_data_changed()
+
 var player_faction: FactionsState.FACTIONS = FactionsState.FACTIONS.RAVINE_HUMANS
 
 var region_icon_ps: PackedScene = preload("uid://si1chjm11vou")
@@ -32,14 +34,17 @@ func _ready() -> void:
 		ALL_PROVINCES.set(res.id, res)
 
 	for f in FactionsState.FACTIONS.values():
+		if f == player_faction:
+			FACTIONS_TO_DATA.set(f, san_fd)
+			continue
 		FACTIONS_TO_DATA.set(f, rik_fd)
 
 # player
-var PLAYER_COMMANDERS: Utils.UnitsStateDictionary = Utils.UnitsStateDictionary.new({
+var PLAYER_COMMANDERS: UnitsStateDictionary = UnitsStateDictionary.new({
 	0: default_commander.duplicate(),
 	1: default_commander.duplicate(),
 })
-var PLAYER_ARMIES: Utils.UnitsStateDictionary = Utils.UnitsStateDictionary.new({})
+var PLAYER_ARMIES: UnitsStateDictionary = UnitsStateDictionary.new({})
 
 ## { commander_id: [Unit] }
 var PLAYER_UNITS: Dictionary[int, Unit] = {
@@ -48,6 +53,8 @@ var PLAYER_UNITS: Dictionary[int, Unit] = {
 }
 
 # enemies, neutrals, others per se
+var OTHER_COMMANDERS: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
+var OTHER_ARMIES: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
 var OTHER_UNITS: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
 
 var DEFAULT_ENEMY_UNITS: Dictionary[int, Unit] = {

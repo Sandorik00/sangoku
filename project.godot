@@ -28,6 +28,7 @@ WorldActions="*uid://b86t0rhq6psg3"
 WorldState="*uid://c36pu2v0nh51f"
 WorldTurnLogic="*uid://dasgfpwywrpid"
 Grng="*uid://hvfbllxgvj3m"
+HireLogic="*uid://qshajq6it6r1"
 
 [display]
 

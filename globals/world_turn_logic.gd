@@ -47,13 +47,17 @@ func _transfer_control(faction: FactionsState.FACTIONS):
 
 	global_ui.toggle_on_turn_end(_current_faction == WorldState.player_faction, _current_faction)
 
+	# turn start
+	_setup_turn()
+	WorldState.player_data_changed.emit()
+
 	if _current_faction == WorldState.player_faction:
 		global_ui.modulate = Color(1, 1, 1, 1)
 		global_ui.process_mode = Node.PROCESS_MODE_INHERIT
 	else: _do_cerebrum_things()
 
 func _do_cerebrum_things():
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(0.5).timeout
 
 	cerebrum.make_decision(WorldState.FACTIONS_TO_DATA.get(_current_faction), {})
 
@@ -80,3 +84,16 @@ func out_combat():
 
 	combat.queue_free()
 	combat = null
+
+func _setup_turn():
+	_calc_income()
+
+func _calc_income():
+	var faction_data: FactionData = WorldState.FACTIONS_TO_DATA.get(_current_faction)
+	var income = 0
+
+	for r: Region in WorldState.ALL_REGIONS.values():
+		if r.faction == _current_faction:
+			income += Types.BASE_INCOME * r.rank
+
+	faction_data.money += income
