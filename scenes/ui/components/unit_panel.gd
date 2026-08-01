@@ -1,5 +1,5 @@
 extends Button
-class_name CommanderPanel
+class_name UnitPanel
 
 @export var commander_name: Label
 

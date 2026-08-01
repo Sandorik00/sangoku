@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unit" format=3 uid="uid://bbriuawlxxmj"]
+
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_c4pc1"]
+
+[resource]
+script = ExtResource("1_c4pc1")
+name = "Sans"
+attack = 2
+speed = 2
+morale = 2
+metadata/_custom_type_script = "uid://bahi8neasd5uo"

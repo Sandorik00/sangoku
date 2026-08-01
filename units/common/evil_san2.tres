@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Unit" format=3 uid="uid://c4fqm3lvds4y8"]
+
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_2gqat"]
+[ext_resource type="Texture2D" uid="uid://bw2w6iflxw1ln" path="res://SanCheeseSources/SanThinking.png" id="1_q4y04"]
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_aw1vr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7q3r"]
+atlas = ExtResource("3_aw1vr")
+region = Rect2(48, 64, 16, 16)
+
+[resource]
+script = ExtResource("1_2gqat")
+id = 3
+name = "Evil san 2"
+portrait = ExtResource("1_q4y04")
+sprite = SubResource("AtlasTexture_s7q3r")
+metadata/_custom_type_script = "uid://bahi8neasd5uo"

@@ -9,7 +9,7 @@ class_name HireMenu
 @export_group("Short info")
 @export var portrait_tr: TextureRect
 @export var class_l: Label
-@export var grade_l: Label
+@export var level_l: Label
 @export var troops_l: Label
 @export var cost_l: Label
 
@@ -21,85 +21,89 @@ class_name HireMenu
 @export var mana_l: Label
 @export var morale_l: Label
 
-var selected_army: Army
-var selected_army_index: int = -1
-var selected_army_cost: int = -1
+var units_for_hire: Dictionary = {}
 
-var army_panels: Dictionary[int, ArmyPanel] = {}
+var selected_unit: Unit = null
+var selected_unit_index: int = -1
+var selected_unit_cost: int = -1
+
+var unit_panels: Dictionary[int, UnitPanel] = {}
 
 func _ready():
 	hire_btn.pressed.connect(_on_hire_btn_pressed)
 
-func add_armies(armies_a: Array[Army]):
-	if armies_a.is_empty(): return
+	units_for_hire = HireLogic.get_units_for_faction(WorldState.player_faction)
 
-	HireLogic.add_armies(armies_a)
+	if units_for_hire.is_empty(): return
 
-	selected_army = HireLogic.armies.get(0)
-	selected_army_index = 0
-	selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+	selected_unit_index = units_for_hire.keys().get(0)
+	selected_unit = units_for_hire.get(selected_unit_index)
+	selected_unit_cost = selected_unit.troops * 1
 	_validate_hire_btn()
 
-	if selected_army:
+	if selected_unit:
 		_refresh_ui()
 
-	for i in HireLogic.armies.keys().size():
-		var army = HireLogic.armies.get(i)
-		var army_panel: ArmyPanel = unit_panel_ps.instantiate()
+	for k in units_for_hire.keys():
+		var unit: Unit = units_for_hire.get(k)
+		var unit_panel: UnitPanel = unit_panel_ps.instantiate()
 
-		army_panel.set_stats(army)
-		army_panel.pressed.connect(_on_army_pressed.bind(army, i))
-		army_panels.set(i, army_panel)
-		unit_list_ui.add_child(army_panel)
+		unit_panel.set_stats(unit)
+		unit_panel.pressed.connect(_on_unit_pressed.bind(unit, k))
+		unit_panels.set(k, unit_panel)
+		unit_list_ui.add_child(unit_panel)
 
-func _on_army_pressed(army: Army, index: int):
-	selected_army = army
-	selected_army_index = index
-	selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+func _on_unit_pressed(unit: Unit, index: int):
+	selected_unit = unit
+	selected_unit_index = index
+	selected_unit_cost = selected_unit.troops * 1
+
 	_validate_hire_btn()
 	_refresh_ui()
 
 func _refresh_ui():
-	portrait_tr.texture = selected_army.portrait
-	class_l.text = selected_army.clazz
-	grade_l.text = selected_army.grade
-	troops_l.text = str(selected_army.number_of_troops)
-	cost_l.text = str(selected_army_cost)
+	portrait_tr.texture = selected_unit.portrait
+	class_l.text = selected_unit.clazz
+	troops_l.text = str(selected_unit.troops)
+	cost_l.text = str(selected_unit_cost)
 
-	attack_l.text = str(selected_army.attack)
-	defence_l.text = str(selected_army.defence)
-	speed_l.text = str(selected_army.speed)
-	attack_range_l.text = str(selected_army.attack_range)
-	mana_l.text = str(selected_army.mana)
-	morale_l.text = str(selected_army.morale)
+	attack_l.text = str(selected_unit.attack)
+	defence_l.text = str(selected_unit.defence)
+	speed_l.text = str(selected_unit.speed)
+	attack_range_l.text = str(selected_unit.attack_range)
+	mana_l.text = str(selected_unit.mana)
+	morale_l.text = str(selected_unit.morale)
 
 func _on_hire_btn_pressed():
-	var curr_panel: ArmyPanel = army_panels.get(selected_army_index)
-	army_panels.erase(selected_army_index)
+	var curr_panel: UnitPanel = unit_panels.get(selected_unit_index)
+	unit_panels.erase(selected_unit_index)
 	curr_panel.queue_free()
 
-	HireLogic.armies.erase(selected_army_index)
-
-	WorldActions.hiring_army.emit(selected_army, selected_army_cost, HireLogic.armies.values())
+	HireLogic.hire_unit(WorldState.player_faction, selected_unit_index)
+	units_for_hire.erase(selected_unit_index)
 
 	# TODO: wait for Godot 4.9 for `get` issue fixed
-	if HireLogic.armies.keys().is_empty():
-		selected_army_index = -1
-		selected_army = null
-		selected_army_cost = -1
+	if units_for_hire.is_empty():
+		selected_unit_index = -1
+		selected_unit = null
+		selected_unit_cost = -1
 	else:
-		selected_army_index = HireLogic.armies.keys().get(0)
-		selected_army = HireLogic.armies.get(selected_army_index)
-		selected_army_cost = selected_army.number_of_troops * selected_army.base_cost
+		selected_unit_index = units_for_hire.keys().get(0)
+		selected_unit = units_for_hire.get(selected_unit_index)
+		selected_unit_cost = selected_unit.troops * 1
 
 	_validate_hire_btn()
 
-	if selected_army:
+	if selected_unit:
 		_refresh_ui()
 	else:
 		UIState.current_region_action = Types.REGION_ACTION_TYPE.NONE
 
 func _validate_hire_btn():
-	if WorldState.PLAYER_DATA.money < selected_army_cost:
+	if selected_unit_index == -1:
+		hire_btn.disabled = true
+		return
+
+	if WorldState.PLAYER_DATA.money < selected_unit_cost:
 		hire_btn.disabled = true
 	else: hire_btn.disabled = false

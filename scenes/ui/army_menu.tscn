@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://bldqos0y8xufl"]
 
 [ext_resource type="Script" uid="uid://3mu7rhv1omrn" path="res://scenes/ui/army_menu.gd" id="1_tm76n"]
-[ext_resource type="PackedScene" uid="uid://xx3fp8dwams8" path="res://scenes/ui/components/commander_panel.tscn" id="2_bcpuf"]
+[ext_resource type="PackedScene" uid="uid://xx3fp8dwams8" path="res://scenes/ui/components/unit_panel.tscn" id="2_bcpuf"]
 [ext_resource type="PackedScene" uid="uid://b1igy4agrjk14" path="res://scenes/ui/army_menu_tabs/info_tab.tscn" id="3_tm76n"]
-[ext_resource type="PackedScene" uid="uid://vnn1tqvsb6sw" path="res://scenes/ui/army_menu_tabs/army_tab.tscn" id="4_4iik1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcpuf"]
 bg_color = Color(0, 0, 0, 0.21568628)
 
-[node name="ArmyMenu" type="Control" unique_id=194574503 node_paths=PackedStringArray("commander_list_ui", "current_tab_scene", "close_btn", "info_btn", "abilities_btn", "army_btn", "equip_btn", "tab_container")]
+[node name="ArmyMenu" type="Control" unique_id=194574503 node_paths=PackedStringArray("commander_list_ui", "current_tab_scene", "close_btn", "info_btn", "abilities_btn", "equip_btn", "tab_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,11 +23,9 @@ current_tab_scene = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/InfoTab")
 close_btn = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/CommanderBanner/HBoxContainer/Close")
 info_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button")
 abilities_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button2")
-army_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button3")
 equip_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button4")
 tab_container = NodePath("Panel/HBoxContainer/Tabs/TabsContainer")
 info_tab_ps = ExtResource("3_tm76n")
-army_tab_ps = ExtResource("4_4iik1")
 
 [node name="Panel" type="Panel" parent="." unique_id=155814156]
 layout_mode = 1

@@ -76,11 +76,39 @@ func collect_resources(dir_path: String) -> Array[String]:
 		var path = dir_path.trim_suffix("/") + "/" + full_name
 
 		if dir.current_is_dir():
+			full_name = dir.get_next()
 			continue
 
 		file_paths.append(path)
 		full_name = dir.get_next()
 	
 	dir.list_dir_end()
+	
+	return file_paths
+
+func collect_resources_recursive(start_path: String) -> Array[String]:
+	var dirs = [start_path]
+	var file_paths: Array[String] = []
+
+	while not dirs.is_empty():
+			var dir_path = dirs.pop_back()
+			var dir = DirAccess.open(dir_path)
+
+			dir.list_dir_begin()
+
+			var full_name = dir.get_next()
+
+			while full_name != "":
+					var path = dir_path.trim_suffix("/") + "/" + full_name
+
+					if dir.current_is_dir():
+							dirs.append(path)
+							full_name = dir.get_next()
+							continue
+
+					file_paths.append(path)
+					full_name = dir.get_next()
+			
+			dir.list_dir_end()
 	
 	return file_paths

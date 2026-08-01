@@ -85,7 +85,6 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 func _show_hire_ui():
 	hire_menu_ui = hire_menu_ui_ps.instantiate()
 
-	hire_menu_ui.add_armies(HireLogic.armies_for_hire)
 	add_child(hire_menu_ui)
 
 func _on_menu_army_switched(opened: bool):

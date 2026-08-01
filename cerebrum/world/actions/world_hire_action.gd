@@ -19,22 +19,21 @@ func evaluate(faction: FactionData, _context: Dictionary) -> float:
 func execute(faction: FactionData, _context: Dictionary) -> void:
 	print(FactionsState.FACTIONS_TEXT.get(faction.faction) + " is hiring...")
 
-	var faction_available_units: Array[Army] = []
-
-	for r: Region in WorldState.ALL_REGIONS.values():
-		if r.faction == faction.faction:
-			var unit_data: Array[Army] = HireLogic.all_units_data.get(r.id)
-			faction_available_units.append_array(unit_data)
+	var faction_available_units: Dictionary = HireLogic.get_units_for_faction(faction.faction)
 
 	if faction_available_units.is_empty(): return
 
-	var currently_hiring: Army = faction_available_units.get(0)
-	var cost: int = currently_hiring.base_cost * currently_hiring.number_of_troops
+	var hiring_end: bool = false
+	var current_index: int = 0
 
-	if faction.money >= cost:
-		faction.money -= cost
-		faction.armies.set_last(currently_hiring)
-		# HireLogic.update_regions_data(region_armies_after_hire)
-		print(FactionsState.FACTIONS_TEXT.get(faction.faction) + " hired: " + currently_hiring.name)
-		faction.hired_this_week = true
-	else: print("This is a bug!!")
+	while not hiring_end:
+		var currently_hiring_index = faction_available_units.keys().get(current_index)
+		var currently_hiring: Unit = faction_available_units.get(currently_hiring_index)
+
+		if HireLogic.hire_unit(faction.faction, currently_hiring_index):
+			hiring_end = true
+			faction.hired_this_week = true
+			print(FactionsState.FACTIONS_TEXT.get(faction.faction) + " hired: " + currently_hiring.name)
+
+		current_index += 1
+		if current_index >= faction_available_units.keys().size(): hiring_end = true

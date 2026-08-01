@@ -1,59 +1,25 @@
 extends Resource
 class_name Unit
 
-var commander: Commander
-var army: Army
+@export_group("Info")
+@export var id: int = -1
+@export var unit_id: int = -1
+@export var name: String = ""
+@export var portrait: Texture2D = null
+@export var sprite: AtlasTexture = null
 
-var name: String
-var portrait: Texture2D
-var sprite: AtlasTexture
+@export_group("Class info")
+@export var clazz: String = ""
+@export var level: int = 1
 
-var attack: int
-var defence: int
-var speed: int
-var morale: int
-var mana: int
-var leadership: int
-var attack_range: int
-var troops: int
-var initiative: int
-var movement: int
-
-var validUnit: bool = false
-var team: Types.TEAMS = Types.TEAMS.RED
-var enemies: Types.TEAM_MAPPING = Types.TEAMS_MAPPING_TO_MAPPINGS.get(team, Types.TEAM_MAPPING.RED)
-
-func _init(_team: Types.TEAMS, _commander: Commander, _army: Army = null) -> void:
-	assert(_commander, "Unit must have a commander!")
-	
-	commander = _commander
-	army = _army
-	team = _team
-	enemies = Types.TEAMS_MAPPING_TO_MAPPINGS.get(team, Types.TEAM_MAPPING.RED)
-
-	self.calculate()
-
-func calculate():
-	validUnit = false
-	if not commander: return
-
-	var army_stats = army
-	if not army_stats:
-		army_stats = Army.new()
-	
-	name = commander.name if not commander.name.is_empty() else army_stats.name
-	portrait = commander.portrait if commander.portrait else army_stats.portrait
-	sprite = commander.sprite if commander.sprite else army_stats.sprite
-
-	attack = army_stats.attack + commander.attack
-	defence = army_stats.defence + commander.defence
-	speed = army_stats.speed + commander.speed
-	morale = army_stats.morale
-	mana = army_stats.mana + commander.mana
-	leadership = commander.leadership
-	attack_range = max(army_stats.attack_range, 1)
-	troops = army_stats.number_of_troops
-	initiative = army_stats.speed + commander.speed
-	movement = speed
-
-	validUnit = true
+@export_group("Stats")
+@export var attack: int = 1
+@export var defence: int = 1
+@export var speed: int = 1
+@export var morale: int = 1
+@export var mana: int = 1
+@export var leadership: int = 1
+@export var attack_range: int = 1
+@export var troops: int = 0
+@export var initiative: int = 1
+@export var movement: int = 3

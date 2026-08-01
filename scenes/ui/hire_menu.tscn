@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="1_5qbh0"]
 [ext_resource type="Script" uid="uid://cfdoaobycic00" path="res://scenes/ui/hire_menu.gd" id="1_neqos"]
-[ext_resource type="PackedScene" uid="uid://b0i0c0b7t0khl" path="res://scenes/ui/components/army_panel.tscn" id="2_erugy"]
+[ext_resource type="PackedScene" uid="uid://xx3fp8dwams8" path="res://scenes/ui/components/unit_panel.tscn" id="2_erugy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5oag"]
 bg_color = Color(0.6, 0.6, 0.6, 0.49803922)
@@ -16,7 +16,7 @@ font_size = 40
 [sub_resource type="LabelSettings" id="LabelSettings_58y7u"]
 font_size = 40
 
-[node name="HireMenu" type="Control" unique_id=1101857578 node_paths=PackedStringArray("unit_list_ui", "hire_btn", "portrait_tr", "class_l", "grade_l", "troops_l", "cost_l", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
+[node name="HireMenu" type="Control" unique_id=1101857578 node_paths=PackedStringArray("unit_list_ui", "hire_btn", "portrait_tr", "class_l", "level_l", "troops_l", "cost_l", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ unit_list_ui = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxConta
 hire_btn = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer3/HireBtn")
 portrait_tr = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer/TextureRect")
 class_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Class")
-grade_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Grade")
+level_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Level")
 troops_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer/Troops")
 cost_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer4/VBoxContainer/CostN")
 attack_l = NodePath("PanelContainer/PanelContainer/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer/HBoxContainer/AttackN")
@@ -98,9 +98,9 @@ layout_mode = 2
 text = "Class: class"
 label_settings = SubResource("LabelSettings_5qbh0")
 
-[node name="Grade" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer" unique_id=873620353]
+[node name="Level" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer" unique_id=873620353]
 layout_mode = 2
-text = "Grade: 1"
+text = "Level: 1"
 label_settings = SubResource("LabelSettings_5qbh0")
 
 [node name="Troops" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/ShortInfo/MarginContainer2/VBoxContainer" unique_id=858866361]

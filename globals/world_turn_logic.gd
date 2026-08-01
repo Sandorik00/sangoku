@@ -69,6 +69,7 @@ func into_combat():
 	global_ui.hide()
 
 	combat = combat_ps.instantiate()
+	# TODO: fix here also!
 	combat.setup_combat_entities(WorldState.PLAYER_UNITS.values() + WorldState.DEFAULT_ENEMY_UNITS.values())
 
 	sub_viewport.add_child(combat)

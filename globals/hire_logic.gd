@@ -1,36 +1,49 @@
 extends Node
 
-var all_units_data: Dictionary[int, Array]
-var current_region: int = -1
-var armies_for_hire: Array[Army] = []
-
-var armies: Dictionary[int, Army] = {}
-
-@onready var default_units_for_hire: UnitsByRegions = preload("uid://c52jtoi4mjys8")
+var all_units_data: Array[Unit] = []
+var units_for_hire: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
 
 func _ready() -> void:
-	UIState.chosen_region_changed.connect(_on_chosen_region_changed)
-
-	var paths := Utils.collect_resources("res://regions/resources/unit_data")
+	var paths := Utils.collect_resources_recursive("res://units/factions")
 	for path in paths:
-		var res: UnitsByRegions = ResourceLoader.load(path, "UnitsByRegions")
-		var armies_a = res.units_in_store
+		var res: Unit = ResourceLoader.load(path, "Unit")
 
-		all_units_data.set(res.region_id, armies_a)
+		all_units_data.push_back(res)
 
-func _on_chosen_region_changed(region: Region):
-	if not region:
-		armies_for_hire = []
-		current_region = -1
-		armies = {}
-		return
+func get_units_for_faction(faction: FactionsState.FACTIONS) -> Dictionary:
+	var has_faction: bool = false
+	var units_dict: Dictionary = units_for_hire.get(faction, {})
 
-	current_region = region.id
-	armies_for_hire = all_units_data.get(region.id, default_units_for_hire.units_in_store)
+	if units_for_hire.has(faction): has_faction = true
+	else: has_faction = false
 
-func update_regions_data(region_armies: Array[Army]):
-	all_units_data.set(current_region, region_armies)
+	if not has_faction:
+		if all_units_data.is_empty(): return {}
 
-func add_armies(armies_a: Array[Army]):
-	for i in armies_a.size():
-		armies.set(i, armies_a.get(i))
+		for i in 3:
+			if all_units_data.is_empty(): break
+
+			var random_index := Grng.RNG.randi() % all_units_data.size()
+			units_dict.set(i, all_units_data.pop_at(random_index))
+
+		units_for_hire.set(faction, units_dict)
+	
+	return units_dict
+
+func hire_unit(faction: FactionsState.FACTIONS, index: int) -> bool:
+	var units_dict: Dictionary = units_for_hire.get(faction, {})
+	if units_dict.is_empty(): return false
+
+	var faction_data: FactionData = WorldState.FACTIONS_TO_DATA.get(faction)
+
+	var unit: Unit = units_dict.get(index)
+	var cost: int = unit.troops * 1
+
+	if faction_data.money >= cost:
+		faction_data.money -= cost
+		faction_data.units.set_last(unit)
+		units_dict.erase(index)
+		units_for_hire.set(faction, units_dict)
+
+		return true
+	else: return false

@@ -10,9 +10,7 @@ class_name FactionData
 @export var army_power: int = 0
 @export var hired_this_week: bool = false
 
-@export var units: Dictionary[int, Unit] = {}
-@export var commanders: UnitsStateDictionary = UnitsStateDictionary.new()
-@export var armies: UnitsStateDictionary = UnitsStateDictionary.new()
+@export var units: UnitsStateDictionary = UnitsStateDictionary.new({})
 
 # not so dynamic stats
 @export_range(0.0, 2.0, 0.1) var evilness: float = 1 # from 0 to 2 in extreme cases

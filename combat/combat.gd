@@ -20,11 +20,6 @@ var unit_id: int = 0
 
 @export_category("Units")
 @export var unitPS: PackedScene
-@export var armyResource: Army
-@export var commanderResource: Commander
-
-@export var enemyArmyResource: Army
-@export var enemyCommanderResource: Commander
 
 @export_category("Logic")
 @export var combatState: CombatState
@@ -76,6 +71,7 @@ func _ready():
 	var combatants: Array[SanGrid.GridEntity] = []
 
 	# place units
+	# TODO: better arrange units without teams
 	for i in CombatData.unitsInCombat.keys():
 		var spawnPos = spawnPositions[i]
 		var posForUnit = to_global(tileMap.map_to_local(spawnPos))
@@ -85,7 +81,7 @@ func _ready():
 		u.prepare()
 		u.position = posForUnit
 
-		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.unit_data.team, u.unit_data.enemies)
+		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.team, u.enemies)
 		uEntity.id = i
 
 		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)

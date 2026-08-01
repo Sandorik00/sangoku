@@ -1,33 +1,12 @@
 [gd_resource type="Resource" script_class="UnitsByRegions" format=3 uid="uid://bxm5meujtf0pf"]
 
 [ext_resource type="Script" uid="uid://brcg7n732qpgr" path="res://regions/resources/units_by_regions.gd" id="1_3neya"]
-[ext_resource type="Script" uid="uid://cm1ih4epmy33m" path="res://units/army.gd" id="2_m5s8u"]
-
-[sub_resource type="Resource" id="Resource_vapes"]
-script = ExtResource("2_m5s8u")
-name = "Fire mage"
-attack = 4
-speed = 1
-mana = 20
-attack_range = 3
-morale = 5
-number_of_troops = 30
-metadata/_custom_type_script = "uid://cm1ih4epmy33m"
-
-[sub_resource type="Resource" id="Resource_ra6nq"]
-script = ExtResource("2_m5s8u")
-name = "Cavalier"
-attack = 3
-defence = 2
-speed = 5
-mana = 5
-attack_range = 1
-morale = 10
-number_of_troops = 50
-metadata/_custom_type_script = "uid://cm1ih4epmy33m"
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="2_3neya"]
+[ext_resource type="Resource" uid="uid://cb8vsyda8rl5e" path="res://units/common/evil_san.tres" id="3_5folf"]
+[ext_resource type="Resource" uid="uid://c4fqm3lvds4y8" path="res://units/common/evil_san2.tres" id="4_ckpka"]
 
 [resource]
 script = ExtResource("1_3neya")
 region_id = 15
-units_in_store = Array[ExtResource("2_m5s8u")]([SubResource("Resource_vapes"), SubResource("Resource_ra6nq")])
+units_in_store = Array[ExtResource("2_3neya")]([ExtResource("3_5folf"), ExtResource("4_ckpka")])
 metadata/_custom_type_script = "uid://brcg7n732qpgr"

@@ -6,10 +6,6 @@ var player_faction: FactionsState.FACTIONS = FactionsState.FACTIONS.RAVINE_HUMAN
 
 var region_icon_ps: PackedScene = preload("uid://si1chjm11vou")
 
-var default_commander: Commander = preload("uid://cvtoav134qx88")
-var default_enemy_commander: Commander = preload("uid://c7djxq3ycce4")
-var default_enemy_army: Army = preload("uid://ccflaedfaseyi")
-
 var san_fd: FactionData = preload("uid://b11lrqc3hslkx")
 var rombus_fd: FactionData = preload("uid://bg543dst24jwa")
 var rik_fd: FactionData = preload("uid://ccw2wet6o1bwv")
@@ -17,13 +13,13 @@ var rik_fd: FactionData = preload("uid://ccw2wet6o1bwv")
 func _ready() -> void:
 	ALL_REGION_ICONS.assign(get_tree().get_nodes_in_group("RegionIcons"))
 
-	var regions_paths := Utils.collect_resources("res://regions/resources/region_res/free_mode/regions")
+	var regions_paths: Array[String] = Utils.collect_resources("res://regions/resources/region_res/free_mode/regions")
 	for path in regions_paths:
 		var res: Region = ResourceLoader.load(path, "Region")
 
 		ALL_REGIONS.set(res.id, res)
 
-	var provinces_paths := Utils.collect_resources("res://regions/resources/region_res/free_mode/provinces")
+	var provinces_paths: Array[String] = Utils.collect_resources("res://regions/resources/region_res/free_mode/provinces")
 	for path in provinces_paths:
 		var res: Province = ResourceLoader.load(path, "Province")
 
@@ -40,28 +36,10 @@ func _ready() -> void:
 		FACTIONS_TO_DATA.set(f, rik_fd)
 
 # player
-var PLAYER_COMMANDERS: UnitsStateDictionary = UnitsStateDictionary.new({
-	0: default_commander.duplicate(),
-	1: default_commander.duplicate(),
-})
-var PLAYER_ARMIES: UnitsStateDictionary = UnitsStateDictionary.new({})
-
 ## { commander_id: [Unit] }
-var PLAYER_UNITS: Dictionary[int, Unit] = {
-	0: Unit.new(Types.TEAMS.BLUE, PLAYER_COMMANDERS.get_by_key(0)),
-	1: Unit.new(Types.TEAMS.BLUE, PLAYER_COMMANDERS.get_by_key(1)),
-}
+var PLAYER_UNITS: UnitsStateDictionary = UnitsStateDictionary.new()
 
-# enemies, neutrals, others per se
-var OTHER_COMMANDERS: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
-var OTHER_ARMIES: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
-var OTHER_UNITS: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
-
-var DEFAULT_ENEMY_UNITS: Dictionary[int, Unit] = {
-	0: Unit.new(Types.TEAMS.RED, default_enemy_commander.duplicate(), default_enemy_army.duplicate()),
-	1: Unit.new(Types.TEAMS.RED, default_enemy_commander.duplicate(), default_enemy_army.duplicate()),
-	2: Unit.new(Types.TEAMS.RED, default_enemy_commander.duplicate(), default_enemy_army.duplicate()),
-}
+var DEFAULT_ENEMY_UNITS: UnitsStateDictionary = UnitsStateDictionary.new()
 
 # regions
 ## Dictionary[FactionsState.FACTIONS, Array[RegionIcon]]

@@ -1,3 +1,3 @@
 extends Node
 
-var rng = RandomNumberGenerator.new()
+var RNG = RandomNumberGenerator.new()

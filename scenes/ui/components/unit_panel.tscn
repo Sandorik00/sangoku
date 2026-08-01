@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://b0i0c0b7t0khl"]
+[gd_scene format=3 uid="uid://xx3fp8dwams8"]
 
-[ext_resource type="Script" uid="uid://c8p5du8u5m0gt" path="res://scenes/ui/components/army_panel.gd" id="1_x0xim"]
+[ext_resource type="Script" uid="uid://c36fgnkrv1a8r" path="res://scenes/ui/components/unit_panel.gd" id="1_3ypdg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_neqos"]
 font_size = 28
@@ -8,17 +8,16 @@ font_size = 28
 [sub_resource type="LabelSettings" id="LabelSettings_erugy"]
 font_size = 20
 
-[node name="ArmyPanel" type="Button" unique_id=1331081905 node_paths=PackedStringArray("army_name", "attack_l", "defence_l", "speed_l", "attack_range_l", "mana_l", "morale_l")]
+[node name="UnitPanel" type="Button" unique_id=1331081905 node_paths=PackedStringArray("commander_name", "attack_l", "defence_l", "speed_l", "mana_l", "leadership_l")]
 custom_minimum_size = Vector2(0, 81)
 mouse_default_cursor_shape = 2
-script = ExtResource("1_x0xim")
-army_name = NodePath("VBoxContainer/Army name")
+script = ExtResource("1_3ypdg")
+commander_name = NodePath("VBoxContainer/Commander name")
 attack_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/AttackN")
 defence_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer2/DefenceN")
 speed_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer3/SpeedN")
-attack_range_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer4/RangeN")
 mana_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer5/ManaN")
-morale_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer6/MoraleN")
+leadership_l = NodePath("VBoxContainer/HBoxContainer/HBoxContainer6/LeadershipN")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1104115729]
 layout_mode = 1
@@ -28,9 +27,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Army name" type="Label" parent="VBoxContainer" unique_id=1241471751]
+[node name="Commander name" type="Label" parent="VBoxContainer" unique_id=1241471751]
 layout_mode = 2
-text = "Army name"
+text = "Commander name"
 label_settings = SubResource("LabelSettings_neqos")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=78770954]
@@ -76,19 +75,6 @@ layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_erugy")
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1989827864]
-layout_mode = 2
-
-[node name="Range" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer4" unique_id=1239814886]
-layout_mode = 2
-text = "Range:"
-label_settings = SubResource("LabelSettings_erugy")
-
-[node name="RangeN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer4" unique_id=1955998799]
-layout_mode = 2
-text = "99"
-label_settings = SubResource("LabelSettings_erugy")
-
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=177893354]
 layout_mode = 2
 
@@ -105,12 +91,12 @@ label_settings = SubResource("LabelSettings_erugy")
 [node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=908431149]
 layout_mode = 2
 
-[node name="Morale" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=641808357]
+[node name="Leadership" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=641808357]
 layout_mode = 2
-text = "Morale:"
+text = "Leadership:"
 label_settings = SubResource("LabelSettings_erugy")
 
-[node name="MoraleN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=1928289429]
+[node name="LeadershipN" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer6" unique_id=1928289429]
 layout_mode = 2
 text = "99"
 label_settings = SubResource("LabelSettings_erugy")
