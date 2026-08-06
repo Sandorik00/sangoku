@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcpuf"]
 bg_color = Color(0, 0, 0, 0.21568628)
 
-[node name="ArmyMenu" type="Control" unique_id=194574503 node_paths=PackedStringArray("commander_list_ui", "current_tab_scene", "close_btn", "info_btn", "abilities_btn", "equip_btn", "tab_container")]
+[node name="ArmyMenu" type="Control" unique_id=194574503 node_paths=PackedStringArray("unit_list_ui", "current_tab_scene", "close_btn", "info_btn", "abilities_btn", "equip_btn", "tab_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,8 +17,8 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tm76n")
-commander_panel_ps = ExtResource("2_bcpuf")
-commander_list_ui = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/List/ScrollContainer/VBoxContainer")
+unit_panel_ps = ExtResource("2_bcpuf")
+unit_list_ui = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/List/ScrollContainer/VBoxContainer")
 current_tab_scene = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/InfoTab")
 close_btn = NodePath("Panel/HBoxContainer/CommanderList/VBoxContainer/CommanderBanner/HBoxContainer/Close")
 info_btn = NodePath("Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer/Button")
@@ -58,6 +58,7 @@ theme_override_constants/separation = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Tabs/TabsContainer" unique_id=536150060]
 layout_mode = 2
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Button" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=308307940]
 custom_minimum_size = Vector2(216, 0)
@@ -70,12 +71,6 @@ custom_minimum_size = Vector2(216, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Skill tree"
-
-[node name="Button3" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=965703451]
-custom_minimum_size = Vector2(216, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Army"
 
 [node name="Button4" type="Button" parent="Panel/HBoxContainer/Tabs/TabsContainer/HBoxContainer" unique_id=1014296997]
 custom_minimum_size = Vector2(216, 0)

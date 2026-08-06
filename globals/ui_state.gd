@@ -5,6 +5,7 @@ signal region_action_changed(type: Types.REGION_ACTION_TYPE)
 
 # menu signals
 signal menu_army_switched(opened: bool)
+signal menu_refill_switched(opened: bool)
 
 var chosen_region: Region :
 	set(new_value):
@@ -24,3 +25,8 @@ var army_menu_opened: bool = false :
 	set(new_value):
 		army_menu_opened = new_value
 		menu_army_switched.emit(new_value)
+
+var refill_menu_opened: bool = false :
+	set(new_value):
+		refill_menu_opened = new_value
+		menu_refill_switched.emit(new_value)

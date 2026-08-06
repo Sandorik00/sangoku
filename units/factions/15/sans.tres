@@ -8,4 +8,6 @@ name = "Sans"
 attack = 2
 speed = 2
 morale = 2
+troops = 50
+max_troops = 50
 metadata/_custom_type_script = "uid://bahi8neasd5uo"

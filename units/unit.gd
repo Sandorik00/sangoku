@@ -20,6 +20,9 @@ class_name Unit
 @export var mana: int = 1
 @export var leadership: int = 1
 @export var attack_range: int = 1
-@export var troops: int = 0
+@export var troops: int = 1
 @export var initiative: int = 1
 @export var movement: int = 3
+
+@export_group("Dynamic stats")
+@export var max_troops: int = 1

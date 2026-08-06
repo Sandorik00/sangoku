@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://csojx02fbly6n"]
+
+[ext_resource type="PackedScene" uid="uid://dvksvnfxirwrx" path="res://scenes/ui/troops_panel.tscn" id="1_4fbj2"]
+[ext_resource type="Script" uid="uid://c0hqrsje2alec" path="res://scenes/ui/refill_menu.gd" id="1_xx6xt"]
+
+[node name="RefillMenu" type="Control" unique_id=328521388 node_paths=PackedStringArray("troops_container", "close_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xx6xt")
+troops_panel_ps = ExtResource("1_4fbj2")
+troops_container = NodePath("Panel/HBoxContainer/MarginContainer/ScrollContainer/TroopsContainer")
+close_btn = NodePath("Panel/HBoxContainer2/Button")
+
+[node name="Panel" type="Panel" parent="." unique_id=1597471574]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1465327506]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer" unique_id=1718259293]
+custom_minimum_size = Vector2(773, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/MarginContainer" unique_id=165916578]
+layout_mode = 2
+
+[node name="TroopsContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer/ScrollContainer" unique_id=1752974901]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel" unique_id=408910445]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer2" unique_id=2003457977]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Close"

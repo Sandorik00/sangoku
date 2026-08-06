@@ -17,7 +17,7 @@ spacing_bottom = -10
 font = SubResource("FontVariation_bcpuf")
 font_size = 32
 
-[node name="InfoTab" type="VBoxContainer" unique_id=662747475 node_paths=PackedStringArray("attack_l", "defence_l", "speed_l", "mana_l", "leadership_l", "clazz_l", "grade_l", "troops_l")]
+[node name="InfoTab" type="VBoxContainer" unique_id=662747475 node_paths=PackedStringArray("attack_l", "defence_l", "speed_l", "mana_l", "leadership_l", "clazz_l", "level_l", "troops_l")]
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 script = ExtResource("1_8lue8")
@@ -27,7 +27,7 @@ speed_l = NodePath("Stats/MarginContainer/HBoxContainer/Control3/SpeedN")
 mana_l = NodePath("Stats/MarginContainer/HBoxContainer/Control4/ManaN")
 leadership_l = NodePath("Stats/MarginContainer/HBoxContainer/Control5/LeadershipN")
 clazz_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer/Clazz")
-grade_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/GradeN")
+level_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/LevelN")
 troops_l = NodePath("Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer2/TroopsN")
 
 [node name="Control" type="Control" parent="." unique_id=360481796]
@@ -202,10 +202,10 @@ theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=768218585]
 layout_mode = 2
-text = "Grade: "
+text = "Level: "
 label_settings = SubResource("LabelSettings_tm76n")
 
-[node name="GradeN" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=298530258]
+[node name="LevelN" type="Label" parent="Army_Equip/Army/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=298530258]
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_tm76n")

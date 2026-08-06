@@ -15,13 +15,16 @@ class_name GlobalUI
 @export_category("Menu panel")
 @export var menu_panel: MenuPanel
 @export var army_menu_ui_ps: PackedScene
+@export var refill_menu_ui_ps: PackedScene
 
 @export_category("Turn panels")
 @export var factions_turn_ui: FactionsTurnUI
 
 var actionsBox: RegionActionsBox
 var hire_menu_ui: HireMenu
+
 var army_menu_ui: ArmyMenu
+var refill_menu_ui: RefillMenu
 
 # turn logic
 var highlighted_regions: Array[RegionIcon] = []
@@ -32,6 +35,7 @@ func _ready():
 	UIState.region_action_changed.connect(_on_region_action_changed)
 	# menu panel buttons
 	UIState.menu_army_switched.connect(_on_menu_army_switched)
+	UIState.menu_refill_switched.connect(_on_menu_refill_switched)
 
 func _on_chosen_region_changed(region: Region):
 	if (not region):
@@ -96,6 +100,16 @@ func _on_menu_army_switched(opened: bool):
 	else:
 		army_menu_ui.queue_free()
 		army_menu_ui = null
+
+func _on_menu_refill_switched(opened: bool):
+	if opened:
+		refill_menu_ui = refill_menu_ui_ps.instantiate()
+
+		refill_menu_ui.add_units(WorldState.PLAYER_UNITS)
+		add_child(refill_menu_ui)
+	else:
+		refill_menu_ui.queue_free()
+		refill_menu_ui = null
 
 func toggle_on_turn_end(players_turn: bool, faction: FactionsState.FACTIONS):
 	if players_turn and factions_turn_ui.visible:

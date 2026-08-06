@@ -37,8 +37,6 @@ func _ready() -> void:
 
 # player
 ## { commander_id: [Unit] }
-var PLAYER_UNITS: UnitsStateDictionary = UnitsStateDictionary.new()
-
 var DEFAULT_ENEMY_UNITS: UnitsStateDictionary = UnitsStateDictionary.new()
 
 # regions
@@ -51,4 +49,5 @@ var ALL_REGIONS: Dictionary[int, Region] = {}
 var ALL_REGION_ICONS: Array[RegionIcon] = []
 
 var PLAYER_DATA: FactionData = san_fd
+var PLAYER_UNITS: UnitsStateDictionary = san_fd.units
 var FACTIONS_TO_DATA: Dictionary[FactionsState.FACTIONS, FactionData] = {}

@@ -80,6 +80,7 @@ func _on_hire_btn_pressed():
 	curr_panel.queue_free()
 
 	HireLogic.hire_unit(WorldState.player_faction, selected_unit_index)
+	WorldState.player_data_changed.emit()
 	units_for_hire.erase(selected_unit_index)
 
 	# TODO: wait for Godot 4.9 for `get` issue fixed

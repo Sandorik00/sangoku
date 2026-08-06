@@ -34,3 +34,14 @@ func erase_at(index: int):
 
 func keys() -> Array[int]:
 	return _data.keys()
+
+func is_empty() -> bool:
+	return _data.is_empty()
+
+func get_least_power(count: int) -> Array[Unit]:
+	var array: Array[Unit] = _data.values()
+	array = array.filter(func(u: Unit): return u.troops != u.max_troops)
+	array.sort_custom(func(a: Unit, b: Unit): return a.troops < b.troops)
+	array = array.slice(0, count)
+
+	return array

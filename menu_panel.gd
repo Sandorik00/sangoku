@@ -5,6 +5,7 @@ class_name MenuPanel
 @export var system_btn: TextureButton
 @export var items_btn: TextureButton
 @export var army_btn: Button
+@export var troops_btn: Button
 
 @export var end_turn_btn: Button
 
@@ -15,6 +16,7 @@ func _ready():
 	system_btn.pressed.connect(_on_system_pressed)
 	items_btn.pressed.connect(_on_items_pressed)
 	army_btn.pressed.connect(_on_army_pressed)
+	troops_btn.pressed.connect(_on_troops_pressed)
 
 	end_turn_btn.pressed.connect(_on_end_turn_pressed)
 
@@ -32,6 +34,9 @@ func _on_items_pressed():
 
 func _on_army_pressed():
 	UIState.army_menu_opened = true
+
+func _on_troops_pressed():
+	UIState.refill_menu_opened = true
 
 func _on_end_turn_pressed():
 	WorldTurnLogic.turn_end.emit()

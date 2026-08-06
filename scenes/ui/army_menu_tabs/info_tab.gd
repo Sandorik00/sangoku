@@ -10,7 +10,7 @@ class_name InfoTab
 
 @export_category("Army")
 @export var clazz_l: Label
-@export var grade_l: Label
+@export var level_l: Label
 @export var troops_l: Label
 
 func refresh_ui(unit: Unit):
@@ -22,7 +22,6 @@ func refresh_ui(unit: Unit):
 	mana_l.text = str(unit.mana)
 	leadership_l.text = str(unit.leadership)
 
-	if unit.army:
-		clazz_l.text = str(unit.army.clazz)
-		grade_l.text = str(unit.army.grade)
-		troops_l.text = str(unit.army.number_of_troops)
+	clazz_l.text = str(unit.clazz)
+	level_l.text = str(unit.level)
+	troops_l.text = str(unit.troops)
