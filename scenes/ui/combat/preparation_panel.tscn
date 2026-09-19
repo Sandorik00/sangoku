@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://beaac5yk866mj"]
+
+[ext_resource type="Script" uid="uid://wap4wiwapssi" path="res://scenes/ui/combat/preparation_panel.gd" id="1_j22xf"]
+[ext_resource type="PackedScene" uid="uid://dmkmwk1utlpyh" path="res://scenes/ui/combat/preparation_unit_card.tscn" id="2_6bw2q"]
+
+[node name="PreparationPanel" type="Control" unique_id=1171450533 node_paths=PackedStringArray("units_card_container", "start_combat_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_j22xf")
+units_card_container = NodePath("VBoxContainer/Panel/MarginContainer/ScrollContainer/UnitCardsContainer")
+preparation_unit_card_ps = ExtResource("2_6bw2q")
+start_combat_btn = NodePath("VBoxContainer/HBoxContainer/Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1999297391]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1784019156]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=25955976]
+layout_mode = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=784761931]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start combat"
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer" unique_id=1517690103]
+custom_minimum_size = Vector2(0, 152)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel" unique_id=28047872]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Panel/MarginContainer" unique_id=1568972857]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="UnitCardsContainer" type="HBoxContainer" parent="VBoxContainer/Panel/MarginContainer/ScrollContainer" unique_id=1217196786]
+layout_mode = 2
+theme_override_constants/separation = 16

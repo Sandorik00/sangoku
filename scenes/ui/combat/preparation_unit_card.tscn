@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dmkmwk1utlpyh"]
+
+[ext_resource type="Script" uid="uid://cayqkoqt4ofae" path="res://scenes/ui/combat/preparation_unit_card.gd" id="1_11twh"]
+[ext_resource type="Texture2D" uid="uid://cdbqt37efhl4b" path="res://SanCheeseSources/725844008349466624.png" id="1_65xhl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yro8m"]
+font_size = 32
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1783633329 node_paths=PackedStringArray("name_l", "portrait_tr", "btn")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_11twh")
+name_l = NodePath("VBoxContainer/Label")
+portrait_tr = NodePath("VBoxContainer/TextureRect")
+btn = NodePath("Button")
+
+[node name="Button" type="Button" parent="." unique_id=614767376]
+layout_mode = 2
+button_mask = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1447210607]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=152582042]
+layout_mode = 2
+text = "Unit name"
+label_settings = SubResource("LabelSettings_yro8m")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=105285419]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_65xhl")
+expand_mode = 1

@@ -1,9 +1,13 @@
 extends TileMapLayer
 class_name OverlayTileMap
 
+func drawPreparationsCells(positions: Array[Vector2]):
+	for cell in positions:
+		set_cell(cell, 0, Vector2(6, 5))
+
 func drawWalkZone(moveList: Array[SanGrid.GridCell]):
 	for node in moveList:
-		if node.entity.type == SanGrid.GridEntityType.UNIT and node.entity.team == Types.TEAMS.BLUE:
+		if node.entity.type == SanGrid.GridEntityType.UNIT and node.entity.unitNode.team == Types.TEAMS.BLUE:
 			set_cell(node.xy, 0, Vector2(8, 8))
 		else:
 			node.isWalkTile = true
@@ -11,10 +15,11 @@ func drawWalkZone(moveList: Array[SanGrid.GridCell]):
 
 func draw_reach_zone(cellList: Array[SanGrid.GridCell], unit_entity: SanGrid.GridEntity):
 	for cell in cellList:
-		if cell.entity.type == SanGrid.GridEntityType.UNIT and (unit_entity.enemies & cell.entity.team) != 0: 
+		if cell.entity.type == SanGrid.GridEntityType.UNIT and (unit_entity.unitNode.enemies & cell.entity.unitNode.team) != 0:
 			set_cell(cell.xy, 0, Vector2(3, 1))
 
-		# set_cell(cell.xy, 0, Vector2(4, 1))
+func clearPreparationsCells():
+	clear()
 		
 func clearWalkZone(grid: SanGrid, cells: Array[SanGrid.GridCell]):
 	grid.clear_walk_tiles(cells)

@@ -35,6 +35,9 @@ func erase_at(index: int):
 func keys() -> Array[int]:
 	return _data.keys()
 
+func values() -> Array[Unit]:
+	return _data.values()
+
 func is_empty() -> bool:
 	return _data.is_empty()
 

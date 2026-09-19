@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cvdiw4xfohtx2"]
 
-[ext_resource type="Script" uid="uid://deuq0c61ulq0r" path="res://scenes/ui/command_panel.gd" id="1_jxfv5"]
+[ext_resource type="Script" uid="uid://deuq0c61ulq0r" path="res://scenes/ui/combat/command_panel.gd" id="1_jxfv5"]
 [ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="2_8dgiu"]
 [ext_resource type="Texture2D" uid="uid://uedogdn0rdan" path="res://resources/ui/morale.tres" id="3_oua2m"]
 [ext_resource type="Texture2D" uid="uid://cp3xi4poodgkx" path="res://assets/ui/back3.png" id="4_dmm8e"]
 [ext_resource type="Texture2D" uid="uid://dww41smgwugux" path="res://resources/ui/mana.tres" id="4_gme27"]
-[ext_resource type="Shader" uid="uid://bts1omv0a1yv2" path="res://scenes/ui/command_panel.gdshader" id="5_71j6e"]
+[ext_resource type="Shader" uid="uid://bts1omv0a1yv2" path="res://scenes/ui/combat/command_panel.gdshader" id="5_71j6e"]
 [ext_resource type="Texture2D" uid="uid://bu1j2r55x14hn" path="res://SanCheeseSources/SanCheese.png" id="5_qwsri"]
 [ext_resource type="Texture2D" uid="uid://byxj67iw6dun1" path="res://SanCheeseSources/748650409559588985.png" id="6_71j6e"]
 

@@ -14,19 +14,13 @@ class GridEntity:
 	var type: GridEntityType
 	var unitNode: UnitEntity
 	var cell: GridCell
-	var team: Types.TEAMS
-	var enemies: Types.TEAM_MAPPING
 
 	func _init(
 		_type: GridEntityType = GridEntityType.EMPTY,
 		_unitNode: Node2D = null,
-		_team: Types.TEAMS = Types.TEAMS.RED,
-		_enemies: Types.TEAM_MAPPING = Types.TEAM_MAPPING.RED
 	):
 		self.type = _type
 		self.unitNode = _unitNode
-		self.team = _team
-		self.enemies = _enemies
 
 	func set_cell(cell: GridCell):
 		var ent = self

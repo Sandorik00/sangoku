@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cqogb7v34lu4p"]
 
-[ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/command_panel.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cvdiw4xfohtx2" path="res://scenes/ui/combat/command_panel.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ddwwou0008gkw" path="res://world.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c0fw3eq07jyru" path="res://scenes/ui/turn_order.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://beaac5yk866mj" path="res://scenes/ui/combat/preparation_panel.tscn" id="3_ycdy4"]
 [ext_resource type="Script" uid="uid://nnuxodm20mlc" path="res://ui.gd" id="4_kek77"]
 [ext_resource type="PackedScene" uid="uid://cvcsy0bs7hyeq" path="res://regions/region_actions_box.tscn" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://61votu5io48k" path="res://regions/region_action.tscn" id="7_dg77c"]
@@ -41,6 +42,9 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="TurnOrder" parent="CanvasLayer" unique_id=1369279574 instance=ExtResource("3_h2yge")]
+visible = false
+
+[node name="PreparationPanel" parent="CanvasLayer" unique_id=1171450533 instance=ExtResource("3_ycdy4")]
 visible = false
 
 [node name="WorldCamera" type="Camera2D" parent="CanvasLayer" unique_id=1776082607]

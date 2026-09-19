@@ -39,6 +39,8 @@ func _ready():
 
 func _on_chosen_region_changed(region: Region):
 	if (not region):
+		UIState.current_region_action = Types.REGION_ACTION_TYPE.NONE
+
 		if actionsBox:
 			actionsBox.queue_free()
 			actionsBox = null
@@ -84,7 +86,25 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 		Types.REGION_ACTION_TYPE.ATTACK:
 			UIState.chosen_region = null
 
-			WorldTurnLogic.into_combat()
+			WorldTurnLogic.into_combat(WorldState.player_faction)
+
+		Types.REGION_ACTION_TYPE.WAR:
+			FactionsState.set_relation(
+				WorldState.player_faction,
+				UIState.chosen_region.faction,
+				Types.FACTION_RELATIONS_MAP.ENEMY,
+			)
+
+			UIState.chosen_region = null
+
+		Types.REGION_ACTION_TYPE.PEACE:
+			FactionsState.set_relation(
+				WorldState.player_faction,
+				UIState.chosen_region.faction,
+				Types.FACTION_RELATIONS_MAP.FRIENDLY,
+			)
+
+			UIState.chosen_region = null
 
 func _show_hire_ui():
 	hire_menu_ui = hire_menu_ui_ps.instantiate()

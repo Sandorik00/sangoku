@@ -16,8 +16,8 @@ func add_combatants(combatants: Array[SanGrid.GridEntity]):
 	if combatants.is_empty(): return
 
 	for c in combatants:
-		if c.team == Types.TEAMS.BLUE: _player_units.set(c.id, c)
-		elif c.team == Types.TEAMS.RED: _enemy_units.set(c.id, c)
+		if c.unitNode.team == Types.TEAMS.BLUE: _player_units.set(c.id, c)
+		elif c.unitNode.team == Types.TEAMS.RED: _enemy_units.set(c.id, c)
 
 	_turn_order = Utils.TurnOrderArray.new(combatants.duplicate())
 	_turn_order.sort_by_initiative()

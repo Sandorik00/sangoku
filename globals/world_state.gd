@@ -37,7 +37,10 @@ func _ready() -> void:
 
 # player
 ## { commander_id: [Unit] }
-var DEFAULT_ENEMY_UNITS: UnitsStateDictionary = UnitsStateDictionary.new()
+var DEFAULT_ENEMY_UNITS: UnitsStateDictionary = UnitsStateDictionary.new({
+	0: preload("uid://cb8vsyda8rl5e"),
+	1: preload("uid://c4fqm3lvds4y8"),
+})
 
 # regions
 ## Dictionary[FactionsState.FACTIONS, Array[RegionIcon]]

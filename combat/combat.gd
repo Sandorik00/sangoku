@@ -9,6 +9,7 @@ var unit_id: int = 0
 @onready var world: Node2D = $/root/Main/CanvasLayer/World
 @onready var world_camera: Camera2D = $/root/Main/CanvasLayer/WorldCamera
 @onready var global_ui: Control = $/root/Main/CanvasLayer/UI
+@onready var preparation_panel: PreparationPanel = $/root/Main/CanvasLayer/PreparationPanel
 
 @export_category("SanGrid")
 @export var grid: SanGrid
@@ -29,7 +30,9 @@ var unit_id: int = 0
 @export var camera: Camera2D
 @export var speed := 100
 
-var spawnPositions: Array[Vector2] = [Vector2(9, 5), Vector2(13, 7), Vector2(10, 5), Vector2(11, 5), Vector2(13, 8)]
+var attackSpawnPositions: Array[Vector2] = [Vector2(1, 1), Vector2(2, 2), Vector2(1, 3)]
+var defenceSpawnPositions: Array[Vector2] = [Vector2(15, 4), Vector2(14, 6), Vector2(15, 4)]
+var additionalSpawnPositions: Array[Vector2] = [Vector2(8, 8)]
 
 var unit_entity: SanGrid.GridEntity
 var unit_active: Unit
@@ -40,12 +43,25 @@ var reachZone: Array[SanGrid.GridCell] = []
 
 var transitionInProgress: bool = true
 var is_my_turn: bool = false
+var is_player_attacker: bool = true
+var is_preparations: bool = true
+
+var player_units: Array[Unit] = []
+var enemy_units: Array[Unit] = []
+var preparation_positions: Array[Vector2] = []
+
+var player_entities: Dictionary[int, SanGrid.GridEntity] = {}
+var enemy_entities: Dictionary[int, SanGrid.GridEntity] = {}
+var combatants: Dictionary[int, SanGrid.GridEntity] = {}
+
+var chosen_for_placement: SanGrid.GridEntity = null
 
 ## Call before adding to the scene
-func setup_combat_entities(units: Array[Unit]):
-	for u in units:
-		CombatData.unitsInCombat.set(unit_id, u)
-		unit_id += 1
+func setup_combat_entities(p_units: Array[Unit], e_units: Array[Unit], is_p_attacker: bool):
+	player_units = p_units
+	enemy_units = e_units
+
+	is_player_attacker = is_p_attacker
 
 func _process(delta):
 	var movement := Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -67,33 +83,90 @@ func _ready():
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
 
-	## Array[{ id: int, initiative: int }]
-	var combatants: Array[SanGrid.GridEntity] = []
-
 	# place units
-	# TODO: better arrange units without teams
-	for i in CombatData.unitsInCombat.keys():
-		var spawnPos = spawnPositions[i]
+	_create_unit_entities(player_units, Types.TEAMS.BLUE, player_entities)
+	_create_unit_entities(enemy_units, Types.TEAMS.RED, enemy_entities)
+
+	var player_positions := attackSpawnPositions if is_player_attacker else defenceSpawnPositions
+	var enemy_positions := attackSpawnPositions if not is_player_attacker else defenceSpawnPositions
+
+	overlayTileMap.drawPreparationsCells(player_positions)
+	preparation_positions = player_positions
+
+	_fill_positions(player_entities.values(), player_positions)
+	_fill_positions(enemy_entities.values(), enemy_positions)
+
+	# setup preparations
+	var unit_cards_map := preparation_panel.create_unit_cards(player_entities)
+	for comb_id in combatants.keys():
+		var card = unit_cards_map.get(comb_id)
+		if not card: continue
+
+		(card as PreparationUnitCard).dim()
+
+	preparation_panel.unit_for_placement_changed.connect(_on_unit_for_placement_changed)
+	preparation_panel.unit_remove.connect(_on_unit_remove_from_prep)
+
+	preparation_panel.start_combat_btn.pressed.connect(_start_combat)
+
+	preparation_panel.show()
+
+func _create_unit_entities(units_for_creation: Array[Unit], team: Types.TEAMS, combatant_entities: Dictionary):
+	for u in units_for_creation:
+		var unitNode: UnitEntity = unitPS.instantiate() as UnitEntity
+		unitNode.unit_data = u
+		unitNode.prepare()
+		unitNode.team = team
+
+		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, unitNode)
+		uEntity.id = unit_id
+
+		combatant_entities.set(unit_id, uEntity)
+		unit_id += 1
+
+func _fill_positions(entities_for_placement: Array[SanGrid.GridEntity], positions_list: Array[Vector2]):
+	for i in positions_list.size():
+		if entities_for_placement.size() <= i: return
+
+		var spawnPos = positions_list[i]
 		var posForUnit = to_global(tileMap.map_to_local(spawnPos))
 
-		var u = unitPS.instantiate() as UnitEntity
-		u.unit_data = CombatData.unitsInCombat[i]
-		u.prepare()
-		u.position = posForUnit
+		var entity = entities_for_placement[i]
 
-		var uEntity = grid.GridEntity.new(grid.GridEntityType.UNIT, u, u.team, u.enemies)
-		uEntity.id = i
+		entity.unitNode.position = posForUnit
 
-		grid.set_entity(spawnPos.x, spawnPos.y, uEntity)
-		grid.add_child(u)
+		grid.set_entity(spawnPos.x, spawnPos.y, entity)
+		grid.add_child(entity.unitNode)
 
-		combatants.push_back(uEntity)
+		combatants.set(entity.id, entity)
 
-	CombatData.add_units_ui(combatants)
-	combatState.add_combatants(combatants)
+func _on_unit_for_placement_changed(id: int):
+	chosen_for_placement = player_entities.get(id)
+
+func _on_unit_remove_from_prep(id: int):
+	var combatant: SanGrid.GridEntity = combatants.get(id)
+	if !combatant || !combatant.unitNode: return
+
+	combatants.erase(combatant.id)
+	grid.remove_child(combatant.unitNode)
+	combatant.cell.erase_entity()
+
+func _start_combat():
+	overlayTileMap.clear()
+	var combatants_mapping: Dictionary[int, Unit] = {}
+
+	for c: SanGrid.GridEntity in combatants.values():
+		combatants_mapping.set(c.id, c.unitNode.unit_data)
+
+	CombatData.unitsInCombat = combatants_mapping
+	CombatData.add_units_ui(combatants.values())
+	combatState.add_combatants(combatants.values())
+
+	preparation_panel.hide()
+	is_preparations = false
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
-	if unit.team != Types.TEAMS.BLUE:
+	if unit.unitNode.team != Types.TEAMS.BLUE:
 		combatState.pass_turn()
 		return
 
@@ -115,6 +188,39 @@ func _calc_and_draw_reach(reach: int):
 	transitionInProgress = false
 
 func _unhandled_input(event: InputEvent):
+	if is_preparations:
+		if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
+			var correctedPosition = tileMap.get_global_mouse_position()
+			var tile = tileMap.local_to_map(correctedPosition)
+
+			if preparation_positions.has(tile):
+				# bad UX, need to rechoose unit
+				if chosen_for_placement == null: return
+
+				# remove old unit from cell if present
+				var old_entity = grid.get_entity(tile.x, tile.y)
+				if old_entity.unitNode:
+					combatants.erase(old_entity.id)
+					grid.remove_child(old_entity.unitNode)
+
+				# add new unit to cell
+				var posForUnit = to_global(tileMap.map_to_local(tile))
+
+				var reuse_combatant: SanGrid.GridEntity = combatants.get(chosen_for_placement.id)
+				chosen_for_placement.unitNode.position = posForUnit
+
+				if reuse_combatant:
+					reuse_combatant.cell.erase_entity()
+					grid.set_entity(tile.x, tile.y, reuse_combatant)
+				else:
+					grid.set_entity(tile.x, tile.y, chosen_for_placement)
+					grid.add_child(chosen_for_placement.unitNode)
+					combatants.set(chosen_for_placement.id, chosen_for_placement)
+
+				preparation_panel.unit_was_placed.emit(old_entity.id)
+		
+		return
+
 	if unit_entity == null or transitionInProgress: return
 
 	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():

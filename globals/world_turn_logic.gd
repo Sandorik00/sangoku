@@ -9,6 +9,7 @@ signal turn_end()
 @onready var world: Node2D = $/root/Main/CanvasLayer/World
 @onready var world_camera: Camera2D = $/root/Main/CanvasLayer/WorldCamera
 @onready var sub_viewport: SubViewport = $/root/Main/CanvasLayer/SubViewportContainer/SubViewport
+@onready var preparation_panel: PreparationPanel = $/root/Main/CanvasLayer/PreparationPanel
 
 var combat_ps: PackedScene = preload("uid://dxyjbs03ln8sa")
 var combat: Combat = null
@@ -64,13 +65,16 @@ func _do_cerebrum_things():
 	turn_end.emit()
 
 # common actions
-func into_combat():
+func into_combat(attacker: FactionsState.FACTIONS):
 	world.hide()
 	global_ui.hide()
 
 	combat = combat_ps.instantiate()
-	# TODO: fix here also!
-	combat.setup_combat_entities(WorldState.PLAYER_UNITS.values() + WorldState.DEFAULT_ENEMY_UNITS.values())
+	combat.setup_combat_entities(
+		WorldState.PLAYER_UNITS.values(),
+		WorldState.DEFAULT_ENEMY_UNITS.values(),
+		attacker == WorldState.player_faction,
+	)
 
 	sub_viewport.add_child(combat)
 

@@ -10,7 +10,6 @@ region = Rect2(0, 32, 16, 16)
 
 [resource]
 script = ExtResource("1_rgcu8")
-id = 1
 name = "San 2"
 portrait = ExtResource("1_yoqpf")
 sprite = SubResource("AtlasTexture_0ur7o")
