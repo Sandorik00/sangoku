@@ -56,6 +56,8 @@ var combatants: Dictionary[int, SanGrid.GridEntity] = {}
 
 var chosen_for_placement: SanGrid.GridEntity = null
 
+var cerebrum: CombatBTSelector
+
 ## Call before adding to the scene
 func setup_combat_entities(p_units: Array[Unit], e_units: Array[Unit], is_p_attacker: bool):
 	player_units = p_units
@@ -77,6 +79,10 @@ func _ready():
 	combatState.end_combat.connect(_on_end_combat)
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
+
+	cerebrum = CombatBTSelector.new([
+		CombatAttackAction.new(),
+	])
 
 	grid.create_grid(grid_dimensions.x, grid_dimensions.y)
 	for y in grid_dimensions.y:
@@ -167,6 +173,20 @@ func _start_combat():
 	
 func _setup_unit_turn(unit: SanGrid.GridEntity):
 	if unit.unitNode.team != Types.TEAMS.BLUE:
+		unit_entity = unit
+		unit_entity = unit
+		unit_active = CombatData.unitsInCombat[unit.id]
+		CombatData.panel_unit_data = unit_active
+		CombatData.move_unit_label(unit)
+
+		var enemy_cells: Array = combatState\
+			.get_list_of_player_entities()\
+			.map(func(ent: SanGrid.GridEntity): return ent.cell)
+		
+		cerebrum.make_decision(unit.cell, grid, { "combat": self, "enemy_cells": enemy_cells })
+
+		await get_tree().create_timer(0.5).timeout
+
 		combatState.pass_turn()
 		return
 
@@ -174,8 +194,8 @@ func _setup_unit_turn(unit: SanGrid.GridEntity):
 	unit_active = CombatData.unitsInCombat[unit.id]
 	CombatData.panel_unit_data = unit_active
 	movement_range = unit_active.movement
-	_calc_and_draw_zone(unit_active.movement)
 	CombatData.move_unit_label(unit)
+	_calc_and_draw_zone(unit_active.movement)
 
 func _calc_and_draw_zone(mov: int):
 	walkZone = grid.calculateWalkZone(unit_entity.cell, mov)
@@ -188,6 +208,7 @@ func _calc_and_draw_reach(reach: int):
 	transitionInProgress = false
 
 func _unhandled_input(event: InputEvent):
+	# PREPARATIONS
 	if is_preparations:
 		if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
 			var correctedPosition = tileMap.get_global_mouse_position()
@@ -221,39 +242,56 @@ func _unhandled_input(event: InputEvent):
 		
 		return
 
+	# CONTROLS
 	if unit_entity == null or transitionInProgress: return
 
 	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
 		var correctedPosition = tileMap.get_global_mouse_position()
 		var tile = tileMap.local_to_map(correctedPosition)
-		# print("Tiles: %s %s" % [tile.x, tile.y])
-		# print(grid.get_cell(tile.x, tile.y).xy)
 
 		var currCell = grid.get_cell(tile.x, tile.y)
 
 		# Walk and Attack and whatsoever
 		if currCell.isWalkTile == true:
-			transitionInProgress = true
-			var cell = unit_entity.cell
-			
-			currCell.set_entity(cell.entity)
-			cell.set_entity(SanGrid.GridEntity.new())
-			
-			#unit_entity.unitNode.position = posForUnit
+			move_player(currCell)
+		elif currCell.isInReach and (unit_entity.unitNode.enemies & currCell.entity.unitNode.team) != 0:
+			unit_basic_attack(currCell)
 
-			walkPath = grid.calculateWalkPath(currCell)
-			_tween_path()
-		elif currCell.isInReach and (unit_entity.unitNode.unit_data.enemies & currCell.entity.team) != 0:
-			transitionInProgress = true
+func move_player(destination: SanGrid.GridCell):
+	transitionInProgress = true
+	var cell = unit_entity.cell
+	
+	grid.set_entity(destination.xy.x, destination.xy.y, cell.entity)
+	grid.set_entity(cell.xy.x, cell.xy.y, SanGrid.GridEntity.new())
+	
+	walkPath = grid.calculateWalkPath(destination)
+	_tween_path()
 
-			var dead_unit := _calculate_attack(unit_entity, currCell.entity)
-			CombatData.update_labels_for_units([unit_entity, currCell.entity])
+func move_npc(destination_path: Array[SanGrid.GridCell]):
+	if destination_path.is_empty(): return
 
-			if dead_unit: _on_unit_death(dead_unit)
+	var cell = unit_entity.cell
+	var unit_movement = min(destination_path.size(), unit_entity.unitNode.unit_data.movement)
 
-			_cycle_walk_zone()
+	var actual_destination_path: Array[SanGrid.GridCell] = destination_path.slice(0, unit_movement)
+	var actual_destination: SanGrid.GridCell = actual_destination_path.get(actual_destination_path.size() - 1)
+	
+	grid.set_entity(actual_destination.xy.x, actual_destination.xy.y, cell.entity)
+	grid.set_entity(cell.xy.x, cell.xy.y, SanGrid.GridEntity.new())
+
+	walkPath = actual_destination_path
+	_tween_path()
+
+func unit_basic_attack(enemy_cell: SanGrid.GridCell):
+	transitionInProgress = true
+
+	var dead_unit := _calculate_attack(unit_entity, enemy_cell.entity)
+	CombatData.update_labels_for_units([unit_entity, enemy_cell.entity])
+
+	if dead_unit: _on_unit_death(dead_unit)
+
+	_cycle_walk_zone()
 				
-
 func _tween_path():
 	var unitNode2D = unit_entity.unitNode
 	var tween = get_tree().create_tween()
@@ -285,7 +323,8 @@ func _tween_path():
 		tween.tween_property(unitNode2D, "position", nextPos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 		tween.parallel().tween_property(CombatData.moving_label, "position", next_label_pos, segmentLength * 0.5).set_trans(Tween.TRANS_QUINT)
 
-	tween.tween_callback(_cycle_walk_zone)
+	if unit_entity.unitNode.team == Types.TEAMS.BLUE:
+		tween.tween_callback(_cycle_walk_zone)
 
 func _cycle_walk_zone():
 	var last_pass_lenght = max(walkPath.size() - 1, 0)
@@ -334,7 +373,8 @@ func _on_unit_death(unit: SanGrid.GridEntity):
 	unit.cell.erase_entity()
 
 func _on_end_turn_pressed():
-	# cleanup
+	transitionInProgress = true
+
 	_clear_walk_zone()
 
 	combatState.pass_turn()

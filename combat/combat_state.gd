@@ -57,3 +57,6 @@ func pass_turn():
 	_turn_order_ui.highlight_unit(_current_unit.id)
 
 	turn_passed.emit(_current_unit)
+
+func get_list_of_player_entities() -> Array[SanGrid.GridEntity]:
+	return _player_units.values()
