@@ -11,6 +11,7 @@ func prevEnumMember(enumz: Dictionary, current: int):
 class TurnOrderArray extends RefCounted:
 	var _data: Array[SanGrid.GridEntity]
 	var _index: int = -1
+	var _offset: int = 0
 
 	func _init(__data: Array[SanGrid.GridEntity] = []) -> void:
 		_data = __data
@@ -30,7 +31,8 @@ class TurnOrderArray extends RefCounted:
 	func get_next() -> SanGrid.GridEntity:
 		if _data.is_empty(): return null
 
-		_index = wrapi(_index + 1, 0, _data.size())
+		_index = wrapi(_index + 1 + _offset, 0, _data.size())
+		_offset = 0
 		var result = _data[_index]
 
 		return result
@@ -39,10 +41,14 @@ class TurnOrderArray extends RefCounted:
 		var unit_index = _data.find(unit)
 		_data.remove_at(unit_index)
 		
-		if unit_index < _index:
-			_index = wrapi(_index - 1, 0, _data.size())
-		elif unit_index == _index:
-			_index = wrapi(_index, 0, _data.size())
+		# if unit_index < _index:
+		# 	_index = wrapi(_index - 1, 0, _data.size())
+		# elif unit_index == _index:
+		# 	_index = wrapi(_index, 0, _data.size())
+		if unit_index <= _index:
+			_offset = -1
+
+		# _index = wrapi(_index, 0, _data.size())
 
 func get_actions_for_relation(relation: int):
 	if relation > Types.FACTION_RELATIONS_MAP.ALLY:

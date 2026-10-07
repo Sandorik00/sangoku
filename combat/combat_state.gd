@@ -29,12 +29,12 @@ func add_combatants(combatants: Array[SanGrid.GridEntity]):
 
 	turn_passed.emit(_current_unit)
 
-func on_unit_death(unit: SanGrid.GridEntity):
+func on_unit_death(unit: SanGrid.GridEntity) -> bool:
 	_turn_order.remove_unit(unit)
 	_turn_order_ui.remove_unit(unit.id)
 
-	if unit.team == Types.TEAMS.BLUE: _player_units.erase(unit.id)
-	elif unit.team == Types.TEAMS.RED: _enemy_units.erase(unit.id)
+	if unit.unitNode.team == Types.TEAMS.BLUE: _player_units.erase(unit.id)
+	elif unit.unitNode.team == Types.TEAMS.RED: _enemy_units.erase(unit.id)
 
 	print(_player_units.keys())
 	print(_enemy_units.keys())
@@ -43,14 +43,14 @@ func on_unit_death(unit: SanGrid.GridEntity):
 		_turn_order_ui.clear_turn_order()
 		_turn_order_ui.hide()
 		end_combat.emit(false)
-		return
+		return true
 	elif _enemy_units.is_empty():
 		_turn_order_ui.clear_turn_order()
 		_turn_order_ui.hide()
 		end_combat.emit(true)
-		return
+		return true
 
-	self.pass_turn()
+	return false
 
 func pass_turn():
 	_current_unit = _turn_order.get_next()

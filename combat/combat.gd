@@ -30,7 +30,7 @@ var unit_id: int = 0
 @export var camera: Camera2D
 @export var speed := 100
 
-var attackSpawnPositions: Array[Vector2] = [Vector2(1, 1), Vector2(2, 2), Vector2(1, 3)]
+var attackSpawnPositions: Array[Vector2] = [Vector2(1, 1), Vector2(2, 2), Vector2(1, 3), Vector2(13, 5)]
 var defenceSpawnPositions: Array[Vector2] = [Vector2(15, 4), Vector2(14, 6), Vector2(15, 4)]
 var additionalSpawnPositions: Array[Vector2] = [Vector2(8, 8)]
 
@@ -41,7 +41,15 @@ var walkPath: Array[SanGrid.GridCell] = []
 
 var reachZone: Array[SanGrid.GridCell] = []
 
-var transitionInProgress: bool = true
+var transitionInProgress: bool = true :
+	set(new_value):
+		transitionInProgress = new_value
+		command_panel.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED\
+			if new_value == true\
+			else Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_INHERITED
+
+var combat_ended: bool = true 
+
 var is_my_turn: bool = false
 var is_player_attacker: bool = true
 var is_preparations: bool = true
@@ -79,6 +87,7 @@ func _ready():
 	combatState.end_combat.connect(_on_end_combat)
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
+	command_panel.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED
 
 	cerebrum = CombatBTSelector.new([
 		CombatAttackAction.new(),
@@ -155,7 +164,7 @@ func _on_unit_remove_from_prep(id: int):
 
 	combatants.erase(combatant.id)
 	grid.remove_child(combatant.unitNode)
-	combatant.cell.erase_entity()
+	grid.set_entity(combatant.cell.xy.x, combatant.cell.xy.y, SanGrid.GridEntity.new())
 
 func _start_combat():
 	overlayTileMap.clear()
@@ -183,7 +192,7 @@ func _setup_unit_turn(unit: SanGrid.GridEntity):
 			.get_list_of_player_entities()\
 			.map(func(ent: SanGrid.GridEntity): return ent.cell)
 		
-		cerebrum.make_decision(unit.cell, grid, { "combat": self, "enemy_cells": enemy_cells })
+		await cerebrum.make_decision(unit, grid, { "combat": self, "enemy_cells": enemy_cells })
 
 		await get_tree().create_timer(0.5).timeout
 
@@ -231,7 +240,7 @@ func _unhandled_input(event: InputEvent):
 				chosen_for_placement.unitNode.position = posForUnit
 
 				if reuse_combatant:
-					reuse_combatant.cell.erase_entity()
+					grid.set_entity(reuse_combatant.cell.xy.x, reuse_combatant.cell.xy.y, SanGrid.GridEntity.new())
 					grid.set_entity(tile.x, tile.y, reuse_combatant)
 				else:
 					grid.set_entity(tile.x, tile.y, chosen_for_placement)
@@ -280,7 +289,7 @@ func move_npc(destination_path: Array[SanGrid.GridCell]):
 	grid.set_entity(cell.xy.x, cell.xy.y, SanGrid.GridEntity.new())
 
 	walkPath = actual_destination_path
-	_tween_path()
+	await _tween_path()
 
 func unit_basic_attack(enemy_cell: SanGrid.GridCell):
 	transitionInProgress = true
@@ -289,9 +298,17 @@ func unit_basic_attack(enemy_cell: SanGrid.GridCell):
 	CombatData.update_labels_for_units([unit_entity, enemy_cell.entity])
 
 	if dead_unit: _on_unit_death(dead_unit)
+	if combat_ended: return
 
-	_cycle_walk_zone()
-				
+	_clear_walk_zone()
+	combatState.pass_turn()
+
+func npc_basic_attack(enemy_cell: SanGrid.GridCell):
+	var dead_unit := _calculate_attack(unit_entity, enemy_cell.entity)
+	CombatData.update_labels_for_units([unit_entity, enemy_cell.entity])
+
+	if dead_unit: _on_unit_death(dead_unit)
+
 func _tween_path():
 	var unitNode2D = unit_entity.unitNode
 	var tween = get_tree().create_tween()
@@ -325,6 +342,7 @@ func _tween_path():
 
 	if unit_entity.unitNode.team == Types.TEAMS.BLUE:
 		tween.tween_callback(_cycle_walk_zone)
+	else: await tween.finished
 
 func _cycle_walk_zone():
 	var last_pass_lenght = max(walkPath.size() - 1, 0)
@@ -366,11 +384,11 @@ func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridE
 	return dead_unit
 
 func _on_unit_death(unit: SanGrid.GridEntity):
-	combatState.on_unit_death(unit)
+	combat_ended = combatState.on_unit_death(unit)
 	var node_for_deletion = unit.unitNode
 	node_for_deletion.queue_free()
 	CombatData.unitsInCombat.erase(unit.id)
-	unit.cell.erase_entity()
+	grid.set_entity(unit.cell.xy.x, unit.cell.xy.y, SanGrid.GridEntity.new())
 
 func _on_end_turn_pressed():
 	transitionInProgress = true

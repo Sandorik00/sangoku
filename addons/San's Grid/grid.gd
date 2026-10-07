@@ -35,16 +35,6 @@ class GridCell:
 		self.entity = _entity
 		self.xy = _xy
 
-class CostNode:
-	var g_cost: int = -1
-	var h_cost: int = -1
-	var f_cost: int = -1
-
-	func _init(g: int, h: int):
-		self.g_cost = g
-		self.h_cost = h
-		self.f_cost = g + h
-
 func create_grid(x: int, y: int):
 	grid.resize(x * y)
 	width = x

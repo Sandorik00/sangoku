@@ -1,21 +1,33 @@
 extends CombatBTNode
 class_name CombatAttackAction
 
-func evaluate(_unit: SanGrid.GridCell, _grid: SanGrid, _context: Dictionary) -> float:
+func evaluate(_unit: SanGrid.GridEntity, _grid: SanGrid, _context: Dictionary) -> float:
 	return 1.0
 
-func execute(unit: SanGrid.GridCell, grid: SanGrid, context: Dictionary) -> void:
+func execute(unit: SanGrid.GridEntity, grid: SanGrid, context: Dictionary) -> void:
 	var enemy_cells: Array = context.get("enemy_cells")
 	var combat: Combat = context.get("combat")
 
-	var paths_to_enemies: Array[Array] = []
+	var shortest_path: Array[SanGrid.GridCell] = []
 
 	for enemy in enemy_cells:
-		paths_to_enemies.push_back(grid.calculate_path_to_cell(unit, enemy))
+		var new_path := grid.calculate_path_to_cell(unit.cell, enemy)
+		if shortest_path.is_empty() || shortest_path.size() > new_path.size():
+			shortest_path = new_path
 
-	if paths_to_enemies.is_empty(): return
+	if not shortest_path.is_empty():
+		await combat.move_npc(shortest_path)
 
-	paths_to_enemies.sort_custom(func(a: Array, b: Array): return a.size() < b.size())
-	var shortest_path: Array[SanGrid.GridCell] = paths_to_enemies.get(0)
+	var reachable_enemy_cells: Array[SanGrid.GridCell] = grid.get_neighbours(unit.cell.xy)\
+		.filter(func(n: SanGrid.GridCell): return n.entity.unitNode != null)\
+		.filter(func(n: SanGrid.GridCell): return (unit.unitNode.enemies & n.entity.unitNode.team) != 0)
 
-	combat.move_npc(shortest_path)
+	if not reachable_enemy_cells.is_empty():
+		var neighbor_cell_with_enemy: SanGrid.GridCell = reachable_enemy_cells.get(0)
+		# print("fighters: ")
+		# print(unit.unitNode.unit_data.name)
+		# print(neighbor_cell_with_enemy.entity.unitNode.unit_data.name, "\n")
+
+		combat.npc_basic_attack(neighbor_cell_with_enemy)
+
+	completed.emit()

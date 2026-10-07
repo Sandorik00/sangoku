@@ -6,7 +6,7 @@ var actions: Array[CombatBTNode] = []
 func _init(p_actions: Array[CombatBTNode]):
 	actions = p_actions
 
-func make_decision(unit: SanGrid.GridCell, grid: SanGrid, context: Dictionary) -> void:
+func make_decision(unit: SanGrid.GridEntity, grid: SanGrid, context: Dictionary) -> void:
 	var best_action: CombatBTNode = null
 	var highest_score: float = -1.0
 	
@@ -19,3 +19,5 @@ func make_decision(unit: SanGrid.GridCell, grid: SanGrid, context: Dictionary) -
 			
 	if best_action != null and highest_score > 0.0:
 		best_action.execute(unit, grid, context)
+
+		await best_action.completed

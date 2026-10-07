@@ -21,6 +21,9 @@ var _current_faction: FactionsState.FACTIONS = WorldState.player_faction
 
 var cerebrum: WorldBTSelector
 
+var attacking_faction: FactionsState.FACTIONS = FactionsState.FACTIONS.COAST_DWARFS
+var defending_faction: FactionsState.FACTIONS = FactionsState.FACTIONS.COAST_DWARFS
+
 func _ready():
 	var unsorted_factions = FactionsState.FACTIONS.values().duplicate()
 	unsorted_factions.sort_custom(func(f1, _f2): return f1 == WorldState.player_faction)
