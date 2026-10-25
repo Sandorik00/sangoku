@@ -6,5 +6,5 @@
 script = ExtResource("1_pgyp3")
 id = 10
 name = "Vesper ravis"
-faction = 5
+faction = 4
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

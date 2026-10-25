@@ -6,5 +6,5 @@
 script = ExtResource("1_kmkc4")
 id = 13
 name = "Qorax litus"
-faction = 7
+faction = 10
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

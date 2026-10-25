@@ -8,9 +8,12 @@ class_name FactionData
 
 # dynamic stats basically
 @export var army_power: int = 0
-@export var hired_this_week: bool = false
+@export var hired_this_month: bool = false
 
 @export var units: UnitsStateDictionary = UnitsStateDictionary.new({})
 
 # not so dynamic stats
 @export_range(0.0, 2.0, 0.1) var evilness: float = 1 # from 0 to 2 in extreme cases
+
+func recalculate_army_power():
+	army_power = units.get_army_power()

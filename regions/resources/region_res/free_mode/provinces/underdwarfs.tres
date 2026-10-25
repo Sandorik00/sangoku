@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_m42ry")
 id = 5
-faction = 5
+faction = 4
 regions = Array[int]([10])
+neighbors = Array[int]([0, 2, 6, 7])
 metadata/_custom_type_script = "uid://dgfg32o2f1o5"

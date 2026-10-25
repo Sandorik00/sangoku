@@ -6,5 +6,5 @@
 script = ExtResource("1_44y2l")
 id = 9
 name = "Tulivuori"
-faction = 3
+faction = 4
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

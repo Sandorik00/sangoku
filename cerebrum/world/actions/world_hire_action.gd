@@ -5,13 +5,16 @@ func evaluate(faction: FactionData, _context: Dictionary) -> float:
 	var base_score = clamp(0.8, 0.0, 1.5)
 	
 	var final_score = base_score / faction.evilness
-	
-	if faction.money < 1000:
+
+	if faction.units.size() >= 4 && faction.army_power >= 1000:
+		final_score *= 0.3
+
+	if faction.money < 300:
 		final_score *= 0.1
 	elif faction.money > 9999:
 		final_score *= 1.2
 
-	if faction.hired_this_week:
+	if faction.hired_this_month:
 		final_score = 0
 	
 	return final_score
@@ -32,8 +35,11 @@ func execute(faction: FactionData, _context: Dictionary) -> void:
 
 		if HireLogic.hire_unit(faction.faction, currently_hiring_index):
 			hiring_end = true
-			faction.hired_this_week = true
+			faction.hired_this_month = true
+			faction.recalculate_army_power()
 			print(FactionsState.FACTIONS_TEXT.get(faction.faction) + " hired: " + currently_hiring.name)
 
 		current_index += 1
 		if current_index >= faction_available_units.keys().size(): hiring_end = true
+
+	print(faction.units)

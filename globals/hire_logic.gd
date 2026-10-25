@@ -37,7 +37,7 @@ func hire_unit(faction: FactionsState.FACTIONS, index: int) -> bool:
 	var faction_data: FactionData = WorldState.FACTIONS_TO_DATA.get(faction)
 
 	var unit: Unit = units_dict.get(index)
-	var cost: int = unit.troops * 1
+	var cost: int = unit.troops * unit.level
 
 	if faction_data.money >= cost:
 		faction_data.money -= cost

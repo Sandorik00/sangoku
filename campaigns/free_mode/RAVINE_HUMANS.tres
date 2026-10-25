@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FactionData" format=3 uid="uid://ds01um67a45wx"]
+
+[ext_resource type="Script" uid="uid://b2fbwr8thnq6x" path="res://campaigns/faction_data.gd" id="1_y1rel"]
+
+[resource]
+script = ExtResource("1_y1rel")
+faction = 8
+money = 500
+metadata/_custom_type_script = "uid://b2fbwr8thnq6x"

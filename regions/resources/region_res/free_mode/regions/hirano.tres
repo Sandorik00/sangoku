@@ -6,5 +6,5 @@
 script = ExtResource("1_h6gc2")
 id = 20
 name = "Hirano"
-faction = 11
+faction = 10
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

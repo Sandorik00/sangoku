@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Unit" format=3 uid="uid://da0v22kog1l6c"]
+
+[ext_resource type="Texture2D" uid="uid://cemyf8x3n6asr" path="res://SanCheeseSources/SanCheeseUwU.png" id="1_5q4yo"]
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_hnj0d"]
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_h4mng"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm7he"]
+atlas = ExtResource("3_h4mng")
+region = Rect2(16, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_hnj0d")
+name = "Lamia"
+portrait = ExtResource("1_5q4yo")
+sprite = SubResource("AtlasTexture_fm7he")
+clazz = "Halberdier"
+level = 3
+attack = 8
+defence = 8
+speed = 8
+morale = 10
+mana = 5
+leadership = 10
+attack_range = 2
+troops = 30
+initiative = 5
+movement = 4
+max_troops = 100
+metadata/_custom_type_script = "uid://bahi8neasd5uo"

@@ -6,5 +6,5 @@
 script = ExtResource("1_uetr0")
 id = 3
 name = "Gardborg"
-faction = 1
+faction = 4
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("3_adpgp")
 id = 0
-faction = 6
+faction = 4
 regions = Array[int]([0])
+neighbors = Array[int]([2, 5, 7])
 metadata/_custom_type_script = "uid://dgfg32o2f1o5"

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ukefi")
 id = 11
-faction = 11
+faction = 10
 regions = Array[int]([19, 20])
+neighbors = Array[int]([10, 7, 9, 13, 14, 16, 15, 12])
 metadata/_custom_type_script = "uid://dgfg32o2f1o5"

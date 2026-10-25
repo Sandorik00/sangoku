@@ -69,6 +69,20 @@ func get_actions_for_property(region: Region, faction: FactionsState.FACTIONS):
 
 	return Types.ACTIONS_FOR_PROPERTY.get(property_type, [])
 
+func determine_if_rechable(faction: FactionsState.FACTIONS, region: Region) -> bool:
+	var target_province: Province = region.province
+
+	if target_province.faction == faction || region.faction == faction:
+		return true
+
+	var valid_neighbors := target_province.neighbors
+
+	for province: Province in WorldState.ALL_PROVINCES.values():
+		if province.faction == faction && valid_neighbors.has(province.id):
+			return true
+
+	return false
+
 func collect_resources(dir_path: String) -> Array[String]:
 	var file_paths: Array[String] = []
 
@@ -118,3 +132,22 @@ func collect_resources_recursive(start_path: String) -> Array[String]:
 			dir.list_dir_end()
 	
 	return file_paths
+
+# Dictionary
+func get_factions_with_max_regions(dict: Dictionary[FactionsState.FACTIONS, int]) -> Array[FactionsState.FACTIONS]:
+	if dict.is_empty():
+		return []
+
+	var max_keys: Array[FactionsState.FACTIONS] = []
+	var max_value: int = -1
+
+	for key in dict.keys():
+		var current_value: int = dict.get(key)
+		
+		if current_value > max_value:
+			max_value = current_value
+			max_keys = [key]
+		elif current_value == max_value:
+			max_keys.push_back(key)
+
+	return max_keys

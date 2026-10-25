@@ -6,5 +6,5 @@
 script = ExtResource("1_4wbpt")
 id = 34
 name = "White coast"
-faction = 18
+faction = 15
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

@@ -6,12 +6,10 @@ var player_faction: FactionsState.FACTIONS = FactionsState.FACTIONS.RAVINE_HUMAN
 
 var region_icon_ps: PackedScene = preload("uid://si1chjm11vou")
 
-var san_fd: FactionData = preload("uid://b11lrqc3hslkx")
-var rombus_fd: FactionData = preload("uid://bg543dst24jwa")
-var rik_fd: FactionData = preload("uid://ccw2wet6o1bwv")
-
 func _ready() -> void:
-	ALL_REGION_ICONS.assign(get_tree().get_nodes_in_group("RegionIcons"))
+	var region_icon_nodes = get_tree().get_nodes_in_group("RegionIcons")
+	for rin: RegionIcon in region_icon_nodes:
+		ALL_REGION_ICONS.set(rin.res.id, rin)
 
 	var regions_paths: Array[String] = Utils.collect_resources("res://regions/resources/region_res/free_mode/regions")
 	for path in regions_paths:
@@ -29,11 +27,14 @@ func _ready() -> void:
 
 		ALL_PROVINCES.set(res.id, res)
 
-	for f in FactionsState.FACTIONS.values():
-		if f == player_faction:
-			FACTIONS_TO_DATA.set(f, san_fd)
-			continue
-		FACTIONS_TO_DATA.set(f, rik_fd)
+	var faction_data_paths: Array[String] = Utils.collect_resources("res://campaigns/free_mode")
+	for path in faction_data_paths:
+		var res: FactionData = ResourceLoader.load(path, "FactionData")
+
+		FACTIONS_TO_DATA.set(res.faction, res)
+		if res.faction == player_faction:
+			PLAYER_DATA = res
+			PLAYER_UNITS = res.units
 
 # player
 ## { commander_id: [Unit] }
@@ -49,8 +50,8 @@ var DEFAULT_REGIONS: Dictionary[FactionsState.FACTIONS, Array] = {}
 var ALL_PROVINCES: Dictionary[int, Province] = {}
 var ALL_REGIONS: Dictionary[int, Region] = {}
 
-var ALL_REGION_ICONS: Array[RegionIcon] = []
+var ALL_REGION_ICONS: Dictionary[int, RegionIcon] = {}
 
-var PLAYER_DATA: FactionData = san_fd
-var PLAYER_UNITS: UnitsStateDictionary = san_fd.units
+var PLAYER_DATA: FactionData = null
+var PLAYER_UNITS: UnitsStateDictionary = null
 var FACTIONS_TO_DATA: Dictionary[FactionsState.FACTIONS, FactionData] = {}

@@ -6,5 +6,5 @@
 script = ExtResource("1_r2dbm")
 id = 6
 name = "Aitire ridge"
-faction = 2
+faction = 4
 metadata/_custom_type_script = "uid://cjlq0w58b0627"

@@ -55,12 +55,14 @@ func _on_chosen_region_changed(region: Region):
 	actionsBox.region_name_l.text = region.name
 
 	var actions_for_region: Array[Types.REGION_ACTION_TYPE] = []
-	if region.faction != WorldState.player_faction:
-		actions_for_region.append_array(
-			Utils.get_actions_for_relation(FactionsState.get_relation(WorldState.player_faction, region.faction))
-		)
 
-	actions_for_region.append_array(Utils.get_actions_for_property(region, WorldState.player_faction))
+	if Utils.determine_if_rechable(WorldState.player_faction, region):
+		if region.faction != WorldState.player_faction:
+			actions_for_region.append_array(
+				Utils.get_actions_for_relation(FactionsState.get_relation(WorldState.player_faction, region.faction))
+			)
+
+		actions_for_region.append_array(Utils.get_actions_for_property(region, WorldState.player_faction))
 
 	for action in actions_for_region:
 		if action == Types.REGION_ACTION_TYPE.NONE: return
@@ -84,9 +86,11 @@ func _on_region_action_changed(type: Types.REGION_ACTION_TYPE):
 			_show_hire_ui()
 
 		Types.REGION_ACTION_TYPE.ATTACK:
+			var region = UIState.chosen_region
+			var defending_faction = region.faction
 			UIState.chosen_region = null
 
-			WorldTurnLogic.into_combat(WorldState.player_faction)
+			WorldTurnLogic.initiate_combat(WorldState.player_faction, defending_faction, region)
 
 		Types.REGION_ACTION_TYPE.WAR:
 			FactionsState.set_relation(
@@ -134,21 +138,35 @@ func _on_menu_refill_switched(opened: bool):
 func toggle_on_turn_end(players_turn: bool, faction: FactionsState.FACTIONS):
 	if players_turn and factions_turn_ui.visible:
 		for r in highlighted_regions:
-			r.self_modulate = Color(1, 1, 1, 1)
+			reset_region_highlight(r)
 		highlighted_regions.clear()
 
 		factions_turn_ui.hide()
 	else:
 		for r in highlighted_regions:
-			r.self_modulate = Color(1, 1, 1, 1)
+			reset_region_highlight(r)
 		highlighted_regions.clear()
 
-		var faction_regions = WorldState.ALL_REGION_ICONS.filter(func(ri: RegionIcon): return ri.res.faction == faction) as Array[RegionIcon]
+		var faction_regions = WorldState.ALL_REGION_ICONS.values().filter(func(ri: RegionIcon): return ri.res.faction == faction) as Array[RegionIcon]
 		for r in faction_regions:
-			r.self_modulate = Color(0, 0, 1, 1)
+			highlight_region(r, Color(0, 0, 1, 1))
 		highlighted_regions.append_array(faction_regions)
 
 		factions_turn_ui.set_faction(FactionsState.FACTIONS_TEXT.get(faction, "This is a bug"))
 
 		if not factions_turn_ui.visible:
 			factions_turn_ui.show()
+
+func highlight_available_regions(region_icons: Array[RegionIcon]):
+	for ri in region_icons:
+		highlight_region(ri, Color(1, 0.5, 0, 1))
+
+func highlight_region(region_icon: RegionIcon, color: Color):
+	region_icon.self_modulate = color
+
+func reset_region_highlight(region_icon: RegionIcon):
+	region_icon.self_modulate = Color(1, 1, 1, 1)
+
+func reset_regions_highlight():
+	for ri in WorldState.ALL_REGION_ICONS.values():
+		reset_region_highlight(ri)

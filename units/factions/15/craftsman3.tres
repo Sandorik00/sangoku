@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Unit" format=3 uid="uid://cs5l4wlryh5us"]
+
+[ext_resource type="Texture2D" uid="uid://0sm0s5r0ci44" path="res://SanCheeseSources/SanGoblin.png" id="1_02qpo"]
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="2_yjq4e"]
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_pwidn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmhoo"]
+atlas = ExtResource("3_pwidn")
+region = Rect2(48, 48, 16, 16)
+
+[resource]
+script = ExtResource("2_yjq4e")
+name = "Craftsman3"
+portrait = ExtResource("1_02qpo")
+sprite = SubResource("AtlasTexture_lmhoo")
+clazz = "Craftsman"
+level = 3
+attack = 6
+defence = 7
+speed = 6
+morale = 7
+mana = 15
+leadership = 5
+troops = 50
+initiative = 3
+movement = 4
+max_troops = 100
+metadata/_custom_type_script = "uid://bahi8neasd5uo"

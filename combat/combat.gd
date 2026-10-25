@@ -48,7 +48,7 @@ var transitionInProgress: bool = true :
 			if new_value == true\
 			else Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_INHERITED
 
-var combat_ended: bool = true 
+var combat_ended: bool = false 
 
 var is_my_turn: bool = false
 var is_player_attacker: bool = true
@@ -279,14 +279,14 @@ func move_player(destination: SanGrid.GridCell):
 func move_npc(destination_path: Array[SanGrid.GridCell]):
 	if destination_path.is_empty(): return
 
-	var cell = unit_entity.cell
+	var entity = unit_entity
 	var unit_movement = min(destination_path.size(), unit_entity.unitNode.unit_data.movement)
 
 	var actual_destination_path: Array[SanGrid.GridCell] = destination_path.slice(0, unit_movement)
 	var actual_destination: SanGrid.GridCell = actual_destination_path.get(actual_destination_path.size() - 1)
 	
-	grid.set_entity(actual_destination.xy.x, actual_destination.xy.y, cell.entity)
-	grid.set_entity(cell.xy.x, cell.xy.y, SanGrid.GridEntity.new())
+	grid.set_entity(entity.cell.xy.x, entity.cell.xy.y, SanGrid.GridEntity.new())
+	grid.set_entity(actual_destination.xy.x, actual_destination.xy.y, entity)
 
 	walkPath = actual_destination_path
 	await _tween_path()
@@ -397,5 +397,5 @@ func _on_end_turn_pressed():
 
 	combatState.pass_turn()
 
-func _on_end_combat(is_win: bool):
-	WorldTurnLogic.out_combat()
+func _on_end_combat(attacker_is_winner: bool):
+	WorldTurnLogic.out_combat(attacker_is_winner)

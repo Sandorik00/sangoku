@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Unit" format=3 uid="uid://dkitqb0mx8vjo"]
+
+[ext_resource type="Texture2D" uid="uid://dr4yuxtq37a1s" path="res://SanCheeseSources/749020982920085596.png" id="1_j8n1d"]
+[ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_lkge0"]
+[ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_xm1wm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh2py"]
+atlas = ExtResource("3_xm1wm")
+region = Rect2(48, 96, 16, 16)
+
+[resource]
+script = ExtResource("1_lkge0")
+name = "Magician"
+portrait = ExtResource("1_j8n1d")
+sprite = SubResource("AtlasTexture_vh2py")
+clazz = "Mage"
+attack = 5
+speed = 6
+morale = 4
+mana = 10
+leadership = 3
+attack_range = 3
+troops = 50
+max_troops = 100
+metadata/_custom_type_script = "uid://bahi8neasd5uo"

@@ -38,11 +38,26 @@ func keys() -> Array[int]:
 func values() -> Array[Unit]:
 	return _data.values()
 
+func size() -> int:
+	return _data.size()
+
 func is_empty() -> bool:
 	return _data.is_empty()
 
-func get_least_power(count: int) -> Array[Unit]:
-	var array: Array[Unit] = _data.values()
+func get_army_power() -> int:
+	var array: Array[Unit] = self.values()
+	var power = array.reduce(func(acc, unit: Unit): return acc + (unit.troops * unit.level), 0)
+
+	return power
+
+func get_all_sorted_by_lvl_asc() -> Array[Unit]:
+	var array: Array[Unit] = self.values()
+	array.sort_custom(func(a: Unit, b: Unit): return a.level < b.level)
+
+	return array
+
+func get_least_troops(count: int) -> Array[Unit]:
+	var array: Array[Unit] = self.values()
 	array = array.filter(func(u: Unit): return u.troops != u.max_troops)
 	array.sort_custom(func(a: Unit, b: Unit): return a.troops < b.troops)
 	array = array.slice(0, count)
