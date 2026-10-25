@@ -51,14 +51,14 @@ class TurnOrderArray extends RefCounted:
 		# _index = wrapi(_index, 0, _data.size())
 
 func get_actions_for_relation(relation: int):
-	if relation > Types.FACTION_RELATIONS_MAP.ALLY:
-		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ALLY)
-	elif relation > Types.FACTION_RELATIONS_MAP.FRIENDLY:
-		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.FRIENDLY)
-	elif relation > Types.FACTION_RELATIONS_MAP.WARY:
-		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.WARY)
-	else:
-		return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ENEMY)
+	# if relation > Types.FACTION_RELATIONS_MAP.ALLY:
+	# 	return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ALLY)
+	# elif relation > Types.FACTION_RELATIONS_MAP.FRIENDLY:
+	# 	return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.FRIENDLY)
+	# elif relation > Types.FACTION_RELATIONS_MAP.WARY:
+	# 	return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.WARY)
+	# else:
+	return Types.ACTIONS_FOR_RELATIONS.get(Types.FACTION_RELATIONS_MAP.ENEMY)
 
 func get_actions_for_property(region: Region, faction: FactionsState.FACTIONS):
 	var property_type: Types.REGION_PROPERTY_TYPE = Types.REGION_PROPERTY_TYPE.NONE
