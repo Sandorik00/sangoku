@@ -85,25 +85,17 @@ func determine_if_rechable(faction: FactionsState.FACTIONS, region: Region) -> b
 
 func collect_resources(dir_path: String) -> Array[String]:
 	var file_paths: Array[String] = []
-
-	var dir = DirAccess.open(dir_path)
-
-	dir.list_dir_begin()
-
-	var full_name = dir.get_next()
-
-	while full_name != "":
-		var path = dir_path.trim_suffix("/") + "/" + full_name
-
-		if dir.current_is_dir():
-			full_name = dir.get_next()
+	
+	var files = ResourceLoader.list_directory(dir_path)
+	
+	var base_path = dir_path if dir_path.ends_with("/") else dir_path + "/"
+	
+	for file_name in files:
+		if file_name.ends_with("/"):
 			continue
-
-		file_paths.append(path)
-		full_name = dir.get_next()
-	
-	dir.list_dir_end()
-	
+			
+		file_paths.append(base_path + file_name)
+		
 	return file_paths
 
 func collect_resources_recursive(start_path: String) -> Array[String]:
@@ -111,25 +103,19 @@ func collect_resources_recursive(start_path: String) -> Array[String]:
 	var file_paths: Array[String] = []
 
 	while not dirs.is_empty():
-			var dir_path = dirs.pop_back()
-			var dir = DirAccess.open(dir_path)
+		var dir_path = dirs.pop_back()
+		
+		var files = ResourceLoader.list_directory(dir_path)
+		var base_path = dir_path if dir_path.ends_with("/") else dir_path + "/"
 
-			dir.list_dir_begin()
+		for full_name in files:
+			var path = base_path + full_name
 
-			var full_name = dir.get_next()
+			if full_name.ends_with("/"):
+				dirs.append(path.trim_suffix("/"))
+				continue
 
-			while full_name != "":
-					var path = dir_path.trim_suffix("/") + "/" + full_name
-
-					if dir.current_is_dir():
-							dirs.append(path)
-							full_name = dir.get_next()
-							continue
-
-					file_paths.append(path)
-					full_name = dir.get_next()
-			
-			dir.list_dir_end()
+			file_paths.append(path)
 	
 	return file_paths
 

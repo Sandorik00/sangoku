@@ -52,7 +52,7 @@ func execute(faction: FactionData, context: Dictionary) -> void:
 		print("Nothing to attack!")
 		return
 
-	var random_index := Grng.RNG.randi() % weakest_neighbor_regions.size()
+	var random_index := int(Grng.RNG.randi() % weakest_neighbor_regions.size())
 	var region_to_attack: Region = weakest_neighbor_regions.get(random_index)
 
 	# UI shenanigans

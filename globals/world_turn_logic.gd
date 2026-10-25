@@ -277,7 +277,7 @@ func _assume_region_control(region: Region, faction: FactionsState.FACTIONS):
 		var last_count: int = property_ownership.get(reg.faction, 0)
 		property_ownership.set(reg.faction, last_count + 1)
 
-	var max_owners := Utils.get_factions_with_max_regions(property_ownership)
+	var max_owners: Array = Utils.get_factions_with_max_regions(property_ownership)
 
 	if faction in max_owners:
 		region.province.faction = faction

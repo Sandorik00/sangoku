@@ -4,7 +4,7 @@ var all_units_data: Array[Unit] = []
 var units_for_hire: Dictionary[FactionsState.FACTIONS, Dictionary] = {}
 
 func _ready() -> void:
-	var paths := Utils.collect_resources_recursive("res://units/factions")
+	var paths: Array[String] = Utils.collect_resources_recursive("res://units/factions")
 	for path in paths:
 		var res: Unit = ResourceLoader.load(path, "Unit")
 
@@ -23,7 +23,7 @@ func get_units_for_faction(faction: FactionsState.FACTIONS) -> Dictionary:
 		for i in 3:
 			if all_units_data.is_empty(): break
 
-			var random_index := Grng.RNG.randi() % all_units_data.size()
+			var random_index := int(Grng.RNG.randi() % all_units_data.size())
 			units_dict.set(i, all_units_data.pop_at(random_index))
 
 		units_for_hire.set(faction, units_dict)
