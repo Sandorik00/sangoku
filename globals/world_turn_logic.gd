@@ -179,9 +179,6 @@ func _after_combat(attacker_is_winner: bool):
 	attacker_data.recalculate_army_power()
 	defender_data.recalculate_army_power()
 
-	print(attacker_data.army_power)
-	print(defender_data.army_power)
-
 	if attacked_region != null && attacker_is_winner:
 		_assume_region_control(attacked_region, attacking_faction)
 

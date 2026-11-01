@@ -62,10 +62,11 @@ func get_actions_for_relation(relation: int):
 
 func get_actions_for_property(region: Region, faction: FactionsState.FACTIONS):
 	var property_type: Types.REGION_PROPERTY_TYPE = Types.REGION_PROPERTY_TYPE.NONE
-	if region.province.faction == faction:
+	# if region.province.faction == faction:
+	# 	property_type = Types.REGION_PROPERTY_TYPE.CASTLE
+	if region.faction == faction:
+		# property_type = Types.REGION_PROPERTY_TYPE.REINFORCEMENTS
 		property_type = Types.REGION_PROPERTY_TYPE.CASTLE
-	elif region.faction == faction:
-		property_type = Types.REGION_PROPERTY_TYPE.REINFORCEMENTS
 
 	return Types.ACTIONS_FOR_PROPERTY.get(property_type, [])
 

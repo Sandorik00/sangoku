@@ -62,6 +62,7 @@ func _on_chosen_region_changed(region: Region):
 				Utils.get_actions_for_relation(FactionsState.get_relation(WorldState.player_faction, region.faction))
 			)
 
+		# TODO: move hire and market from actions to menu
 		actions_for_region.append_array(Utils.get_actions_for_property(region, WorldState.player_faction))
 
 	for action in actions_for_region:
