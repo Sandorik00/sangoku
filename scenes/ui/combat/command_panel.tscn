@@ -84,7 +84,7 @@ shader_parameter/gradient_stop = 0.75
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxfv5"]
 texture = ExtResource("6_71j6e")
 
-[node name="CommandPanel" type="Control" unique_id=43008561 node_paths=PackedStringArray("portrait", "name_label", "end_turn_button", "attack", "defence", "speed", "attack_range", "morale", "morale_slider", "mana", "mana_slider")]
+[node name="CommandPanel" type="Control" unique_id=43008561 node_paths=PackedStringArray("portrait", "name_label", "end_turn_button", "attack", "defence", "speed", "attack_range", "morale", "morale_slider", "mana", "mana_slider", "skills_container")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -102,6 +102,7 @@ morale = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/Uniq
 morale_slider = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Morale/Container/HSlider")
 mana = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/HBoxContainer/Label2")
 mana_slider = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Stats/UniqueStats/Mana/Container/HSlider")
+skills_container = NodePath("LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1747438298]
 custom_minimum_size = Vector2(40, 40)
@@ -613,165 +614,3 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
 [node name="Abilities" type="HBoxContainer" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels" unique_id=708923586]
 layout_mode = 2
 theme_override_constants/separation = 6
-
-[node name="TextureButton5" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=20980482]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton5" unique_id=716229466]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton6" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1373591340]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton6" unique_id=527793407]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton7" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=901445780]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton7" unique_id=63056217]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton8" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1133198307]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton8" unique_id=1126057839]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton9" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=182909301]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton9" unique_id=1521788101]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton10" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=321495269]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton10" unique_id=1719211929]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton11" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1080234321]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton11" unique_id=1715702828]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton12" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=1771675264]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton12" unique_id=1292703576]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")
-
-[node name="TextureButton13" type="Button" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities" unique_id=495456987]
-custom_minimum_size = Vector2(54, 54)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
-icon = SubResource("AtlasTexture_gme27")
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="LowerPanel/UnitPanel/MarginContainer/HBoxContainer/Usabels/Abilities/TextureButton13" unique_id=919670188]
-material = SubResource("ShaderMaterial_qwsri")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")

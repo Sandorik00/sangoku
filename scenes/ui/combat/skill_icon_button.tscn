@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dy4wllm7v3xxu"]
+
+[ext_resource type="Shader" uid="uid://bts1omv0a1yv2" path="res://scenes/ui/combat/command_panel.gdshader" id="1_oggpw"]
+[ext_resource type="Texture2D" uid="uid://byxj67iw6dun1" path="res://SanCheeseSources/748650409559588985.png" id="2_2cvk7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwsri"]
+bg_color = Color(0, 0, 0, 0.4)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwsri"]
+shader = ExtResource("1_oggpw")
+shader_parameter/border_width_px = 4.0
+shader_parameter/border_radius_px = 8.0
+shader_parameter/color_start = Color(0.867727, 0.7344707, 0.268252, 0.8)
+shader_parameter/color_end = Color(0.15081295, 0.3528688, 0.5664466, 0.8)
+shader_parameter/gradient_stop = 0.75
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxfv5"]
+texture = ExtResource("2_2cvk7")
+
+[node name="SkillIconButton" type="Button" unique_id=1080702917]
+custom_minimum_size = Vector2(54, 54)
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwsri")
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="." unique_id=1664389373]
+material = SubResource("ShaderMaterial_qwsri")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxfv5")

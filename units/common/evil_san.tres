@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_d2cxq"]
 [ext_resource type="Texture2D" uid="uid://0sm0s5r0ci44" path="res://SanCheeseSources/SanGoblin.png" id="1_ixv1o"]
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="3_iovj6"]
 [ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_ptr5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1u48"]

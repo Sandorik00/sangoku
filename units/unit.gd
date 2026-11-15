@@ -26,3 +26,6 @@ class_name Unit
 
 @export_group("Dynamic stats")
 @export var max_troops: int = 1
+
+@export_group("Skills and Items")
+@export var skills: Array[Skill] = []

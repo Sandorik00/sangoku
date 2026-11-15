@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cr7fblxo2yyy3"]
+
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="1_06j8k"]
+[ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="1_p4dqp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_perss"]
+atlas = ExtResource("1_p4dqp")
+region = Rect2(192, 128, 32, 32)
+
+[resource]
+script = ExtResource("1_06j8k")
+skill_name = "Spark"
+icon = SubResource("AtlasTexture_perss")
+targeting_range = 7
+power = 500
+metadata/_custom_type_script = "uid://b4c5wxtf8u74d"

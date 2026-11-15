@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://m32f82ke724t"]
+
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="1_ye18y"]
+
+[resource]
+script = ExtResource("1_ye18y")
+targeting_range = 5
+metadata/_custom_type_script = "uid://b4c5wxtf8u74d"

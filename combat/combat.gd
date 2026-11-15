@@ -1,8 +1,6 @@
 extends Node2D
 class_name Combat
 
-# var UCS := UnitControlsState
-
 var unit_id: int = 0
 @onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
 @onready var command_panel: CommandPanel = $/root/Main/CanvasLayer/CommandPanel
@@ -24,6 +22,7 @@ var unit_id: int = 0
 
 @export_category("Logic")
 @export var combatState: CombatState
+@export var combat_utils: CombatUtils
 @export var movement_range: int = 0
 
 @export_category("Utils")
@@ -66,6 +65,10 @@ var chosen_for_placement: SanGrid.GridEntity = null
 
 var cerebrum: CombatBTSelector
 
+var skill_allowed_targets: Array[SanGrid.GridCell] = []
+var skill_targeting_active: bool = false
+var skill_active: Skill = null
+
 ## Call before adding to the scene
 func setup_combat_entities(p_units: Array[Unit], e_units: Array[Unit], is_p_attacker: bool):
 	player_units = p_units
@@ -87,6 +90,7 @@ func _ready():
 	combatState.end_combat.connect(_on_end_combat)
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
+	command_panel.skill_pressed.connect(_on_skill_pressed)
 	command_panel.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED
 
 	cerebrum = CombatBTSelector.new([
@@ -125,6 +129,11 @@ func _ready():
 	preparation_panel.start_combat_btn.pressed.connect(_start_combat)
 
 	preparation_panel.show()
+
+func _on_skill_pressed(skill: Skill):
+	print("skill pressed: ", skill.skill_name)
+
+	combat_utils.enable_targeting(self, skill)
 
 func _create_unit_entities(units_for_creation: Array[Unit], team: Types.TEAMS, combatant_entities: Dictionary):
 	for u in units_for_creation:
@@ -254,7 +263,7 @@ func _unhandled_input(event: InputEvent):
 	# CONTROLS
 	if unit_entity == null or transitionInProgress: return
 
-	if event is InputEventMouseButton && event.button_index == 1 && !event.is_pressed():
+	if !skill_targeting_active && event is InputEventMouseButton && event.button_index == MouseButton.MOUSE_BUTTON_LEFT && !event.is_pressed():
 		var correctedPosition = tileMap.get_global_mouse_position()
 		var tile = tileMap.local_to_map(correctedPosition)
 
@@ -265,6 +274,27 @@ func _unhandled_input(event: InputEvent):
 			move_player(currCell)
 		elif currCell.isInReach and (unit_entity.unitNode.enemies & currCell.entity.unitNode.team) != 0:
 			unit_basic_attack(currCell)
+
+	if skill_targeting_active && event is InputEventMouseButton && event.button_index == MouseButton.MOUSE_BUTTON_LEFT && !event.is_pressed():
+		var correctedPosition = tileMap.get_global_mouse_position()
+		var tile = tileMap.local_to_map(correctedPosition)
+
+		var currCell = grid.get_cell(tile.x, tile.y)
+		if currCell in skill_allowed_targets:
+			transitionInProgress = true
+
+			var dead_units = combat_utils.apply_effect(self, skill_active.effect, [currCell], skill_active)
+
+			CombatData.update_labels_for_units([currCell.entity])
+
+			for dead_unit in dead_units:
+				_on_unit_death(dead_unit)
+				if combat_ended: return
+
+			combatState.pass_turn()
+
+	if skill_targeting_active && event is InputEventMouseButton && event.button_index == MouseButton.MOUSE_BUTTON_RIGHT && !event.is_pressed():
+		clear_targeting()
 
 func move_player(destination: SanGrid.GridCell):
 	transitionInProgress = true
@@ -360,6 +390,20 @@ func _clear_walk_zone():
 	walkPath = []
 	reachZone = []
 
+func targeting_setup():
+	skill_targeting_active = true
+	_clear_walk_zone()
+
+func clear_targeting():
+	skill_targeting_active = false
+	skill_active = null
+	_cycle_walk_zone()
+
+func end_targeting():
+	skill_targeting_active = false
+	skill_active = null
+	_clear_walk_zone()
+
 func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridEntity) -> SanGrid.GridEntity:
 	var dead_unit: SanGrid.GridEntity = null
 
@@ -380,6 +424,20 @@ func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridE
 	attacker.troops = max(attacker.troops - d_true_damage, 0)
 	if attacker.troops == 0:
 		dead_unit = attacker_e
+
+	return dead_unit
+
+func calculate_damage_for_entity(attack_entity: SanGrid.GridEntity, defence_entity: SanGrid.GridEntity, power: int) -> SanGrid.GridEntity:
+	var dead_unit: SanGrid.GridEntity = null
+
+	var attack_entity_data: Unit = attack_entity.unitNode.unit_data
+	var defence_entity_data: Unit = defence_entity.unitNode.unit_data
+	var base_attack: int = int(power * ((attack_entity_data.attack * (attack_entity_data.troops / 100.0)) / 10.0))
+
+	var true_damage: int = int(base_attack * (100.0 / (100.0 + defence_entity_data.defence)))
+	defence_entity_data.troops = max(defence_entity_data.troops - true_damage, 0)
+	if defence_entity_data.troops == 0:
+		dead_unit = defence_entity
 
 	return dead_unit
 

@@ -11,6 +11,12 @@ spacing_bottom = -30
 [sub_resource type="LabelSettings" id="LabelSettings_yro8m"]
 font_size = 34
 
+[sub_resource type="InputEventAction" id="InputEventAction_fml4j"]
+action = &"skip_turn"
+
+[sub_resource type="Shortcut" id="Shortcut_eolhs"]
+events = [SubResource("InputEventAction_fml4j")]
+
 [node name="Panel" type="Panel" unique_id=1993563656 node_paths=PackedStringArray("system_btn", "items_btn", "army_btn", "troops_btn", "end_turn_btn", "money_l")]
 custom_minimum_size = Vector2(0, 72)
 anchors_preset = 12
@@ -100,4 +106,5 @@ label_settings = SubResource("LabelSettings_yro8m")
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_efqg6")
 theme_override_font_sizes/font_size = 50
+shortcut = SubResource("Shortcut_eolhs")
 text = "End Turn"
