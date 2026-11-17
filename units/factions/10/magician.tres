@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="3_6hnof"]
 [ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_xm1wm"]
 [ext_resource type="Resource" uid="uid://cr7fblxo2yyy3" path="res://combat/progression/skills/spark.tres" id="4_db45h"]
+[ext_resource type="Resource" uid="uid://glustw2cpu44" path="res://combat/progression/skills/fireball.tres" id="5_db45h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh2py"]
 atlas = ExtResource("3_xm1wm")
@@ -24,5 +25,5 @@ leadership = 3
 attack_range = 3
 troops = 50
 max_troops = 100
-skills = Array[ExtResource("3_6hnof")]([ExtResource("4_db45h")])
+skills = Array[ExtResource("3_6hnof")]([ExtResource("4_db45h"), ExtResource("5_db45h")])
 metadata/_custom_type_script = "uid://bahi8neasd5uo"

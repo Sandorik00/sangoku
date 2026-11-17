@@ -25,6 +25,10 @@ func draw_targets_overlay(cell_list: Array[SanGrid.GridCell], unit_entity: SanGr
 		else:
 			set_cell(cell.xy, 0, Vector2(8, 8))
 
+func draw_target_area_overlay(cell_list: Array[SanGrid.GridCell]):
+	for cell in cell_list:
+		set_cell(cell.xy, 0, Vector2(8, 8))
+
 func clearPreparationsCells():
 	clear()
 		

@@ -192,6 +192,29 @@ func get_reachable_cells(currCell: GridCell, reach: int) -> Array[GridCell]:
 		
 	return reachable_cells
 
+func get_reachable_target_cells(currCell: GridCell, reach: int) -> Array[GridCell]:
+	var reachable_cells: Dictionary[Vector2i, GridCell] = {}
+
+	var openSet: Array[GridCell] = []
+	openSet.push_back(currCell)
+
+	for i in range(reach):
+		var tempSet: Array[GridCell] = openSet.duplicate()
+		openSet.clear()
+
+		for j in tempSet:
+			var neighbours := (
+				self.get_neighbours(j.xy)
+				.filter(func(cell): return cell != currCell) as Array[GridCell]
+			)
+
+			for cell: GridCell in neighbours:
+				reachable_cells.set(cell.xy, cell)
+			
+			openSet.append_array(neighbours)
+		
+	return reachable_cells.values()
+
 func get_reachable_entity_cells(currCell: GridCell, reach: int) -> Array[GridCell]:
 	var reachable_cells: Dictionary[Vector2i, GridCell] = {}
 

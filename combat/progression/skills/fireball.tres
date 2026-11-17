@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://glustw2cpu44"]
+
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="1_3y8sh"]
+[ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="1_h4q1j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4q1j"]
+atlas = ExtResource("1_h4q1j")
+region = Rect2(0, 128, 32, 32)
+
+[resource]
+script = ExtResource("1_3y8sh")
+skill_name = "Fireball"
+icon = SubResource("AtlasTexture_h4q1j")
+targeting_type = 2
+targeting_range = 6
+targeting_radius = 2
+targeting_targets = 3
+power = 100
+metadata/_custom_type_script = "uid://b4c5wxtf8u74d"

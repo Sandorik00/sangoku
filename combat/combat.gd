@@ -282,10 +282,18 @@ func _unhandled_input(event: InputEvent):
 		var currCell = grid.get_cell(tile.x, tile.y)
 		if currCell in skill_allowed_targets:
 			transitionInProgress = true
+			var actual_target_cells: Array[SanGrid.GridCell] = [currCell]
 
-			var dead_units = combat_utils.apply_effect(self, skill_active.effect, [currCell], skill_active)
+			if skill_active.targeting_type == CombatUtils.TARGETING_TYPE.AREA && skill_active.targeting_radius >= 1:
+				var cells_in_radius := grid.get_reachable_target_cells(currCell, skill_active.targeting_radius)
+				actual_target_cells.append_array(cells_in_radius)
+				actual_target_cells = actual_target_cells.filter(func(cell: SanGrid.GridCell): return cell.entity.unitNode != null)
+			
+			var dead_units = combat_utils.apply_effect(self, skill_active.effect, actual_target_cells, skill_active)
 
-			CombatData.update_labels_for_units([currCell.entity])
+			var actual_targets_entities: Array[SanGrid.GridEntity] = []
+			actual_targets_entities.assign(actual_target_cells.map(func(cell: SanGrid.GridCell): return cell.entity))
+			CombatData.update_labels_for_units(actual_targets_entities)
 
 			for dead_unit in dead_units:
 				_on_unit_death(dead_unit)
