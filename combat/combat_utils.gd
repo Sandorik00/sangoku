@@ -104,6 +104,7 @@ func apply_effect(combat: Combat, effect: EFFECTS, target_cells: Array[SanGrid.G
 			return _damage_entities_on_cells(combat, target_cells, skill)
 
 		EFFECTS.HEAL:
+			_heal_entities_on_cells(combat, target_cells, skill)
 			return []
 
 		_:
@@ -121,3 +122,10 @@ func _damage_entities_on_cells(combat: Combat, target_cells: Array[SanGrid.GridC
 
 func _damage_entity_on_cell(combat: Combat, target_cell: SanGrid.GridCell, power: int) -> SanGrid.GridEntity:
 	return combat.calculate_damage_for_entity(combat.unit_entity, target_cell.entity, power)
+
+func _heal_entities_on_cells(combat: Combat, target_cells: Array[SanGrid.GridCell], skill: Skill):
+	for cell in target_cells:
+		_heal_entity_on_cell(combat, cell, skill.power)
+
+func _heal_entity_on_cell(combat: Combat, target_cell: SanGrid.GridCell, power: int):
+	combat.calculate_heal_for_entity(combat.unit_entity, target_cell.entity, power)

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dlfnx2j2opn5b"]
+
+[ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="1_235dt"]
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="2_dosae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2fou"]
+atlas = ExtResource("1_235dt")
+region = Rect2(96, 128, 32, 32)
+
+[resource]
+script = ExtResource("2_dosae")
+skill_name = "Cleanse"
+icon = SubResource("AtlasTexture_p2fou")
+targeting_range = 5
+targeting_targets = 0
+effect = 1
+power = 100
+metadata/_custom_type_script = "uid://b4c5wxtf8u74d"

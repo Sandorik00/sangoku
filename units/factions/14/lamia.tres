@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cemyf8x3n6asr" path="res://SanCheeseSources/SanCheeseUwU.png" id="1_5q4yo"]
 [ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_hnj0d"]
 [ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_h4mng"]
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="3_nsowy"]
+[ext_resource type="Resource" uid="uid://dlfnx2j2opn5b" path="res://combat/progression/skills/cleanse.tres" id="4_5yl4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fm7he"]
 atlas = ExtResource("3_h4mng")
@@ -26,4 +28,5 @@ troops = 30
 initiative = 5
 movement = 4
 max_troops = 100
+skills = Array[ExtResource("3_nsowy")]([ExtResource("4_5yl4k")])
 metadata/_custom_type_script = "uid://bahi8neasd5uo"

@@ -449,6 +449,14 @@ func calculate_damage_for_entity(attack_entity: SanGrid.GridEntity, defence_enti
 
 	return dead_unit
 
+func calculate_heal_for_entity(user_entity: SanGrid.GridEntity, target_entity: SanGrid.GridEntity, power: int):
+	var user_entity_data: Unit = user_entity.unitNode.unit_data
+	var target_entity_data: Unit = target_entity.unitNode.unit_data
+	var base_attack: float = power * ((user_entity_data.troops * user_entity_data.level) / 100.0)
+
+	var true_heal: int = int(base_attack / target_entity_data.level)
+	target_entity_data.troops = min(target_entity_data.troops + true_heal, target_entity_data.max_troops)
+
 func _on_unit_death(unit: SanGrid.GridEntity):
 	combat_ended = combatState.on_unit_death(unit)
 	var node_for_deletion = unit.unitNode
