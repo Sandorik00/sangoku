@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="Unit" format=3 uid="uid://bbriuawlxxmj"]
 
+[ext_resource type="Script" uid="uid://v8fgqnd6ypnl" path="res://combat/items/consumable.gd" id="1_0vic6"]
 [ext_resource type="Texture2D" uid="uid://bv3noexydowc" path="res://SanCheeseSources/724296963587047434.png" id="1_128k3"]
+[ext_resource type="Resource" uid="uid://w1mpwda168sx" path="res://combat/items/consumables/ressurect_potion.tres" id="2_2sj15"]
 [ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="2_rd8ak"]
 [ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="3_nssns"]
 [ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_w8jjv"]
@@ -21,4 +23,5 @@ morale = 2
 troops = 50
 max_troops = 50
 skills = Array[ExtResource("3_nssns")]([ExtResource("4_w8jjv")])
+consumables = Array[ExtResource("1_0vic6")]([ExtResource("2_2sj15")])
 metadata/_custom_type_script = "uid://bahi8neasd5uo"

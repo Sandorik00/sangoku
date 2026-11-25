@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://w1mpwda168sx"]
+
+[ext_resource type="Texture2D" uid="uid://y3edcw2cjqpu" path="res://assets/icons/IconSet.png" id="1_11tdk"]
+[ext_resource type="Script" uid="uid://v8fgqnd6ypnl" path="res://combat/items/consumable.gd" id="1_pmqm0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11tdk"]
+atlas = ExtResource("1_11tdk")
+region = Rect2(96, 448, 32, 32)
+
+[resource]
+script = ExtResource("1_pmqm0")
+item_name = "Ressurect potion"
+icon = SubResource("AtlasTexture_11tdk")
+metadata/_custom_type_script = "uid://v8fgqnd6ypnl"

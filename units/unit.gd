@@ -29,3 +29,5 @@ class_name Unit
 
 @export_group("Skills and Items")
 @export var skills: Array[Skill] = []
+@export var equipment: Array = []
+@export var consumables: Array[Consumable] = []

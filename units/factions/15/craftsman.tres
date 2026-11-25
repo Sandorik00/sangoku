@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://0sm0s5r0ci44" path="res://SanCheeseSources/SanGoblin.png" id="1_0gcg4"]
 [ext_resource type="Script" uid="uid://bahi8neasd5uo" path="res://units/unit.gd" id="1_8b685"]
+[ext_resource type="Script" uid="uid://v8fgqnd6ypnl" path="res://combat/items/consumable.gd" id="1_tnteq"]
+[ext_resource type="Resource" uid="uid://w1mpwda168sx" path="res://combat/items/consumables/ressurect_potion.tres" id="2_1xkaq"]
 [ext_resource type="Texture2D" uid="uid://do51ahc3qut05" path="res://blue mushroom sheet.png" id="3_2da3k"]
+[ext_resource type="Script" uid="uid://b4c5wxtf8u74d" path="res://combat/progression/skill.gd" id="5_tk4yb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmhoo"]
 atlas = ExtResource("3_2da3k")
@@ -25,4 +28,5 @@ troops = 50
 initiative = 3
 movement = 4
 max_troops = 100
+consumables = Array[ExtResource("1_tnteq")]([ExtResource("2_1xkaq")])
 metadata/_custom_type_script = "uid://bahi8neasd5uo"

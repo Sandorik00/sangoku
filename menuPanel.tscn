@@ -107,4 +107,5 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_efqg6")
 theme_override_font_sizes/font_size = 50
 shortcut = SubResource("Shortcut_eolhs")
+shortcut_in_tooltip = false
 text = "End Turn"

@@ -91,6 +91,7 @@ func _ready():
 	# UCS.nextState.connect(_setup_new_state)
 	command_panel.end_turn_button.connect("pressed", _on_end_turn_pressed)
 	command_panel.skill_pressed.connect(_on_skill_pressed)
+	command_panel.consumable_pressed.connect(_on_consumable_pressed)
 	command_panel.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED
 
 	cerebrum = CombatBTSelector.new([
@@ -134,6 +135,11 @@ func _on_skill_pressed(skill: Skill):
 	print("skill pressed: ", skill.skill_name)
 
 	combat_utils.enable_targeting(self, skill)
+
+func _on_consumable_pressed(consumable: Consumable):
+	print("consumable pressed: ", consumable.item_name)
+
+	apply_flat_heal(unit_entity, consumable.power)
 
 func _create_unit_entities(units_for_creation: Array[Unit], team: Types.TEAMS, combatant_entities: Dictionary):
 	for u in units_for_creation:
@@ -456,6 +462,11 @@ func calculate_heal_for_entity(user_entity: SanGrid.GridEntity, target_entity: S
 
 	var true_heal: int = int(base_attack / target_entity_data.level)
 	target_entity_data.troops = min(target_entity_data.troops + true_heal, target_entity_data.max_troops)
+
+func apply_flat_heal(target_entity: SanGrid.GridEntity, power: int):
+	var target_entity_data: Unit = target_entity.unitNode.unit_data
+
+	target_entity_data.troops = min(target_entity_data.troops + power, target_entity_data.max_troops)
 
 func _on_unit_death(unit: SanGrid.GridEntity):
 	combat_ended = combatState.on_unit_death(unit)
