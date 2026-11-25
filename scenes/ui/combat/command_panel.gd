@@ -99,15 +99,15 @@ func _fill_unit_data(data: Unit):
 	portrait.texture = data.portrait
 	name_label.text = data.name
 
-	attack.text = str(data.attack)
-	defence.text = str(data.defence)
-	speed.text = str(data.speed)
-	attack_range.text = str(data.attack_range)
+	attack.text = str(data.final_attack)
+	defence.text = str(data.final_defence)
+	speed.text = str(data.final_speed)
+	attack_range.text = str(data.final_attack_range)
 
-	morale.text = str(data.morale)
-	morale_slider.value = data.morale
-	mana.text = str(data.mana)
-	mana_slider.value = data.mana
+	morale.text = str(data.final_morale)
+	morale_slider.value = data.final_morale
+	mana.text = str(data.final_mana)
+	mana_slider.value = data.final_mana
 
 	for i in range(number_of_skill_icons):
 		var skill = data.skills.get(i) if data.skills.size() > i else null

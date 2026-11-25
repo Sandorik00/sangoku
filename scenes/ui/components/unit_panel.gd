@@ -12,8 +12,8 @@ class_name UnitPanel
 func set_stats(unit: Unit):
 	commander_name.text = unit.name
 
-	attack_l.text = str(unit.attack)
-	defence_l.text = str(unit.defence)
-	speed_l.text = str(unit.speed)
-	mana_l.text = str(unit.mana)
-	leadership_l.text = str(unit.leadership)
+	attack_l.text = str(unit.final_attack)
+	defence_l.text = str(unit.final_defence)
+	speed_l.text = str(unit.final_speed)
+	mana_l.text = str(unit.final_mana)
+	leadership_l.text = str(unit.final_leadership)

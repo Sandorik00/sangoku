@@ -16,11 +16,11 @@ class_name InfoTab
 func refresh_ui(unit: Unit):
 	if not unit: return
 
-	attack_l.text = str(unit.attack)
-	defence_l.text = str(unit.defence)
-	speed_l.text = str(unit.speed)
-	mana_l.text = str(unit.mana)
-	leadership_l.text = str(unit.leadership)
+	attack_l.text = str(unit.final_attack)
+	defence_l.text = str(unit.final_defence)
+	speed_l.text = str(unit.final_speed)
+	mana_l.text = str(unit.final_mana)
+	leadership_l.text = str(unit.final_leadership)
 
 	clazz_l.text = str(unit.clazz)
 	level_l.text = str(unit.level)

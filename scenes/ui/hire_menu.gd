@@ -67,12 +67,12 @@ func _refresh_ui():
 	troops_l.text = str(selected_unit.troops)
 	cost_l.text = str(selected_unit_cost)
 
-	attack_l.text = str(selected_unit.attack)
-	defence_l.text = str(selected_unit.defence)
-	speed_l.text = str(selected_unit.speed)
-	attack_range_l.text = str(selected_unit.attack_range)
-	mana_l.text = str(selected_unit.mana)
-	morale_l.text = str(selected_unit.morale)
+	attack_l.text = str(selected_unit.final_attack)
+	defence_l.text = str(selected_unit.final_defence)
+	speed_l.text = str(selected_unit.final_speed)
+	attack_range_l.text = str(selected_unit.final_attack_range)
+	mana_l.text = str(selected_unit.final_mana)
+	morale_l.text = str(selected_unit.final_morale)
 
 func _on_hire_btn_pressed():
 	var curr_panel: UnitPanel = unit_panels.get(selected_unit_index)

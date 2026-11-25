@@ -7,6 +7,7 @@ func _ready() -> void:
 	var paths: Array[String] = Utils.collect_resources_recursive("res://units/factions")
 	for path in paths:
 		var res: Unit = ResourceLoader.load(path, "Unit")
+		res.recalc_final_stats()
 
 		all_units_data.push_back(res)
 

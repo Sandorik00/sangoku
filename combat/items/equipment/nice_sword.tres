@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://b6beds0ubtryw"]
+
+[ext_resource type="Script" uid="uid://mthh0ajxp1r5" path="res://combat/items/equipment.gd" id="1_p0qrt"]
+
+[resource]
+script = ExtResource("1_p0qrt")
+item_name = "Nice sword"
+attack = 20
+metadata/_custom_type_script = "uid://mthh0ajxp1r5"

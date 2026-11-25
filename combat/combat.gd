@@ -424,10 +424,10 @@ func _calculate_attack(attacker_e: SanGrid.GridEntity, defender_e: SanGrid.GridE
 	var attacker = attacker_e.unitNode.unit_data
 	var defender = defender_e.unitNode.unit_data
 
-	var a_true_attack: int = attacker.attack - defender.defence
+	var a_true_attack: int = attacker.final_attack - defender.final_defence
 	var a_true_damage: int = max((attacker.troops * a_true_attack) * 0.3, 1)
 
-	var d_true_attack: int = defender.attack - attacker.defence
+	var d_true_attack: int = defender.final_attack - attacker.final_defence
 	var d_true_damage: int = max((defender.troops * d_true_attack) * 0.1, 1)
 
 	defender.troops = max(defender.troops - a_true_damage, 0)
@@ -446,9 +446,9 @@ func calculate_damage_for_entity(attack_entity: SanGrid.GridEntity, defence_enti
 
 	var attack_entity_data: Unit = attack_entity.unitNode.unit_data
 	var defence_entity_data: Unit = defence_entity.unitNode.unit_data
-	var base_attack: int = int(power * ((attack_entity_data.attack * (attack_entity_data.troops / 100.0)) / 10.0))
+	var base_attack: int = int(power * ((attack_entity_data.final_attack * (attack_entity_data.troops / 100.0)) / 10.0))
 
-	var true_damage: int = int(base_attack * (100.0 / (100.0 + defence_entity_data.defence)))
+	var true_damage: int = int(base_attack * (100.0 / (100.0 + defence_entity_data.final_defence)))
 	defence_entity_data.troops = max(defence_entity_data.troops - true_damage, 0)
 	if defence_entity_data.troops == 0:
 		dead_unit = defence_entity

@@ -13,6 +13,9 @@ var unit_cards: Dictionary[int, PreparationUnitCard] = {}
 var ids_to_unit_cards: Dictionary[int, PreparationUnitCard] = {}
 var last_highlighted_index: int = -1
 
+func _ready() -> void:
+	unit_was_placed.connect(_on_unit_was_placed)
+
 func create_unit_cards(entities: Dictionary[int, SanGrid.GridEntity]) -> Dictionary[int, PreparationUnitCard]:
 	for child in units_card_container.get_children(): child.queue_free()
 	unit_cards.clear()
@@ -26,8 +29,6 @@ func create_unit_cards(entities: Dictionary[int, SanGrid.GridEntity]) -> Diction
 		preparation_unit_card.btn.gui_input.connect(_on_unit_card_pressed.bind(i))
 		unit_cards.set(i, preparation_unit_card)
 		units_card_container.add_child(preparation_unit_card)
-
-	unit_was_placed.connect(_on_unit_was_placed)
 
 	for card: PreparationUnitCard in unit_cards.values():
 		ids_to_unit_cards.set(card.unit_entity.id, card)
