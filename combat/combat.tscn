@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://e0lka6yf3h0g" path="res://combat/combat_state.gd" id="6_fvoc2"]
 [ext_resource type="Script" uid="uid://caht1m1kri2yi" path="res://draw_grid.gd" id="6_syqip"]
 [ext_resource type="Script" uid="uid://yl35qwtnwngh" path="res://combat/combat_utils.gd" id="9_iga5g"]
+[ext_resource type="Script" uid="uid://bpxxs1aibea28" path="res://combat/walls_draw.gd" id="10_walls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga4lu"]
 texture = ExtResource("3_kx3u1")
@@ -270,6 +271,10 @@ speed = null
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=941406359]
 tile_set = SubResource("TileSet_u30h6")
 collision_enabled = false
+
+[node name="Walls" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
+script = ExtResource("10_walls")
+tile_map = NodePath("../Terrain")
 
 [node name="Overlays" type="TileMapLayer" parent="." unique_id=1309137642]
 self_modulate = Color(1, 1, 1, 0.70000005)

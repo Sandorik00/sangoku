@@ -3,10 +3,7 @@ extends Node
 signal unit_data_changed(unit: Unit)
 
 @onready var combat_ui: Control = $/root/Main/CanvasLayer/CombatUI
-@onready var sub_viewport_container: SubViewportContainer = $/root/Main/CanvasLayer/SubViewportContainer
 @onready var army_count_label: PackedScene = preload("res://scenes/ui/army_count.tscn")
-
-@onready var sub_viewport_transform: Transform2D = sub_viewport_container.get_global_transform()
 
 var panel_unit_data: Unit :
 	set(new_value):
@@ -23,10 +20,7 @@ func add_units_ui(unit_entities_in_combat: Array[SanGrid.GridEntity]):
 	for ue in unit_entities_in_combat:
 		var acl = army_count_label.instantiate() as Label
 
-		var local_in_viewport = ue.unitNode.get_global_transform_with_canvas()
-		var result_transform = sub_viewport_transform * local_in_viewport.origin
-
-		acl.global_position = ((result_transform + Vector2(-16, 8)) * 3)
+		acl.position = (ue.unitNode.global_position * 6) + (Vector2(-16, 8) * 3)
 		acl.text = str(unitsInCombat[ue.id].troops)
 		units_by_labels.set(ue.id, acl)
 		combat_ui.add_child(acl)

@@ -8,6 +8,7 @@ var unit_id: int = 0
 @onready var world_camera: Camera2D = $/root/Main/CanvasLayer/WorldCamera
 @onready var global_ui: Control = $/root/Main/CanvasLayer/UI
 @onready var preparation_panel: PreparationPanel = $/root/Main/CanvasLayer/PreparationPanel
+@onready var walls: WallsDraw = $Walls
 
 @export_category("SanGrid")
 @export var grid: SanGrid
@@ -29,9 +30,11 @@ var unit_id: int = 0
 @export var camera: Camera2D
 @export var speed := 100
 
-var attackSpawnPositions: Array[Vector2] = [Vector2(1, 1), Vector2(2, 2), Vector2(1, 3), Vector2(13, 5)]
-var defenceSpawnPositions: Array[Vector2] = [Vector2(15, 4), Vector2(14, 6), Vector2(15, 4)]
-var additionalSpawnPositions: Array[Vector2] = [Vector2(8, 8)]
+const SPAWN_COUNT: int = 3
+const SPAWN_EDGE_DEPTH: int = 3
+
+var attackSpawnPositions: Array[Vector2] = []
+var defenceSpawnPositions: Array[Vector2] = []
 
 var unit_entity: SanGrid.GridEntity
 var unit_active: Unit
@@ -103,6 +106,9 @@ func _ready():
 		for x in grid_dimensions.x:
 			tileMap.set_cell(Vector2(x, y), 0, Vector2(3, 1))
 
+	_generate_spawn_positions()
+	_apply_battle_map()
+
 	# place units
 	_create_unit_entities(player_units, Types.TEAMS.BLUE, player_entities)
 	_create_unit_entities(enemy_units, Types.TEAMS.RED, enemy_entities)
@@ -130,6 +136,48 @@ func _ready():
 	preparation_panel.start_combat_btn.pressed.connect(_start_combat)
 
 	preparation_panel.show()
+
+func _generate_spawn_positions():
+	# Attackers spawn near the left edge, defenders near the right edge.
+	attackSpawnPositions = _pick_spawn_positions(0, SPAWN_EDGE_DEPTH - 1)
+	defenceSpawnPositions = _pick_spawn_positions(
+		grid_dimensions.x - SPAWN_EDGE_DEPTH,
+		grid_dimensions.x - 1
+	)
+
+func _pick_spawn_positions(x_min: int, x_max: int) -> Array[Vector2]:
+	var positions: Array[Vector2] = []
+	var used: Dictionary[Vector2i, bool] = {}
+	var attempts: int = 0
+
+	while positions.size() < SPAWN_COUNT and attempts < 1000:
+		attempts += 1
+
+		var cell := Vector2i(
+			Grng.RNG.randi_range(x_min, x_max),
+			Grng.RNG.randi_range(0, grid_dimensions.y - 1)
+		)
+		if used.has(cell): continue
+
+		used.set(cell, true)
+		positions.append(Vector2(cell))
+
+	return positions
+
+func _apply_battle_map():
+	var region: Region = WorldTurnLogic.attacked_region
+	if region == null: return
+
+	var wall_cells: Array[Vector2i] = []
+	for cell in BattleMaps.get_walls(region.id):
+		if not grid.is_cell_valid(cell.x, cell.y): continue
+		if attackSpawnPositions.has(Vector2(cell)): continue
+		if defenceSpawnPositions.has(Vector2(cell)): continue
+
+		grid.set_entity(cell.x, cell.y, grid.GridEntity.new(grid.GridEntityType.WALL))
+		wall_cells.append(cell)
+
+	walls.set_cells(wall_cells)
 
 func _on_skill_pressed(skill: Skill):
 	print("skill pressed: ", skill.skill_name)
@@ -278,7 +326,9 @@ func _unhandled_input(event: InputEvent):
 		# Walk and Attack and whatsoever
 		if currCell.isWalkTile == true:
 			move_player(currCell)
-		elif currCell.isInReach and (unit_entity.unitNode.enemies & currCell.entity.unitNode.team) != 0:
+		elif currCell.isInReach \
+				and currCell.entity.type == SanGrid.GridEntityType.UNIT \
+				and (unit_entity.unitNode.enemies & currCell.entity.unitNode.team) != 0:
 			unit_basic_attack(currCell)
 
 	if skill_targeting_active && event is InputEventMouseButton && event.button_index == MouseButton.MOUSE_BUTTON_LEFT && !event.is_pressed():

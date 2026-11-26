@@ -8,7 +8,7 @@ var move_array: Array[GridCell] = []
 
 var astar = AStarGrid2D.new()
 
-enum GridEntityType { EMPTY, UNIT }
+enum GridEntityType { EMPTY, UNIT, WALL }
 
 class GridEntity:
 	var id: int
@@ -55,7 +55,7 @@ func set_entity(x: int, y: int, ent: GridEntity):
 	ent.cell = cell
 	cell.entity = ent
 
-	if ent.type == GridEntityType.UNIT:
+	if ent.type == GridEntityType.UNIT or ent.type == GridEntityType.WALL:
 		astar.set_point_solid(Vector2i(x, y), true)
 	else: astar.set_point_solid(Vector2i(x, y), false)
 

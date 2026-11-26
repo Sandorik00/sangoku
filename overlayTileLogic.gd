@@ -20,7 +20,7 @@ func draw_reach_zone(cellList: Array[SanGrid.GridCell], unit_entity: SanGrid.Gri
 
 func draw_targets_overlay(cell_list: Array[SanGrid.GridCell], unit_entity: SanGrid.GridEntity):
 	for cell in cell_list:
-		if (unit_entity.unitNode.enemies & cell.entity.unitNode.team) != 0:
+		if cell.entity.unitNode != null and (unit_entity.unitNode.enemies & cell.entity.unitNode.team) != 0:
 			set_cell(cell.xy, 0, Vector2(3, 1))
 		else:
 			set_cell(cell.xy, 0, Vector2(8, 8))
