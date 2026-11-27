@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://dmt2a72kkexo6"]
+
+[ext_resource type="Script" uid="uid://bpwef3msoffuw" path="res://scenes/ui/dialogue_panel.gd" id="1_panel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+content_margin_left = 28.0
+content_margin_top = 20.0
+content_margin_right = 28.0
+content_margin_bottom = 20.0
+bg_color = Color(0.043, 0.078, 0.071, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.784, 0.627, 0.416, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="DialoguePanel" type="CanvasLayer" unique_id=1409480395]
+process_mode = 3
+layer = 100
+visible = false
+script = ExtResource("1_panel")
+
+[node name="Root" type="Control" parent="." unique_id=1828057276]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Root" unique_id=1827536484]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Dim" type="ColorRect" parent="Root" unique_id=1318010486]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Bottom" type="MarginContainer" parent="Root" unique_id=1655571805]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -400.0
+offset_right = -120.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Bottom" unique_id=500546861]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="HBox" type="HBoxContainer" parent="Root/Bottom/Panel" unique_id=863046054]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 28
+
+[node name="Portrait" type="TextureRect" parent="Root/Bottom/Panel/HBox" unique_id=924205947]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="Root/Bottom/Panel/HBox" unique_id=1201526335]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="SpeakerName" type="Label" parent="Root/Bottom/Panel/HBox/VBox" unique_id=953547254]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.627, 0.416, 1)
+theme_override_font_sizes/font_size = 26
+text = "Speaker"
+
+[node name="Text" type="RichTextLabel" parent="Root/Bottom/Panel/HBox/VBox" unique_id=2043173347]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.9, 0.9, 0.87, 1)
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Arrow" type="Label" parent="Root/Bottom/Panel/HBox/VBox" unique_id=520049918]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.627, 0.416, 1)
+theme_override_font_sizes/font_size = 20
+text = "▼"
+horizontal_alignment = 2

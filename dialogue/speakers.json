@@ -1,0 +1,9 @@
+{
+	"sergey": {
+		"name_key": "SPK_SERGEY",
+		"portrait": "res://assets/ui/placeholder_portrait.svg"
+	},
+	"narrator": {
+		"name_key": ""
+	}
+}

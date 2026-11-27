@@ -1,0 +1,8 @@
+{
+	"lines": [
+		{ "who": "narrator", "key": "DLG_TEST_01" },
+		{ "who": "sergey", "key": "DLG_TEST_02" },
+		{ "who": "sergey", "key": "DLG_TEST_03" },
+		{ "who": "narrator", "key": "DLG_TEST_04" }
+	]
+}

@@ -30,6 +30,7 @@ WorldTurnLogic="*uid://dasgfpwywrpid"
 Grng="*uid://hvfbllxgvj3m"
 HireLogic="*uid://qshajq6it6r1"
 BattleMaps="*uid://bs52tnwgf5f23"
+Dialogue="*res://globals/dialogue.gd"
 
 [display]
 
@@ -94,6 +95,10 @@ skip_turn={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization/dialogue.en.translation", "res://localization/dialogue.ru.translation")
 
 [physics]
 
